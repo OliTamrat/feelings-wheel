@@ -3,643 +3,359 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark" />
     <link rel="icon" href="data:," />
     <title>Feelings Wheel Sign In</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
     <style>
-      :root {
-        color-scheme: light dark;
-        /* Kintale brand kit */
-        --cream: #f3ede1;
-        --cream-2: #ece3d2;
-        --ink: #241e18;
-        --oxblood: #a8381b;
-        --oxblood-deep: #8c2d15;
-        --peach: #f2a97e;
-        --gold: #e8c26a;
-        --book-cloth: #261a15;
-
-        --bg: var(--cream);
-        --surface: #faf6ec;
-        --surface-2: var(--cream-2);
-        --text: var(--ink);
-        --text-soft: #5c5148;
-        --line: #d8cdb6;
-        --accent: var(--oxblood);
-        --accent-hover: var(--oxblood-deep);
-        --accent-text: #fdf9f0;
-        --field-bg: #fffdf7;
-        --focus: var(--oxblood);
-        --error: #a8281b;
-        --ok: #4c6b2f;
-        --lamp-glow: rgba(232, 194, 106, 0.55);
-        --lamp-body: #261a15;
-        --lamp-line: #241e18;
-        --shadow: 0 24px 60px rgba(38, 26, 21, 0.16), 0 4px 14px rgba(38, 26, 21, 0.08);
-      }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #1d130e;
-          --surface: var(--book-cloth);
-          --surface-2: #33231b;
-          --text: var(--cream);
-          --text-soft: #c9bba6;
-          --line: #4a382c;
-          --accent: #c8502e;
-          --accent-hover: #d95f38;
-          --accent-text: #fdf6ea;
-          --field-bg: #201711;
-          --focus: var(--peach);
-          --error: #f0927e;
-          --ok: #a9c47e;
-          --lamp-glow: rgba(232, 194, 106, 0.4);
-          --lamp-body: #f3ede1;
-          --lamp-line: #f3ede1;
-          --shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 4px 14px rgba(0, 0, 0, 0.4);
-        }
-      }
-
+      :root { color-scheme: dark; }
       * { box-sizing: border-box; }
       [hidden] { display: none !important; }
       html, body { margin: 0; padding: 0; }
       body {
-        font-family: "Schibsted Grotesk", system-ui, sans-serif;
-        background: var(--bg);
-        color: var(--text);
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: #050606;
+        color: #f4f1ea;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
         -webkit-font-smoothing: antialiased;
       }
       button, input { font: inherit; }
-      button, [role="button"], summary, a.btn {
-        min-height: 2.75rem;
-      }
-      input:not([type="checkbox"]) { min-height: 3rem; }
-      :focus-visible {
-        outline: 2px solid var(--focus);
-        outline-offset: 2px;
-        border-radius: 4px;
-      }
 
-      .page {
-        flex: 1;
-        width: 100%;
-        max-width: 1060px;
-        margin: 0 auto;
-        padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 4vw, 2.5rem);
-        display: flex;
-        flex-direction: column;
+      /* ---------- The lamp sign-in scene — the original teal design, restored as-is ----------
+         The room stays dark; only the lamp's light wash shifts:
+         teal for sign in, warm amber for sign up / signed out. Red means one thing only: an error.
+         The one requested change: the Sign In / Sign Up tab pill is teal in BOTH modes —
+         it no longer flips to amber/yellow on Sign Up. Nothing else was touched. */
+      .lamp-scene{
+        --lx-teal:#14b8a6; --lx-teal-bright:#2dd4bf; --lx-teal-deep:#0f766e;
+        --lx-amber:#f5b942; --lx-amber-soft:#ffd88a;
+        --lx-error:#ef4444; --lx-error-bright:#f87171;
+        --lx-ink:#f4f1ea; --lx-dim:#b8b2a6; --lx-faint:#8a8578;
+        --lx-card-border:rgba(255,255,255,.09);
+        --lx-field:#0a0f0d; --lx-field-border:rgba(255,255,255,.12);
+        --accent-solid:#2dd4bf;
+        --wash-strong:rgba(45,212,191,.45); --wash-mid:rgba(20,184,166,.16);
+        --beam-a:rgba(120,240,214,.32); --beam-b:rgba(45,212,191,.08);
+        --bulb-a:#e6fffb; --bulb-b:#5eead4; --bulb-c:#14b8a6;
+        --halo-core:rgba(94,234,212,.85);
+        color-scheme:dark;
+        position:relative; overflow:hidden;
+        min-height:100dvh;
+        background:linear-gradient(180deg,#0b100e 0%,#070a09 55%,#050606 100%);
+        color:var(--lx-ink); font-family:"DM Sans",system-ui,sans-serif;
+        display:flex; flex-direction:column;
       }
-
-      /* ---------- masthead ---------- */
-      .masthead {
-        display: flex;
-        align-items: center;
-        gap: 0.85rem;
-        padding-bottom: clamp(1.25rem, 3vw, 2rem);
+      .lamp-scene[data-glow="amber"]{
+        --accent-solid:#f5b942;
+        --wash-strong:rgba(245,185,66,.45); --wash-mid:rgba(245,185,66,.16);
+        --beam-a:rgba(255,214,130,.32); --beam-b:rgba(245,185,66,.08);
+        --bulb-a:#fff6d8; --bulb-b:#ffd166; --bulb-c:#e79b26;
+        --halo-core:rgba(255,207,110,.85);
       }
-      .mark {
-        width: 46px; height: 46px;
-        flex: none;
-        background: var(--book-cloth);
-        border-radius: 9px;
-        display: grid;
-        place-items: center;
-        position: relative;
-        overflow: hidden;
+      .lamp-scene :focus-visible{outline:3px solid var(--lx-amber);outline-offset:2px}
+      .lamp-scene::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 72px}
+      .lamp-scene .desk{position:absolute;left:0;right:0;bottom:0;height:19%;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.38) 18%,rgba(0,0,0,.62) 100%);border-top:1px solid rgba(255,255,255,.045)}
+      .lamp-scene .lx-topbar{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:6px clamp(16px,4vw,40px);gap:16px;border-bottom:1px solid rgba(255,255,255,.055)}
+      .lamp-scene .lx-brand{display:inline-flex;align-items:center;gap:11px;height:44px;font-weight:700;letter-spacing:.14em;font-size:13px;text-transform:uppercase;line-height:1}
+      .lamp-scene .lx-brand .dot{width:9px;height:9px;border-radius:50%;background:var(--lx-amber);box-shadow:0 0 14px var(--lx-amber);flex:none}
+      .lamp-scene .status-pill{display:inline-flex;align-items:center;gap:9px;height:44px;font-size:13px;font-weight:600;line-height:1;color:var(--lx-ink);white-space:nowrap}
+      .lamp-scene .status-pill .led{width:8px;height:8px;border-radius:50%;background:var(--accent-solid);box-shadow:0 0 12px var(--accent-solid);transition:all .6s;flex:none}
+      .lamp-scene .status-pill span em{font-style:normal;color:var(--lx-dim);font-weight:500}
+      .lamp-scene .lx-stage{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:minmax(250px,38%) 1fr;align-items:center;gap:clamp(10px,3vw,44px);padding:clamp(14px,3vh,30px) clamp(16px,4vw,40px) clamp(24px,4vh,44px);width:100%;max-width:1180px;margin:0 auto}
+      .lamp-scene .lamp-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+      .lamp-scene .lamp-box{--bulb-x:81.1%;--bulb-y:38.6%;position:relative;width:min(320px,80vw);aspect-ratio:360/430}
+      .lamp-scene .glow{position:absolute;left:var(--bulb-x);top:var(--bulb-y);width:115%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,var(--wash-strong) 0%,var(--wash-mid) 38%,transparent 68%);filter:blur(6px);opacity:1;transition:opacity .7s ease,background .8s ease;pointer-events:none}
+      .lamp-scene.is-out .glow{opacity:0}
+      .lamp-scene .bulb-halo{position:absolute;left:var(--bulb-x);top:var(--bulb-y);width:34%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,var(--halo-core) 0%,var(--wash-strong) 34%,var(--wash-mid) 58%,transparent 72%);filter:blur(2px);opacity:1;transition:opacity .5s ease,background .8s ease;pointer-events:none}
+      .lamp-scene.is-out .bulb-halo{opacity:0}
+      .lamp-scene .beam{position:absolute;left:var(--bulb-x);top:var(--bulb-y);width:82%;height:59%;transform:translateX(-50%);clip-path:polygon(45% 0,55% 0,100% 100%,0% 100%);background:linear-gradient(180deg,var(--beam-a),var(--beam-b) 55%,transparent 96%);filter:blur(3px);opacity:1;transition:opacity .7s ease,background .8s ease;pointer-events:none}
+      .lamp-scene.is-out .beam{opacity:0}
+      .lamp-scene .pool{position:absolute;left:var(--bulb-x);bottom:0%;width:88%;height:14%;border-radius:50%;transform:translateX(-50%);background:radial-gradient(ellipse,var(--wash-strong),transparent 68%);filter:blur(5px);transition:opacity .7s,background .8s ease;pointer-events:none}
+      .lamp-scene.is-out .pool{opacity:0}
+      .lamp-scene .lamp-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+      .lamp-scene .bulb-light{transition:opacity .5s}
+      .lamp-scene.is-out .bulb-light{opacity:0}
+      .lamp-scene .bulb-off{transition:opacity .5s}
+      .lamp-scene:not(.is-out) .bulb-off{opacity:0}
+      .lamp-scene .bulb-stop-a{stop-color:var(--bulb-a)} .lamp-scene .bulb-stop-b{stop-color:var(--bulb-b)} .lamp-scene .bulb-stop-c{stop-color:var(--bulb-c)}
+      .lamp-scene .shade-inner{fill:var(--bulb-b);opacity:.22;transition:opacity .6s ease,fill .8s ease}
+      .lamp-scene:not(.is-out) .shade-inner{opacity:.95}
+      .lamp-scene .cord-zone{position:absolute;left:63.5%;top:26.5%;width:52px;display:flex;flex-direction:column;align-items:center;transform-origin:top center;transform:rotate(1.2deg);z-index:4;touch-action:none;user-select:none;-webkit-user-select:none}
+      .lamp-scene .cord-string{width:2px;height:86px;border-radius:2px;background:repeating-linear-gradient(180deg,#d8c491 0 5px,#a98f52 5px 10px);box-shadow:0 0 0 1px rgba(0,0,0,.25);transform-origin:top center}
+      .lamp-scene .cord-knob{margin-top:-2px;width:46px;height:52px;min-height:52px;border:none;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;cursor:pointer}
+      .lamp-scene .cord-knob .bead{width:17px;height:17px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#ffe9b0,#e9b64f 55%,#9a7422);box-shadow:0 3px 8px rgba(0,0,0,.55),inset 0 -2px 4px rgba(0,0,0,.3);flex:none}
+      .lamp-scene .cord-knob .grip{width:13px;height:24px;margin-top:3px;border-radius:7px;background:linear-gradient(180deg,#2c2c2e,#131314);border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 10px rgba(0,0,0,.5);flex:none}
+      .lamp-scene .cord-knob:focus-visible{outline:2px solid var(--lx-amber);outline-offset:4px;border-radius:10px}
+      .lamp-scene .pull-hint{margin-top:14px;text-align:center;font-size:13.5px;color:var(--lx-dim);max-width:290px;line-height:1.55}
+      .lamp-scene .pull-hint strong{color:var(--lx-ink);font-weight:600}
+      .lamp-scene .card-col{display:flex;justify-content:center;min-width:0}
+      .lamp-scene .lx-card{width:min(440px,100%);position:relative;background:linear-gradient(168deg,rgba(24,32,28,.92),rgba(13,18,16,.96));border:1px solid var(--lx-card-border);border-radius:20px;padding:clamp(24px,3.4vw,36px);box-shadow:0 34px 70px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.3);transition:box-shadow .8s ease,border-color .8s ease}
+      .lamp-scene .lx-card.pop{animation:lxpop .55s cubic-bezier(.3,1.4,.5,1)}
+      @keyframes lxpop{0%{transform:scale(.965) translateY(10px);opacity:.4}100%{transform:scale(1) translateY(0);opacity:1}}
+      .lamp-scene .lx-card.shake{animation:lxshake .4s ease}
+      @keyframes lxshake{0%,100%{transform:translateX(0)}22%{transform:translateX(-7px)}48%{transform:translateX(6px)}72%{transform:translateX(-4px)}}
+      .lamp-scene .view{display:none}
+      .lamp-scene .view.active{display:block;animation:lxviewIn .45s ease both}
+      @keyframes lxviewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+      .lamp-scene .lx-card h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:clamp(28px,4vw,36px);margin:0 0 6px;letter-spacing:.01em;line-height:1.12;color:var(--lx-ink)}
+      .lamp-scene .lx-card .sub{margin:0 0 22px;color:var(--lx-dim);font-size:14.5px;line-height:1.55}
+      .lamp-scene .lx-card .sub b{color:var(--lx-ink);font-weight:600;word-break:break-all}
+      .lamp-scene .tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.06);margin-bottom:22px;position:relative}
+      /* THE requested change: tab pill is teal in both modes (was: followed the lamp wash, amber on Sign Up) */
+      .lamp-scene .tab-ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:9px;background:rgba(20,184,166,.16);border:1px solid rgba(45,212,191,.45);transition:transform .38s cubic-bezier(.45,0,.2,1),background .45s ease,border-color .45s ease}
+      .lamp-scene .tabs.up .tab-ind{transform:translateX(100%)}
+      .lamp-scene .tab{position:relative;z-index:1;border:none;background:transparent;color:var(--lx-dim);font-size:14px;font-weight:600;padding:10px;border-radius:9px;min-height:44px;transition:color .25s;cursor:pointer}
+      .lamp-scene .tab[aria-selected="true"]{color:var(--lx-ink)}
+      .lamp-scene .dust{position:absolute;left:var(--bulb-x,81.1%);top:var(--bulb-y,38.6%);width:82%;height:59%;transform:translateX(-50%);clip-path:polygon(45% 0,55% 0,100% 100%,0% 100%);pointer-events:none;transition:opacity .7s ease}
+      .lamp-scene.is-out .dust{opacity:0}
+      .lamp-scene .dust i{position:absolute;border-radius:50%;background:var(--accent-solid);box-shadow:0 0 6px var(--wash-strong);animation:lxdustFloat ease-in-out infinite alternate;transition:background .6s ease}
+      @keyframes lxdustFloat{from{transform:translate(0,0)}to{transform:translate(var(--dx,6px),var(--dy,-12px))}}
+      .lamp-scene label.f-label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--lx-dim);margin:0 0 7px}
+      .lamp-scene .field{margin-bottom:16px}
+      .lamp-scene .input-row{position:relative}
+      .lamp-scene .input-row input{width:100%;min-height:50px;padding:12px 46px 12px 14px;border-radius:11px;background:var(--lx-field);border:1px solid var(--lx-field-border);color:var(--lx-ink);font-size:15.5px;outline:none;transition:border-color .2s,box-shadow .2s}
+      .lamp-scene .input-row input::placeholder{color:#5f6a64}
+      .lamp-scene .input-row input:focus{border-color:var(--lx-teal);box-shadow:0 0 0 3px rgba(20,184,166,.22)}
+      .lamp-scene .input-row input.invalid{border-color:var(--lx-error);box-shadow:0 0 0 3px rgba(239,68,68,.22)}
+      .lamp-scene .input-row input.invalid:focus{border-color:var(--lx-error);box-shadow:0 0 0 3px rgba(239,68,68,.28)}
+      .lamp-scene .eye-btn{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:42px;height:42px;min-height:42px;border:none;background:transparent;color:var(--lx-faint);display:flex;align-items:center;justify-content:center;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer}
+      .lamp-scene .eye-btn:hover{color:var(--lx-ink)}
+      .lamp-scene .err-msg{display:none;color:var(--lx-error-bright);font-size:13px;margin-top:6px;line-height:1.45}
+      .lamp-scene .err-msg.show{display:block}
+      .lamp-scene .form-error{display:none;align-items:flex-start;gap:9px;margin:0 0 16px;padding:11px 13px;border-radius:10px;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.45);color:#fecaca;font-size:13.5px;line-height:1.45}
+      .lamp-scene .form-error.show{display:flex}
+      .lamp-scene .form-error .dot-err{width:8px;height:8px;border-radius:50%;background:var(--lx-error);box-shadow:0 0 10px var(--lx-error);flex:none;margin-top:5px}
+      .lamp-scene .pw-checklist{display:none;margin-top:10px;padding:11px 13px;border-radius:10px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.07)}
+      .lamp-scene .pw-checklist.show{display:block}
+      .lamp-scene .pw-strength{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
+      .lamp-scene .pw-strength .val{letter-spacing:0;text-transform:none;font-size:13px}
+      .lamp-scene .pw-strength .val.weak{color:var(--lx-amber)}
+      .lamp-scene .pw-strength .val.strong{color:var(--lx-teal-bright)}
+      .lamp-scene .pw-strength .val.empty{color:var(--lx-faint)}
+      .lamp-scene .pw-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:10px}
+      .lamp-scene .pw-bar i{display:block;height:100%;width:0%;border-radius:99px;background:var(--lx-amber);transition:width .3s ease,background .3s ease}
+      .lamp-scene .pw-bar i.strong{background:var(--lx-teal)}
+      .lamp-scene .pw-rules{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+      .lamp-scene .pw-rule{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--lx-faint)}
+      .lamp-scene .pw-rule .tick{width:16px;height:16px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex:none;color:transparent}
+      .lamp-scene .pw-rule.met{color:var(--lx-dim)}
+      .lamp-scene .pw-rule.met .tick{background:rgba(20,184,166,.18);border-color:rgba(20,184,166,.55);color:var(--lx-teal-bright)}
+      .lamp-scene .pw-rule.failed{color:#fecaca}
+      .lamp-scene .pw-rule.failed .tick{background:rgba(239,68,68,.16);border-color:rgba(239,68,68,.6);color:var(--lx-error-bright)}
+      .lamp-scene .row-between{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 20px;flex-wrap:wrap}
+      .lamp-scene .remember{display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--lx-dim);font-size:13.5px;font-weight:500;padding:6px 2px;min-height:44px;cursor:pointer}
+      .lamp-scene .switch{width:40px;height:23px;border-radius:999px;background:#2a332e;border:1px solid rgba(255,255,255,.14);position:relative;flex:none;transition:background .25s}
+      .lamp-scene .switch::after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#cfd4cd;transition:all .25s}
+      .lamp-scene .remember[aria-checked="true"] .switch{background:var(--lx-teal-deep)}
+      .lamp-scene .remember[aria-checked="true"] .switch::after{left:19px;background:#d9fff8}
+      .lamp-scene .forgot{color:var(--lx-teal-bright);font-size:13.5px;font-weight:600;text-decoration:none;padding:10px 2px;display:inline-block;background:none;border:none;cursor:pointer}
+      .lamp-scene .forgot:hover{text-decoration:underline}
+      .lamp-scene .cta{width:100%;min-height:52px;border:none;border-radius:12px;font-size:15.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .15s,filter .2s,background .4s;color:#241703;text-decoration:none;cursor:pointer}
+      .lamp-scene .cta:active{transform:scale(.985)}
+      .lamp-scene .cta-teal{background:linear-gradient(180deg,#f0a832,#e08e12);color:#241703;box-shadow:0 10px 26px rgba(240,168,50,.28)}
+      .lamp-scene .cta-teal:hover{filter:brightness(1.07)}
+      .lamp-scene .cta-ghost{background:transparent;border:1px solid var(--lx-field-border);color:var(--lx-ink);box-shadow:none}
+      .lamp-scene .cta-ghost:hover{border-color:rgba(255,255,255,.3)}
+      .lamp-scene .cta[disabled]{opacity:.65;cursor:wait}
+      .lamp-scene .spinner{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(0,0,0,.25);border-top-color:currentColor;animation:lxspin .7s linear infinite;flex:none}
+      @keyframes lxspin{to{transform:rotate(360deg)}}
+      .lamp-scene .divider{display:flex;align-items:center;gap:13px;margin:22px 0 16px;color:var(--lx-faint);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+      .lamp-scene .divider::before,.lamp-scene .divider::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.09)}
+      .lamp-scene .social{width:100%;min-height:48px;padding:0 10px;border-radius:11px;border:1px solid var(--lx-field-border);background:rgba(255,255,255,.03);color:var(--lx-ink);font-size:14px;font-weight:600;line-height:1;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer}
+      .lamp-scene .social:hover{background:rgba(255,255,255,.07)}
+      .lamp-scene .social .mark{width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center}
+      .lamp-scene .social .mark svg{width:18px;height:18px;display:block}
+      .lamp-scene .fineprint{margin:18px 0 0;text-align:center;font-size:12.5px;color:var(--lx-faint);line-height:1.6}
+      .lamp-scene .fineprint a{color:var(--lx-teal-bright);font-weight:600;text-decoration:none}
+      .lamp-scene .fineprint a:hover{text-decoration:underline}
+      .lamp-scene .state-icon{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:4px 0 18px;font-size:27px;font-weight:700}
+      .lamp-scene .state-icon.ok{background:rgba(20,184,166,.16);color:var(--lx-teal-bright);border:1px solid rgba(20,184,166,.45);box-shadow:0 0 30px rgba(20,184,166,.22)}
+      .lamp-scene .state-icon.out{background:rgba(245,185,66,.13);color:#ffd88a;border:1px solid rgba(245,185,66,.45);box-shadow:0 0 30px rgba(245,185,66,.2)}
+      .lamp-scene .session-box{border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);border-radius:12px;padding:14px 16px;margin:0 0 20px;font-size:13.5px}
+      .lamp-scene .session-box .r{display:flex;justify-content:space-between;gap:14px;padding:5px 0}
+      .lamp-scene .session-box .r span:first-child{color:var(--lx-faint)}
+      .lamp-scene .session-box .r span:last-child{font-weight:600;text-align:right;word-break:break-all}
+      .lamp-scene .stack{display:flex;flex-direction:column;gap:11px}
+      .lamp-scene .acct-note{margin:0 0 16px;padding:11px 13px;border-radius:10px;background:rgba(245,185,66,.10);border:1px solid rgba(245,185,66,.4);color:#ffe1a1;font-size:13.5px;line-height:1.45}
+      .lx-toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);z-index:60;background:#171d1a;border:1px solid rgba(255,255,255,.14);color:#f4f1ea;padding:13px 20px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 18px 40px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,1.3,.5,1);max-width:88vw;text-align:center;font-family:"DM Sans",system-ui,sans-serif}
+      .lx-toast.show{transform:translate(-50%,0)}
+      .below-scene{position:relative;z-index:2;text-align:center;padding:0 16px 26px;margin-top:-52px}
+      .below-scene .acct-fine{color:#8a8578;font-size:.92rem;margin:0 auto;max-width:640px}
+      .below-scene .credit{font-family:"DM Sans",system-ui,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8578;margin:14px 0 0}
+      @media (max-width:880px){
+        .lamp-scene .lx-stage{grid-template-columns:1fr;gap:6px;padding-top:8px}
+        .lamp-scene .lamp-box{width:min(270px,74vw)}
+        .lamp-scene .pull-hint{margin-top:6px}
+        .lamp-scene .lx-topbar{min-height:58px;padding:4px 16px}
+        .lamp-scene .lx-brand{font-size:12px;letter-spacing:.11em;gap:9px}
+        .lamp-scene .status-pill{font-size:12.5px}
+        .below-scene{margin-top:0;padding-top:6px}
       }
-      @media (prefers-color-scheme: dark) {
-        .mark { background: #17100c; border: 1px solid var(--line); }
-      }
-      .mark span {
-        font-family: "Instrument Serif", serif;
-        font-size: 1.65rem;
-        line-height: 1;
-        color: var(--cream);
-        transform: translateY(-3px);
-      }
-      .mark svg {
-        position: absolute;
-        left: 0; right: 0; bottom: 5px;
-        width: 100%;
-      }
-      .masthead .wordmark {
-        font-family: "Instrument Serif", serif;
-        font-size: 1.45rem;
-        letter-spacing: 0.01em;
-        line-height: 1.1;
-      }
-      .masthead .wordmark em { font-style: italic; color: var(--accent); }
-      .masthead .tag {
-        font-family: "DM Mono", monospace;
-        font-size: 0.68rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--text-soft);
-        margin-top: 0.15rem;
-      }
-
-      /* ---------- layout ---------- */
-      .stage {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        align-items: start;
-      }
-      @media (min-width: 860px) {
-        .stage { grid-template-columns: 0.92fr 1.08fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
-      }
-
-      /* ---------- lamp side ---------- */
-      .lamp-side { text-align: left; }
-      .lamp-wrap {
-        display: flex;
-        justify-content: flex-start;
-        margin-bottom: 0.5rem;
-      }
-      .lamp-svg { width: min(300px, 72vw); height: auto; display: block; }
-      .lamp-svg .glow-poly { fill: var(--lamp-glow); }
-      .lamp-svg .body-fill { fill: var(--lamp-body); }
-      .lamp-svg .line-stroke { stroke: var(--lamp-line); }
-      .lamp-svg .peach-fill { fill: #f2a97e; }
-      .lamp-svg .gold-fill { fill: #e8c26a; }
-      .lamp-svg .ox-fill { fill: var(--oxblood); }
-      .cord-hit {
-        cursor: pointer;
-      }
-      .cord-hit:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-      .lamp-headline {
-        font-family: "Instrument Serif", serif;
-        font-weight: 400;
-        font-size: clamp(2rem, 5.2vw, 3.1rem);
-        line-height: 1.08;
-        margin: 0.75rem 0 0.9rem;
-        max-width: 12em;
-      }
-      .lamp-headline em { font-style: italic; color: var(--accent); }
-      .lamp-copy {
-        color: var(--text-soft);
-        font-size: 1.02rem;
-        line-height: 1.6;
-        max-width: 34em;
-        margin: 0 0 1.4rem;
-      }
-      .cord-hint {
-        font-family: "DM Mono", monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--text-soft);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .cord-hint::before {
-        content: "";
-        width: 22px; height: 1px;
-        background: var(--accent);
-        display: inline-block;
-      }
-      .guest-link {
-        display: inline-block;
-        margin-top: 1.6rem;
-        color: var(--accent);
-        font-weight: 600;
-        text-decoration: none;
-        border-bottom: 1px solid currentColor;
-        padding: 0.55rem 0.1rem;
-        min-height: 2.75rem;
-      }
-      .guest-link:hover { color: var(--accent-hover); }
-
-      /* ---------- form card ---------- */
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        box-shadow: var(--shadow);
-        padding: clamp(1.4rem, 3.5vw, 2.4rem);
-      }
-      .tabs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        background: var(--surface-2);
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        padding: 4px;
-        gap: 4px;
-        margin-bottom: 1.6rem;
-      }
-      .tab {
-        border: 0;
-        background: transparent;
-        color: var(--text-soft);
-        font-weight: 600;
-        font-size: 0.98rem;
-        border-radius: 7px;
-        cursor: pointer;
-        padding: 0.65rem 0.5rem;
-        transition: background 0.18s ease, color 0.18s ease;
-      }
-      .tab[aria-selected="true"] {
-        background: var(--book-cloth);
-        color: var(--cream);
-      }
-      @media (prefers-color-scheme: dark) {
-        .tab[aria-selected="true"] { background: var(--cream); color: var(--book-cloth); }
-      }
-      .tab:hover:not([aria-selected="true"]) { color: var(--text); }
-
-      .field { margin-bottom: 1.05rem; }
-      .field label {
-        display: block;
-        font-family: "DM Mono", monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        color: var(--text-soft);
-        margin-bottom: 0.45rem;
-      }
-      .field input[type="text"],
-      .field input[type="email"],
-      .field input[type="password"] {
-        width: 100%;
-        background: var(--field-bg);
-        border: 1px solid var(--line);
-        border-radius: 9px;
-        padding: 0.8rem 0.95rem;
-        color: var(--text);
-        font-size: 1rem;
-      }
-      .field input::placeholder { color: var(--text-soft); opacity: 0.75; }
-      .pw-wrap { position: relative; }
-      .pw-wrap input { padding-right: 5.2rem; }
-      .pw-toggle {
-        position: absolute;
-        right: 4px; top: 50%;
-        transform: translateY(-50%);
-        border: 0;
-        background: transparent;
-        color: var(--accent);
-        font-weight: 600;
-        font-size: 0.88rem;
-        cursor: pointer;
-        padding: 0.5rem 0.7rem;
-        min-height: 2.5rem;
-        border-radius: 7px;
-      }
-      .pw-toggle:hover { color: var(--accent-hover); }
-
-      .strength {
-        list-style: none;
-        margin: 0.7rem 0 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.3rem 1rem;
-        font-size: 0.86rem;
-        color: var(--text-soft);
-      }
-      .strength li { display: flex; align-items: center; gap: 0.45rem; }
-      .strength li::before {
-        content: "";
-        width: 8px; height: 8px;
-        border-radius: 50%;
-        border: 1.5px solid var(--line);
-        flex: none;
-      }
-      .strength li.met { color: var(--text); }
-      .strength li.met::before { background: var(--ok); border-color: var(--ok); }
-
-      .row-between {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
-        margin: 0.35rem 0 1.25rem;
-      }
-      .remember {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        cursor: pointer;
-        padding: 0.6rem 0.2rem;
-        min-height: 2.75rem;
-        font-size: 0.95rem;
-      }
-      .remember input {
-        width: 19px; height: 19px;
-        accent-color: var(--accent);
-        margin: 0;
-        cursor: pointer;
-      }
-      .forgot {
-        border: 0;
-        background: none;
-        color: var(--accent);
-        font-weight: 600;
-        cursor: pointer;
-        padding: 0.6rem 0.2rem;
-        min-height: 2.75rem;
-        font-size: 0.95rem;
-      }
-      .forgot:hover { color: var(--accent-hover); text-decoration: underline; }
-
-      .submit {
-        width: 100%;
-        border: 0;
-        border-radius: 10px;
-        background: var(--accent);
-        color: var(--accent-text);
-        font-weight: 700;
-        font-size: 1.02rem;
-        padding: 0.95rem 1rem;
-        cursor: pointer;
-        transition: background 0.18s ease;
-      }
-      .submit:hover { background: var(--accent-hover); }
-      .submit:disabled { opacity: 0.6; cursor: wait; }
-
-      .divider {
-        display: flex;
-        align-items: center;
-        gap: 0.9rem;
-        margin: 1.35rem 0;
-        color: var(--text-soft);
-        font-family: "DM Mono", monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-      .divider::before, .divider::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: var(--line);
-      }
-      .google-btn {
-        width: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.7rem;
-        background: var(--field-bg);
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        color: var(--text);
-        font-weight: 600;
-        font-size: 1rem;
-        padding: 0.85rem 1rem;
-        cursor: pointer;
-      }
-      .google-btn:hover { border-color: var(--text-soft); }
-      .google-btn:disabled { opacity: 0.6; cursor: wait; }
-      .google-btn svg { flex: none; }
-
-      .switch-line {
-        text-align: center;
-        margin: 1.4rem 0 0;
-        color: var(--text-soft);
-        font-size: 0.96rem;
-      }
-      .switch-line button {
-        border: 0; background: none;
-        color: var(--accent);
-        font-weight: 700;
-        cursor: pointer;
-        padding: 0.55rem 0.3rem;
-        min-height: 2.75rem;
-        font-size: 0.96rem;
-      }
-      .switch-line button:hover { text-decoration: underline; }
-
-      .message {
-        border-radius: 9px;
-        padding: 0.85rem 1rem;
-        font-size: 0.95rem;
-        line-height: 1.5;
-        margin-bottom: 1.1rem;
-        display: none;
-      }
-      .message.show { display: block; }
-      .message.error {
-        background: rgba(168, 40, 27, 0.09);
-        border: 1px solid rgba(168, 40, 27, 0.4);
-        color: var(--error);
-      }
-      .message.notice {
-        background: rgba(232, 194, 106, 0.16);
-        border: 1px solid rgba(168, 56, 27, 0.25);
-        color: var(--text);
-      }
-
-      /* ---------- signed-in state ---------- */
-      .signed-in { display: none; text-align: left; }
-      .signed-in.show { display: block; }
-      .avatar {
-        width: 58px; height: 58px;
-        border-radius: 50%;
-        background: var(--book-cloth);
-        color: var(--cream);
-        font-family: "Instrument Serif", serif;
-        font-size: 1.7rem;
-        display: grid;
-        place-items: center;
-        margin-bottom: 1rem;
-      }
-      @media (prefers-color-scheme: dark) {
-        .avatar { background: var(--cream); color: var(--book-cloth); }
-      }
-      .signed-in h2 {
-        font-family: "Instrument Serif", serif;
-        font-weight: 400;
-        font-size: 1.8rem;
-        margin: 0 0 0.3rem;
-      }
-      .signed-in .who { color: var(--text-soft); margin: 0 0 0.6rem; word-break: break-all; }
-      .signed-in .what {
-        color: var(--text-soft);
-        line-height: 1.6;
-        margin: 0 0 1.5rem;
-        max-width: 36em;
-      }
-      .open-wheel {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        background: var(--accent);
-        color: var(--accent-text);
-        text-decoration: none;
-        font-weight: 700;
-        border-radius: 10px;
-        padding: 0.95rem 1rem;
-        margin-bottom: 0.7rem;
-      }
-      .open-wheel:hover { background: var(--accent-hover); }
-      .sign-out {
-        width: 100%;
-        background: transparent;
-        border: 1px solid var(--line);
-        color: var(--text);
-        font-weight: 600;
-        border-radius: 10px;
-        padding: 0.85rem 1rem;
-        cursor: pointer;
-      }
-      .sign-out:hover { border-color: var(--text-soft); }
-
-      footer {
-        padding: 1.6rem 1rem 2rem;
-        text-align: center;
-        color: var(--text-soft);
-        font-size: 0.85rem;
-      }
-      footer .credit { font-family: "DM Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
-
-      @media (prefers-reduced-motion: no-preference) {
-        .lamp-glow { transition: opacity 0.5s ease; }
-        .cord-ball { transition: transform 0.35s ease; }
+      @media(prefers-reduced-motion:reduce){
+        .lamp-scene .lx-card.pop,.lamp-scene .view.active,.lamp-scene .lx-card.shake,.lamp-scene .dust i,.lamp-scene .spinner{animation:none}
+        .lx-toast{transition:none}
       }
     </style>
   </head>
   <body>
-    <div class="page">
-      <header class="masthead">
-        <div class="mark" aria-hidden="true">
-          <span>F</span>
-          <svg viewBox="0 0 46 10" width="46" height="10" aria-hidden="true">
-            <path d="M2 7 Q 9 2, 16 6 T 30 6 T 44 5" fill="none" stroke="#f2a97e" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="41" cy="4" r="2.1" fill="#e8c26a"/>
-          </svg>
-        </div>
-        <div>
-          <div class="wordmark">Feelings <em>Wheel</em></div>
-          <div class="tag">Name it · Need it · Say it</div>
-        </div>
+    <div class="lamp-scene is-out" id="lxScene" data-glow="teal">
+      <div class="desk" aria-hidden="true"></div>
+      <header class="lx-topbar">
+        <div class="lx-brand"><span class="dot" aria-hidden="true"></span><span>Feelings · Wheel</span></div>
+        <div class="status-pill" role="status" aria-live="polite"><span class="led" aria-hidden="true"></span><span id="lxStatus">Lamp OFF <em>· Signed out</em></span></div>
       </header>
-
-      <main class="stage">
-        <section class="lamp-side" aria-label="About signing in">
-          <div class="lamp-wrap">
-            <svg class="lamp-svg" viewBox="0 0 300 300" role="img" aria-label="A reading lamp. Pull its cord to switch between sign in and sign up.">
-              <!-- light cone -->
-              <polygon class="lamp-glow glow-poly" id="lampGlow" points="96,96 204,96 258,268 42,268" opacity="0.85"/>
-              <!-- stand -->
-              <line class="line-stroke" x1="150" y1="118" x2="150" y2="252" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
-              <ellipse class="body-fill" cx="150" cy="262" rx="58" ry="10"/>
-              <!-- shade -->
-              <path class="body-fill" d="M96 118 L118 52 Q150 38 182 52 L204 118 Q150 132 96 118 Z"/>
-              <path class="peach-fill" d="M96 118 Q150 132 204 118 L198 104 Q150 116 102 104 Z"/>
-              <circle class="gold-fill" cx="150" cy="120" r="7"/>
-              <!-- pull cord -->
-              <g class="cord-hit" id="cordHit" tabindex="0" role="button" aria-label="Pull the cord to switch between sign in and sign up">
-                <line class="line-stroke" x1="196" y1="112" x2="196" y2="176" stroke-width="2.5" opacity="0.75"/>
-                <circle class="cord-ball ox-fill" id="cordBall" cx="196" cy="186" r="9"/>
-                <circle cx="196" cy="186" r="22" fill="transparent"/>
+      <div class="lx-stage">
+        <section class="lamp-wrap" aria-label="Desk lamp with pull cord">
+          <div class="lamp-box">
+            <div class="glow" aria-hidden="true"></div>
+            <div class="beam" aria-hidden="true"></div>
+            <div class="pool" aria-hidden="true"></div>
+            <div class="bulb-halo" aria-hidden="true"></div>
+            <div class="dust" id="lxDust" aria-hidden="true"></div>
+            <svg class="lamp-svg" viewBox="0 0 360 430" fill="none" aria-hidden="true">
+              <ellipse cx="105" cy="402" rx="72" ry="13" fill="#0c0c0d"/>
+              <path d="M38 400 Q105 378 172 400 L166 408 Q105 392 44 408 Z" fill="#1b1b1d"/>
+              <ellipse cx="105" cy="398" rx="62" ry="10" fill="#26262a"/>
+              <circle cx="105" cy="392" r="11" fill="#c9973f"/>
+              <circle cx="105" cy="392" r="5.5" fill="#7c5c1e"/>
+              <path d="M105 388 L168 268" stroke="#1d1d20" stroke-width="13" stroke-linecap="round"/>
+              <path d="M105 388 L168 268" stroke="#34343a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 0" opacity=".7"/>
+              <circle cx="172" cy="262" r="14" fill="#222226"/>
+              <circle cx="172" cy="262" r="7" fill="#c9973f"/>
+              <path d="M178 254 L252 148" stroke="#1d1d20" stroke-width="12" stroke-linecap="round"/>
+              <path d="M178 254 L252 148" stroke="#34343a" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
+              <path d="M120 340 l10 -8 M128 326 l10 -8 M136 312 l10 -8 M144 298 l10 -8" stroke="#8a8a90" stroke-width="2.4" stroke-linecap="round" opacity=".65"/>
+              <circle cx="258" cy="142" r="12.5" fill="#222226"/>
+              <circle cx="258" cy="142" r="6" fill="#c9973f"/>
+              <defs>
+                <radialGradient id="lxBulbGrad" cx="50%" cy="42%" r="65%">
+                  <stop offset="0%" class="bulb-stop-a"/>
+                  <stop offset="60%" class="bulb-stop-b"/>
+                  <stop offset="100%" class="bulb-stop-c"/>
+                </radialGradient>
+                <linearGradient id="lxShadeGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#2a2a2f"/>
+                  <stop offset="100%" stop-color="#101012"/>
+                </linearGradient>
+              </defs>
+              <path d="M248 130 L316 98 Q331 92 330 108 L324 168 Q322 184 307 180 L256 160 Q244 155 245 143 Z" fill="url(#lxShadeGrad)"/>
+              <path class="shade-inner" d="M256 160 L307 180 Q322 184 324 168 L325 148 L260 144 Z"/>
+              <rect x="284" y="140" width="15" height="16" rx="4" fill="#3a3a40"/>
+              <rect x="284" y="140" width="15" height="16" rx="4" fill="none" stroke="rgba(255,255,255,.14)"/>
+              <g class="bulb-off">
+                <circle cx="292" cy="166" r="13" fill="#2b2b30" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+                <circle cx="288" cy="161" r="4" fill="#ffffff" opacity=".14"/>
+              </g>
+              <g class="bulb-light">
+                <circle cx="292" cy="166" r="52" style="fill:var(--wash-strong)" opacity=".14"/>
+                <circle cx="292" cy="166" r="34" style="fill:var(--wash-strong)" opacity=".22"/>
+                <circle cx="292" cy="166" r="21" style="fill:var(--bulb-b)" opacity=".38"/>
+                <circle cx="292" cy="166" r="13" fill="url(#lxBulbGrad)"/>
+                <circle cx="288" cy="161" r="4" style="fill:var(--bulb-a)" opacity=".95"/>
               </g>
             </svg>
+            <div class="cord-zone" id="lxCordZone">
+              <div class="cord-string" id="lxCordString"></div>
+              <button class="cord-knob" id="lxCordKnob" type="button" aria-pressed="false" aria-label="Pull cord — turn the lamp on to sign in, off to sign out">
+                <span class="bead" aria-hidden="true"></span>
+                <span class="grip" aria-hidden="true"></span>
+              </button>
+            </div>
           </div>
-
-          <h1 class="lamp-headline" id="lampHeadline">Welcome back to your <em>feelings.</em></h1>
-          <p class="lamp-copy" id="lampCopy">
-            Sign in and your notes, goals and Habit Lab sittings follow you from device to device —
-            saved to your own private space, never shared. No account? Everything on the wheel
-            still works as a guest.
-          </p>
-          <p class="cord-hint">Pull the lamp cord to switch</p>
-          <br />
-          <a class="guest-link" href="https://olitamrat.github.io/feelings-wheel/">Continue as a guest →</a>
+          <p class="pull-hint"><span aria-hidden="true">↓</span> <span id="lxPullHint"><strong>Pull to turn on</strong></span></p>
         </section>
 
-        <section class="card" aria-label="Sign in">
-          <!-- signed-out / form state -->
-          <div id="formState">
-            <div class="tabs" role="tablist" aria-label="Sign in or sign up">
-              <button class="tab" id="tabSignIn" role="tab" aria-selected="true" type="button">Sign In</button>
-              <button class="tab" id="tabSignUp" role="tab" aria-selected="false" type="button">Sign Up</button>
+        <section class="card-col">
+          <div class="lx-card" id="lxCard">
+
+            <div class="view active" id="lxViewOut">
+              <div class="state-icon out" aria-hidden="true">⏻</div>
+              <h1 id="lxOutTitle">The lamp is off.</h1>
+              <p class="sub" id="lxOutSub">Pull the cord to sign in — or don't. Everything on this page works as a guest; an account only adds sync.</p>
+              <div class="session-box" id="lxOutSession" style="display:none">
+                <div class="r"><span>Last session</span><span id="lxOutEmail">None yet</span></div>
+              </div>
+              <div class="stack">
+                <button class="cta cta-teal" id="lxBackIn" type="button">Pull the light on</button>
+              </div>
+              <p class="fineprint"><a href="https://olitamrat.github.io/feelings-wheel/">Continue as a guest →</a><br />Guest data never leaves this device.</p>
             </div>
 
-            <div class="message" id="message" role="alert" aria-live="polite"></div>
-
-            <form id="authForm" novalidate>
-              <div class="field" id="nameField" hidden>
-                <label for="nameInput">Your name</label>
-                <input type="text" id="nameInput" autocomplete="name" placeholder="What should the wheel call you?" />
+            <div class="view" id="lxViewAuth">
+              <h1 id="lxAuthTitle">Welcome back</h1>
+              <p class="sub" id="lxAuthSub">Sign in to pick up your notes, goals and habit practice where you left them.</p>
+              <p class="acct-note" id="lxAcctNote" hidden>Accounts couldn't load just now — check your connection. Everything else on this page still works, and your words keep saving on this device.</p>
+              <div class="form-error" id="lxFormError" role="alert"><span class="dot-err" aria-hidden="true"></span><span id="lxFormErrorText">Something went wrong. Try again.</span></div>
+              <div class="tabs" id="lxTabs" role="tablist" aria-label="Sign in or sign up">
+                <span class="tab-ind" aria-hidden="true"></span>
+                <button class="tab" id="lxTabIn" role="tab" aria-selected="true" type="button">Sign In</button>
+                <button class="tab" id="lxTabUp" role="tab" aria-selected="false" type="button">Sign Up</button>
               </div>
-              <div class="field">
-                <label for="emailInput">Email</label>
-                <input type="email" id="emailInput" autocomplete="email" placeholder="you@example.com" required />
-              </div>
-              <div class="field">
-                <label for="passwordInput">Password</label>
-                <div class="pw-wrap">
-                  <input type="password" id="passwordInput" autocomplete="current-password" placeholder="Your password" required />
-                  <button class="pw-toggle" id="pwToggle" type="button" aria-label="Show password">Show</button>
+              <form id="lxAuthForm" novalidate>
+                <div class="field" id="lxNameField" style="display:none">
+                  <label class="f-label" for="lxName">Full name</label>
+                  <div class="input-row"><input id="lxName" type="text" placeholder="Your name" autocomplete="name"></div>
                 </div>
-                <ul class="strength" id="strengthList" hidden>
-                  <li data-rule="len">At least 8 characters</li>
-                  <li data-rule="upper">A capital letter</li>
-                  <li data-rule="num">A number</li>
-                  <li data-rule="sym">A symbol (! ? # …)</li>
-                </ul>
+                <div class="field">
+                  <label class="f-label" for="lxEmail">Email</label>
+                  <div class="input-row"><input id="lxEmail" type="email" placeholder="you@example.com" autocomplete="email"></div>
+                  <p class="err-msg" id="lxEmailErr">Enter a valid email address.</p>
+                </div>
+                <div class="field">
+                  <label class="f-label" for="lxPass">Password</label>
+                  <div class="input-row">
+                    <input id="lxPass" type="password" placeholder="Enter your password" autocomplete="current-password">
+                    <button class="eye-btn" id="lxEye" type="button" aria-label="Show password">SHOW</button>
+                  </div>
+                  <p class="err-msg" id="lxPassErr">Password needs at least 8 characters.</p>
+                  <div class="pw-checklist" id="lxPwList" aria-live="polite">
+                    <div class="pw-strength"><span>Password strength</span><span class="val empty" id="lxPwVal">—</span></div>
+                    <div class="pw-bar" aria-hidden="true"><i id="lxPwBar"></i></div>
+                    <ul class="pw-rules">
+                      <li class="pw-rule" data-rule="length"><span class="tick" aria-hidden="true">✓</span> At least 8 characters</li>
+                      <li class="pw-rule" data-rule="upper"><span class="tick" aria-hidden="true">✓</span> Uppercase letter</li>
+                      <li class="pw-rule" data-rule="number"><span class="tick" aria-hidden="true">✓</span> Number</li>
+                      <li class="pw-rule" data-rule="symbol"><span class="tick" aria-hidden="true">✓</span> Symbol (e.g. ! @ # $)</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row-between">
+                  <button class="remember" id="lxRemember" type="button" role="switch" aria-checked="true"><span class="switch" aria-hidden="true"></span> Remember me</button>
+                  <button class="forgot" id="lxForgot" type="button">Forgot?</button>
+                </div>
+                <button class="cta cta-teal" id="lxSubmit" type="submit"><span id="lxSubmitLabel">Sign In →</span></button>
+              </form>
+              <div class="divider">or continue with</div>
+              <button class="social" type="button" id="lxGoogle"><span class="mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg></span>Google</button>
+              <p class="fineprint">Accounts are handled by Firebase (Google). Your notes live under your account only — the database rules let no one else read them.</p>
+            </div>
+
+            <div class="view" id="lxViewIn">
+              <div class="state-icon ok" aria-hidden="true">✓</div>
+              <h1 id="lxInTitle">You're in.</h1>
+              <div class="session-box">
+                <div class="r"><span>Signed in as</span><span id="lxInEmail"></span></div>
+                <div class="r"><span>Name</span><span id="lxInName">—</span></div>
+                <div class="r"><span>Your words</span><span id="lxSyncLine">Syncing…</span></div>
               </div>
-
-              <div class="row-between">
-                <label class="remember">
-                  <input type="checkbox" id="rememberInput" checked />
-                  Remember me
-                </label>
-                <button class="forgot" id="forgotBtn" type="button">Forgot password?</button>
+              <div class="stack">
+                <a class="cta cta-teal" href="https://olitamrat.github.io/feelings-wheel/">Open the Feelings Wheel →</a>
+                <button class="cta cta-ghost" id="lxSignOut" type="button">Sign out</button>
               </div>
+              <p class="fineprint">Signing out doesn't delete anything — your words stay in your account, and a copy stays on this device.</p>
+            </div>
 
-              <button class="submit" id="submitBtn" type="submit">Sign in</button>
-            </form>
-
-            <div class="divider">or</div>
-
-            <button class="google-btn" id="googleBtn" type="button">
-              <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
-                <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
-                <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
-                <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
-                <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/>
-              </svg>
-              Continue with Google
-            </button>
-
-            <p class="switch-line" id="switchLine">
-              New to the Feelings Wheel?
-              <button type="button" id="switchBtn">Create an account</button>
-            </p>
-          </div>
-
-          <!-- signed-in state -->
-          <div class="signed-in" id="signedInState">
-            <div class="avatar" id="avatarInitial" aria-hidden="true">·</div>
-            <h2 id="signedInTitle">You're signed in.</h2>
-            <p class="who" id="signedInWho"></p>
-            <p class="what">
-              Your notes, goals and Habit Lab sittings now save to your account and sync
-              wherever you open the wheel. On the wheel itself, look for your name in the
-              Account section to see the synced state.
-            </p>
-            <a class="open-wheel" href="https://olitamrat.github.io/feelings-wheel/">Open the Feelings Wheel →</a>
-            <button class="sign-out" id="signOutBtn" type="button">Sign out</button>
           </div>
         </section>
-      </main>
+      </div>
+      <div class="below-scene">
+        <p class="acct-fine">Guest data never leaves this device. Account data is stored in Firebase under your account, readable only by you.</p>
+        <p class="credit">Created by Olink Technologies</p>
+      </div>
     </div>
-
-    <footer>
-      <p class="credit">Created by Olink Technologies</p>
-    </footer>
+    <div class="lx-toast" id="lxToast" role="status"></div>
 
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -656,260 +372,228 @@
           appId: "1:708736674985:web:85b1d4e1e45baee1b20db8"
         };
 
-        var els = {
-          formState: document.getElementById("formState"),
-          signedInState: document.getElementById("signedInState"),
-          tabSignIn: document.getElementById("tabSignIn"),
-          tabSignUp: document.getElementById("tabSignUp"),
-          form: document.getElementById("authForm"),
-          nameField: document.getElementById("nameField"),
-          nameInput: document.getElementById("nameInput"),
-          emailInput: document.getElementById("emailInput"),
-          passwordInput: document.getElementById("passwordInput"),
-          pwToggle: document.getElementById("pwToggle"),
-          strengthList: document.getElementById("strengthList"),
-          rememberInput: document.getElementById("rememberInput"),
-          forgotBtn: document.getElementById("forgotBtn"),
-          submitBtn: document.getElementById("submitBtn"),
-          googleBtn: document.getElementById("googleBtn"),
-          switchLine: document.getElementById("switchLine"),
-          switchBtn: document.getElementById("switchBtn"),
-          message: document.getElementById("message"),
-          lampHeadline: document.getElementById("lampHeadline"),
-          lampCopy: document.getElementById("lampCopy"),
-          lampGlow: document.getElementById("lampGlow"),
-          cordHit: document.getElementById("cordHit"),
-          cordBall: document.getElementById("cordBall"),
-          avatarInitial: document.getElementById("avatarInitial"),
-          signedInTitle: document.getElementById("signedInTitle"),
-          signedInWho: document.getElementById("signedInWho"),
-          signOutBtn: document.getElementById("signOutBtn")
-        };
+        function lxEl(id) { return document.getElementById(id); }
+        var lxScene = lxEl("lxScene");
+        var lxMode = "off", lxTab = "in", lxLastEmail = "", lxRememberOn = true;
+        var auth = null, fbUser = null;
 
-        var mode = "signin"; // or "signup"
-        var auth = null;
-
-        function showMessage(text, kind) {
-          els.message.textContent = text;
-          els.message.className = "message show " + (kind || "error");
-        }
-        function clearMessage() {
-          els.message.textContent = "";
-          els.message.className = "message";
-        }
-
-        function setMode(next) {
-          mode = next;
-          var isIn = mode === "signin";
-          els.tabSignIn.setAttribute("aria-selected", isIn ? "true" : "false");
-          els.tabSignUp.setAttribute("aria-selected", isIn ? "false" : "true");
-          els.nameField.hidden = isIn;
-          els.strengthList.hidden = isIn;
-          els.passwordInput.setAttribute("autocomplete", isIn ? "current-password" : "new-password");
-          els.submitBtn.textContent = isIn ? "Sign in" : "Create account";
-          els.switchLine.firstChild.textContent = isIn ? "New to the Feelings Wheel? " : "Already have an account? ";
-          els.switchBtn.textContent = isIn ? "Create an account" : "Sign in";
-          els.lampHeadline.innerHTML = isIn
-            ? 'Welcome back to your <em>feelings.</em>'
-            : 'A quieter way to <em>keep</em> them.';
-          els.lampCopy.textContent = isIn
-            ? "Sign in and your notes, goals and Habit Lab sittings follow you from device to device — saved to your own private space, never shared. No account? Everything on the wheel still works as a guest."
-            : "Create a free account and the wheel remembers with you — your check-ins, notes and goals, kept in your own private space and synced across your devices. Guests keep everything on one device instead.";
-          els.lampGlow.setAttribute("opacity", isIn ? "0.85" : "0.45");
-          els.cordBall.setAttribute("cy", isIn ? "186" : "192");
-          clearMessage();
-        }
-
-        els.tabSignIn.addEventListener("click", function () { setMode("signin"); });
-        els.tabSignUp.addEventListener("click", function () { setMode("signup"); });
-        els.switchBtn.addEventListener("click", function () {
-          setMode(mode === "signin" ? "signup" : "signin");
-        });
-        els.cordHit.addEventListener("click", function () {
-          setMode(mode === "signin" ? "signup" : "signin");
-        });
-        els.cordHit.addEventListener("keydown", function (e) {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setMode(mode === "signin" ? "signup" : "signin");
-          }
-        });
-
-        els.pwToggle.addEventListener("click", function () {
-          var showing = els.passwordInput.type === "text";
-          els.passwordInput.type = showing ? "password" : "text";
-          els.pwToggle.textContent = showing ? "Show" : "Hide";
-          els.pwToggle.setAttribute("aria-label", showing ? "Show password" : "Hide password");
-          els.passwordInput.focus();
-        });
-
-        els.passwordInput.addEventListener("input", function () {
-          var v = els.passwordInput.value;
-          var rules = {
-            len: v.length >= 8,
-            upper: /[A-Z]/.test(v),
-            num: /[0-9]/.test(v),
-            sym: /[^A-Za-z0-9]/.test(v)
-          };
-          var items = els.strengthList.querySelectorAll("li");
-          for (var i = 0; i < items.length; i++) {
-            var key = items[i].getAttribute("data-rule");
-            items[i].classList.toggle("met", !!rules[key]);
-          }
-        });
-
-        function friendlyError(err) {
-          var code = (err && err.code) || "";
+        function fbErr(err) {
+          var code = err && err.code ? err.code : "";
           switch (code) {
-            case "auth/invalid-credential":
-            case "auth/wrong-password":
-            case "auth/user-not-found":
-              return "That email and password don't match an account. Check both and try again — or use Forgot password.";
-            case "auth/email-already-in-use":
-              return "An account with this email already exists. Try signing in instead.";
-            case "auth/invalid-email":
-              return "That email address doesn't look complete. Check it and try again.";
-            case "auth/weak-password":
-              return "That password is too weak. Aim for at least 8 characters with a mix of letters, a number and a symbol.";
-            case "auth/too-many-requests":
-              return "Too many attempts in a row. Wait a few minutes, then try again.";
-            case "auth/network-request-failed":
-              return "The connection dropped before sign-in finished. Check your connection and try again.";
-            case "auth/popup-closed-by-user":
-            case "auth/cancelled-popup-request":
-              return "The Google window closed before sign-in finished. Try again when you're ready.";
-            case "auth/unauthorized-domain":
-              return "Google sign-in isn't switched on for this page's address yet. Email sign-in works — use that for now.";
-            case "auth/user-disabled":
-              return "This account has been disabled. Reach out for help getting back in.";
-            default:
-              return "Something went wrong signing you in. Try again in a moment.";
+            case "auth/invalid-email": return "That email address doesn't look right — check it and try again.";
+            case "auth/invalid-credential": case "auth/user-not-found": case "auth/wrong-password": return "Incorrect email or password. Check both and try again.";
+            case "auth/email-already-in-use": return "That email already has an account — try the Sign In tab instead.";
+            case "auth/weak-password": return "That password is too weak — use at least 8 characters, with a mix of letters, numbers and a symbol.";
+            case "auth/user-disabled": return "This account has been disabled. Contact support if you think that's a mistake.";
+            case "auth/too-many-requests": return "Too many attempts in a row — wait a few minutes, then try again.";
+            case "auth/network-request-failed": return "No connection — check your network and try again.";
+            case "auth/unauthorized-domain": return "Google sign-in isn't enabled for this web address yet. Email sign-in works — or add this domain in Firebase → Authentication → Settings → Authorized domains.";
+            case "auth/popup-blocked": return "Your browser blocked the Google window — allow popups for this page, or use email sign-in.";
+            case "auth/popup-closed-by-user": case "auth/cancelled-popup-request": return "The Google window closed before sign-in finished — try again, or use email.";
+            default: return "Something went wrong" + (code ? " (" + code + ")" : "") + ". Try again.";
           }
         }
 
-        function setBusy(busy) {
-          els.submitBtn.disabled = busy;
-          els.googleBtn.disabled = busy;
-          els.submitBtn.textContent = busy
-            ? "One moment…"
-            : (mode === "signin" ? "Sign in" : "Create account");
+        /* --- Lamp + card state (original behaviour) --- */
+        function lxSetLamp(on) { lxScene.classList.toggle("is-out", !on); lxEl("lxCordKnob").setAttribute("aria-pressed", on ? "true" : "false"); }
+        function lxSetStatus(html) { lxEl("lxStatus").innerHTML = html; }
+        function lxShowView(name) {
+          [["out", "lxViewOut"], ["auth", "lxViewAuth"], ["in", "lxViewIn"]].forEach(function (pair) {
+            lxEl(pair[1]).classList.toggle("active", pair[0] === name);
+          });
+          var card = lxEl("lxCard"); card.classList.remove("pop"); void card.offsetWidth; card.classList.add("pop");
+        }
+        function renderAccountState() {
+          if (fbUser) {
+            lxLastEmail = fbUser.email || lxLastEmail; lxMode = "in"; lxSetLamp(true); lxShowView("in");
+            lxEl("lxInEmail").textContent = fbUser.email || "";
+            lxEl("lxInName").textContent = fbUser.displayName || "—";
+            lxEl("lxInTitle").textContent = fbUser.displayName ? ("You're in, " + fbUser.displayName.split(" ")[0] + ".") : "You're in.";
+            lxEl("lxSyncLine").textContent = "Synced to your account";
+            lxSetStatus("Lamp ON <em>· Signed in</em>");
+            lxEl("lxPullHint").innerHTML = "<strong>Pull to sign out</strong>";
+          } else {
+            if (lxMode === "in") lxMode = "off";
+            lxSetLamp(lxMode !== "off");
+            lxShowView(lxMode === "auth" ? "auth" : "out");
+            lxSetStatus(lxMode === "auth" ? "Lamp ON <em>· Not signed in</em>" : "Lamp OFF <em>· Signed out</em>");
+            lxEl("lxPullHint").innerHTML = lxMode === "auth" ? "<strong>Pull to turn off</strong>" : "<strong>Pull to turn on</strong>";
+            if (lxLastEmail) {
+              lxEl("lxOutSession").style.display = "";
+              lxEl("lxOutEmail").textContent = lxLastEmail;
+              lxEl("lxOutTitle").textContent = "Signed out.";
+              lxEl("lxOutSub").textContent = "The lamp is off and this device is back to guest mode — words you write here now save on this device only.";
+            }
+          }
+        }
+        function lxCordToggle() {
+          if (fbUser) { lxSignOut(); return; }
+          if (lxMode === "off") { lxMode = "auth"; lxSetLamp(true); lxShowView("auth"); lxSetStatus("Lamp ON <em>· Not signed in</em>"); lxEl("lxPullHint").innerHTML = "<strong>Pull to turn off</strong>"; }
+          else if (lxMode === "auth") { lxMode = "off"; lxSetLamp(false); lxShowView("out"); lxSetStatus("Lamp OFF <em>· Signed out</em>"); lxEl("lxPullHint").innerHTML = "<strong>Pull to turn on</strong>"; }
+        }
+        lxEl("lxBackIn").addEventListener("click", lxCordToggle);
+
+        /* Cord: click toggles; a real downward pull toggles too (original) */
+        (function () {
+          var zone = lxEl("lxCordZone"), knob = lxEl("lxCordKnob"), string = lxEl("lxCordString");
+          var BASE = 86; var drag = null, suppressClick = false;
+          knob.addEventListener("pointerdown", function (e) { drag = { y: e.clientY, moved: false }; try { knob.setPointerCapture(e.pointerId); } catch (err) {} });
+          knob.addEventListener("pointermove", function (e) { if (!drag) return; var dy = Math.max(0, Math.min(48, e.clientY - drag.y)); if (dy > 4) drag.moved = true; string.style.height = (BASE + dy) + "px"; zone.style.transform = "rotate(" + (1.2 + dy * 0.04) + "deg)"; });
+          function endDrag() { if (!drag) return; var pulled = parseInt(string.style.height, 10) > BASE + 26; string.style.height = BASE + "px"; zone.style.transform = "rotate(1.2deg)"; if (drag.moved) { suppressClick = true; setTimeout(function () { suppressClick = false; }, 60); if (pulled) lxCordToggle(); } drag = null; }
+          knob.addEventListener("pointerup", endDrag); knob.addEventListener("pointercancel", endDrag);
+          knob.addEventListener("click", function () { if (suppressClick) return; lxCordToggle(); });
+        })();
+
+        /* Dust motes drifting in the beam (original) */
+        (function () {
+          var dust = lxEl("lxDust"); if (!dust) return;
+          var frag = document.createDocumentFragment();
+          for (var i = 0; i < 22; i++) {
+            var p = document.createElement("i");
+            var size = (1.6 + Math.random() * 2.6).toFixed(1);
+            p.style.width = size + "px"; p.style.height = size + "px";
+            p.style.left = (10 + Math.random() * 80) + "%"; p.style.top = (4 + Math.random() * 88) + "%";
+            p.style.opacity = (0.25 + Math.random() * 0.6).toFixed(2);
+            p.style.setProperty("--dx", (Math.random() * 14 - 7).toFixed(0) + "px");
+            p.style.setProperty("--dy", (-(6 + Math.random() * 14)).toFixed(0) + "px");
+            p.style.animationDuration = (7 + Math.random() * 8).toFixed(1) + "s";
+            p.style.animationDelay = (-Math.random() * 8).toFixed(1) + "s";
+            frag.appendChild(p);
+          }
+          dust.appendChild(frag);
+        })();
+
+        /* Toast (original) */
+        var lxToastTimer = null;
+        function lxToastMsg(t) { var el = lxEl("lxToast"); if (!el) return; el.textContent = t; el.classList.add("show"); if (lxToastTimer) clearTimeout(lxToastTimer); lxToastTimer = setTimeout(function () { el.classList.remove("show"); }, 4200); }
+
+        /* --- Auth form (original behaviour; tab pill colour is the only visual change) --- */
+        function lxSetTab(t) {
+          lxTab = t;
+          lxEl("lxTabs").classList.toggle("up", t === "up");
+          lxEl("lxTabIn").setAttribute("aria-selected", t === "in" ? "true" : "false");
+          lxEl("lxTabUp").setAttribute("aria-selected", t === "up" ? "true" : "false");
+          lxScene.setAttribute("data-glow", t === "up" ? "amber" : "teal");
+          lxEl("lxNameField").style.display = t === "up" ? "" : "none";
+          lxEl("lxAuthTitle").textContent = t === "up" ? "Create your account" : "Welcome back";
+          lxEl("lxAuthSub").textContent = t === "up" ? "Your notes, goals and habit practice — on every device you sign in on." : "Sign in to pick up your notes, goals and habit practice where you left them.";
+          lxEl("lxSubmitLabel").textContent = t === "up" ? "Create account →" : "Sign In →";
+          lxEl("lxPass").setAttribute("autocomplete", t === "up" ? "new-password" : "current-password");
+          lxEl("lxPassErr").textContent = t === "up" ? "Password needs at least 8 characters." : "Enter your password.";
+          lxHideFormError(); lxPwRefresh(false);
+        }
+        lxEl("lxTabIn").addEventListener("click", function () { lxSetTab("in"); });
+        lxEl("lxTabUp").addEventListener("click", function () { lxSetTab("up"); });
+
+        function lxPwRules(pw) { return { length: pw.length >= 8, upper: /[A-Z]/.test(pw), number: /[0-9]/.test(pw), symbol: /[^A-Za-z0-9]/.test(pw) }; }
+        function lxPwRefresh(failed) {
+          var list = lxEl("lxPwList");
+          if (lxTab !== "up") { list.classList.remove("show"); return; }
+          var pw = lxEl("lxPass").value;
+          list.classList.toggle("show", pw.length > 0 || !!failed);
+          var r = lxPwRules(pw); var met = 0;
+          var items = list.querySelectorAll(".pw-rule");
+          for (var i = 0; i < items.length; i++) {
+            var ok = r[items[i].getAttribute("data-rule")];
+            if (ok) met++;
+            items[i].classList.toggle("met", !!ok);
+            items[i].classList.toggle("failed", !!(failed && !ok));
+          }
+          var val = lxEl("lxPwVal"), bar = lxEl("lxPwBar");
+          bar.style.width = (met * 25) + "%"; bar.classList.toggle("strong", met >= 3);
+          if (!pw.length) { val.textContent = "—"; val.className = "val empty"; }
+          else if (met >= 3) { val.textContent = "Strong"; val.className = "val strong"; }
+          else { val.textContent = "Weak"; val.className = "val weak"; }
+        }
+        lxEl("lxPass").addEventListener("input", function () { lxPwRefresh(false); });
+        lxEl("lxEye").addEventListener("click", function () {
+          var p = lxEl("lxPass"); var show = p.type === "password";
+          p.type = show ? "text" : "password";
+          this.textContent = show ? "HIDE" : "SHOW";
+          this.setAttribute("aria-label", show ? "Hide password" : "Show password");
+        });
+        lxEl("lxRemember").addEventListener("click", function () {
+          lxRememberOn = !lxRememberOn;
+          this.setAttribute("aria-checked", lxRememberOn ? "true" : "false");
+        });
+
+        function lxShowFormError(msg) { lxEl("lxFormErrorText").textContent = msg; lxEl("lxFormError").classList.add("show"); var card = lxEl("lxCard"); card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake"); }
+        function lxHideFormError() { lxEl("lxFormError").classList.remove("show"); }
+        function lxFieldError(input, errEl, bad) { input.classList.toggle("invalid", bad); errEl.classList.toggle("show", bad); return !bad; }
+        function lxSetBusy(b) { var s = lxEl("lxSubmit"); s.disabled = b; lxEl("lxSubmitLabel").innerHTML = b ? '<span class="spinner"></span> One moment…' : (lxTab === "up" ? "Create account →" : "Sign In →"); }
+        function lxPersist() {
+          if (!auth) return Promise.resolve();
+          var p = lxRememberOn ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
+          return auth.setPersistence(p).catch(function () {});
+        }
+        function ensureAuth() {
+          if (auth) return true;
+          lxShowFormError("Accounts couldn't load — check your connection and try again.");
+          return false;
         }
 
-        function applyPersistence() {
-          var p = els.rememberInput.checked
-            ? firebase.auth.Auth.Persistence.LOCAL
-            : firebase.auth.Auth.Persistence.SESSION;
-          return auth.setPersistence(p);
-        }
+        lxEl("lxAuthForm").addEventListener("submit", function (ev) {
+          ev.preventDefault(); lxHideFormError();
+          if (!ensureAuth()) return;
+          var email = lxEl("lxEmail").value.trim(), pw = lxEl("lxPass").value;
+          var ok = lxFieldError(lxEl("lxEmail"), lxEl("lxEmailErr"), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+          if (lxTab === "up") {
+            if (!lxPwRules(pw).length) { lxPwRefresh(true); lxFieldError(lxEl("lxPass"), lxEl("lxPassErr"), true); ok = false; }
+            else lxFieldError(lxEl("lxPass"), lxEl("lxPassErr"), false);
+          } else if (!pw) { lxFieldError(lxEl("lxPass"), lxEl("lxPassErr"), true); ok = false; }
+          if (!ok) return;
+          lxSetBusy(true);
+          lxPersist().then(function () {
+            if (lxTab === "up") {
+              var name = lxEl("lxName").value.trim();
+              return auth.createUserWithEmailAndPassword(email, pw).then(function (cred) {
+                if (name && cred.user) return cred.user.updateProfile({ displayName: name }).then(function () { renderAccountState(); });
+              });
+            }
+            return auth.signInWithEmailAndPassword(email, pw);
+          }).then(function () { lxSetBusy(false); }, function (err) { lxSetBusy(false); lxShowFormError(fbErr(err)); });
+        });
 
+        lxEl("lxGoogle").addEventListener("click", function () {
+          lxHideFormError();
+          if (!ensureAuth()) return;
+          lxPersist().then(function () {
+            return auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+          }).catch(function (err) { lxShowFormError(fbErr(err)); });
+        });
+
+        lxEl("lxForgot").addEventListener("click", function () {
+          var email = lxEl("lxEmail").value.trim();
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { lxShowFormError("Type your email above first — the reset link goes there."); lxEl("lxEmail").focus(); return; }
+          if (!ensureAuth()) return;
+          auth.sendPasswordResetEmail(email).then(function () {
+            lxToastMsg("Password reset email sent to " + email + " — check your inbox.");
+          }, function (err) { lxShowFormError(fbErr(err)); });
+        });
+
+        function lxSignOut() {
+          if (!auth || !fbUser) return;
+          auth.signOut().then(function () { lxToastMsg("Signed out — this device is back to guest mode."); }, function () { lxToastMsg("Sign-out didn't go through — try again."); });
+        }
+        lxEl("lxSignOut").addEventListener("click", lxSignOut);
+
+        /* --- Firebase init (same project + compat SDK as the shipped standalone page) --- */
         function initFirebase() {
           if (typeof firebase === "undefined" || !firebase.auth) {
-            showMessage("The sign-in service couldn't load. Check your connection and reload the page.", "error");
+            lxEl("lxAcctNote").hidden = false;
             return;
           }
           if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
           auth = firebase.auth();
-
           auth.onAuthStateChanged(function (user) {
-            if (user) {
-              var name = user.displayName || "";
-              var email = user.email || "";
-              els.avatarInitial.textContent = (name || email || "F").charAt(0).toUpperCase();
-              els.signedInTitle.textContent = name ? "Welcome, " + name.split(" ")[0] + "." : "You're signed in.";
-              els.signedInWho.textContent = email;
-              els.formState.style.display = "none";
-              els.signedInState.classList.add("show");
-            } else {
-              els.formState.style.display = "";
-              els.signedInState.classList.remove("show");
-            }
+            var wasIn = !!fbUser;
+            fbUser = user || null;
+            renderAccountState();
+            if (fbUser && !wasIn) lxToastMsg("Signed in as " + (fbUser.email || "your account") + " — your words now sync here.");
           });
         }
 
-        els.form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          clearMessage();
-          if (!auth) { initFirebase(); if (!auth) return; }
-
-          var email = els.emailInput.value.trim();
-          var password = els.passwordInput.value;
-          var name = els.nameInput.value.trim();
-
-          if (!email || email.indexOf("@") === -1) {
-            showMessage("Enter the email address for your account.", "error");
-            els.emailInput.focus();
-            return;
-          }
-          if (!password) {
-            showMessage("Enter your password.", "error");
-            els.passwordInput.focus();
-            return;
-          }
-          if (mode === "signup" && password.length < 8) {
-            showMessage("For a new account, use a password of at least 8 characters.", "error");
-            els.passwordInput.focus();
-            return;
-          }
-
-          setBusy(true);
-          applyPersistence().then(function () {
-            if (mode === "signin") {
-              return auth.signInWithEmailAndPassword(email, password);
-            }
-            return auth.createUserWithEmailAndPassword(email, password).then(function (cred) {
-              if (name && cred.user) {
-                return cred.user.updateProfile({ displayName: name }).then(function () { return cred; });
-              }
-              return cred;
-            });
-          }).then(function () {
-            // onAuthStateChanged swaps the view.
-          }).catch(function (err) {
-            showMessage(friendlyError(err), "error");
-          }).then(function () {
-            setBusy(false);
-          });
-        });
-
-        els.googleBtn.addEventListener("click", function () {
-          clearMessage();
-          if (!auth) { initFirebase(); if (!auth) return; }
-          setBusy(true);
-          applyPersistence().then(function () {
-            var provider = new firebase.auth.GoogleAuthProvider();
-            return auth.signInWithPopup(provider);
-          }).catch(function (err) {
-            showMessage(friendlyError(err), "error");
-          }).then(function () {
-            setBusy(false);
-          });
-        });
-
-        els.forgotBtn.addEventListener("click", function () {
-          clearMessage();
-          if (!auth) { initFirebase(); if (!auth) return; }
-          var email = els.emailInput.value.trim();
-          if (!email || email.indexOf("@") === -1) {
-            showMessage("Type your email above first, then tap Forgot password and we'll send the reset link there.", "notice");
-            els.emailInput.focus();
-            return;
-          }
-          auth.sendPasswordResetEmail(email).then(function () {
-            showMessage("Reset link sent to " + email + ". Open it to choose a new password.", "notice");
-          }).catch(function (err) {
-            showMessage(friendlyError(err), "error");
-          });
-        });
-
-        els.signOutBtn.addEventListener("click", function () {
-          if (!auth) return;
-          auth.signOut().then(function () {
-            setMode("signin");
-            showMessage("You've signed out. This device is a guest again — anything you do on the wheel now stays on this device only.", "notice");
-          });
-        });
-
-        setMode("signin");
+        lxSetTab("in");
         initFirebase();
       })();
     </script>
