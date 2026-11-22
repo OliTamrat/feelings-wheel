@@ -9,7 +9,6 @@
 <title>Feelings Wheel — Name it. Understand it. Build a habit around it.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:dark;
@@ -294,180 +293,24 @@ footer .signoff{font-family:var(--serif);font-size:1.1rem;color:var(--ink-deep);
 footer .signoff .dot{color:var(--peach)}
 footer .signoff em{font-style:italic;color:var(--peach)}
 html[data-theme="light"] footer .signoff .dot,html[data-theme="light"] footer .signoff em{color:var(--ox)}
-/* ---------- Account — the lamp sign-in scene (ported from the lamp sign/signup page) ----------
-   The room stays dark in both themes; only the lamp's light wash shifts:
-   teal for sign in, warm amber for sign up / signed out. Red means one thing only: an error. */
-.acct-btn{flex:0 0 auto;margin-left:auto;border:1.5px solid var(--cloth-line);background:transparent;color:var(--ink);border-radius:999px;padding:9px 18px;min-height:44px;font-weight:600;font-size:.95rem;max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* ---------- Account — sign-in lives on its own page (login.html) ----------
+   The header button and the hero Account link go to login.html, a separate
+   page styled in the Kintale brand kit (cream, ink, oxblood, peach, gold,
+   book-cloth). This page carries no sign-in form of its own; it only listens
+   for the signed-in state so notes, goals and habit practice can sync. */
+.acct-btn{flex:0 0 auto;margin-left:auto;border:1.5px solid var(--cloth-line);background:transparent;color:var(--ink);border-radius:999px;padding:9px 18px;min-height:44px;font-weight:600;font-size:.95rem;max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .acct-btn:hover{border-color:var(--peach)}
 html[data-theme="light"] .acct-btn{border-color:#b8a888}
 html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
 .brandbar .theme-toggle{margin-left:0}
-.lamp-scene{
-  --lx-teal:#14b8a6; --lx-teal-bright:#2dd4bf; --lx-teal-deep:#0f766e;
-  --lx-amber:#f5b942; --lx-amber-soft:#ffd88a;
-  --lx-error:#ef4444; --lx-error-bright:#f87171;
-  --lx-ink:#f4f1ea; --lx-dim:#b8b2a6; --lx-faint:#8a8578;
-  --lx-card-border:rgba(255,255,255,.09);
-  --lx-field:#0a0f0d; --lx-field-border:rgba(255,255,255,.12);
-  --accent-solid:#2dd4bf;
-  --wash-strong:rgba(45,212,191,.45); --wash-mid:rgba(20,184,166,.16);
-  --beam-a:rgba(120,240,214,.32); --beam-b:rgba(45,212,191,.08);
-  --bulb-a:#e6fffb; --bulb-b:#5eead4; --bulb-c:#14b8a6;
-  --halo-core:rgba(94,234,212,.85);
-  color-scheme:dark;
-  position:relative; overflow:hidden; border-radius:18px; margin-top:26px;
-  border:1px solid var(--line); box-shadow:var(--book-shadow);
-  background:linear-gradient(180deg,#0b100e 0%,#070a09 55%,#050606 100%);
-  color:var(--lx-ink); font-family:"DM Sans",system-ui,sans-serif;
-  display:flex; flex-direction:column;
-}
-.lamp-scene[data-glow="amber"]{
-  --accent-solid:#f5b942;
-  --wash-strong:rgba(245,185,66,.45); --wash-mid:rgba(245,185,66,.16);
-  --beam-a:rgba(255,214,130,.32); --beam-b:rgba(245,185,66,.08);
-  --bulb-a:#fff6d8; --bulb-b:#ffd166; --bulb-c:#e79b26;
-  --halo-core:rgba(255,207,110,.85);
-}
-.lamp-scene :focus-visible{outline:3px solid var(--lx-amber);outline-offset:2px}
-.lamp-scene::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 72px}
-.lamp-scene .desk{position:absolute;left:0;right:0;bottom:0;height:19%;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.38) 18%,rgba(0,0,0,.62) 100%);border-top:1px solid rgba(255,255,255,.045)}
-.lamp-scene .lx-topbar{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:6px clamp(16px,4vw,40px);gap:16px;border-bottom:1px solid rgba(255,255,255,.055)}
-.lamp-scene .lx-brand{display:inline-flex;align-items:center;gap:11px;height:44px;font-weight:700;letter-spacing:.14em;font-size:13px;text-transform:uppercase;line-height:1}
-.lamp-scene .lx-brand .dot{width:9px;height:9px;border-radius:50%;background:var(--lx-amber);box-shadow:0 0 14px var(--lx-amber);flex:none}
-.lamp-scene .status-pill{display:inline-flex;align-items:center;gap:9px;height:44px;font-size:13px;font-weight:600;line-height:1;color:var(--lx-ink);white-space:nowrap}
-.lamp-scene .status-pill .led{width:8px;height:8px;border-radius:50%;background:var(--accent-solid);box-shadow:0 0 12px var(--accent-solid);transition:all .6s;flex:none}
-.lamp-scene .status-pill span em{font-style:normal;color:var(--lx-dim);font-weight:500}
-.lamp-scene .lx-stage{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:minmax(250px,38%) 1fr;align-items:center;gap:clamp(10px,3vw,44px);padding:clamp(14px,3vh,30px) clamp(16px,4vw,40px) clamp(24px,4vh,44px);width:100%;margin:0 auto}
-.lamp-scene .lamp-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
-.lamp-scene .lamp-box{--bulb-x:81.1%;--bulb-y:38.6%;position:relative;width:min(320px,80vw);aspect-ratio:360/430}
-.lamp-scene .glow{position:absolute;left:var(--bulb-x);top:var(--bulb-y);width:115%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,var(--wash-strong) 0%,var(--wash-mid) 38%,transparent 68%);filter:blur(6px);opacity:1;transition:opacity .7s ease,background .8s ease;pointer-events:none}
-.lamp-scene.is-out .glow{opacity:0}
-.lamp-scene .bulb-halo{position:absolute;left:var(--bulb-x);top:var(--bulb-y);width:34%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,var(--halo-core) 0%,var(--wash-strong) 34%,var(--wash-mid) 58%,transparent 72%);filter:blur(2px);opacity:1;transition:opacity .5s ease,background .8s ease;pointer-events:none}
-.lamp-scene.is-out .bulb-halo{opacity:0}
-.lamp-scene .beam{position:absolute;left:var(--bulb-x);top:var(--bulb-y);width:82%;height:59%;transform:translateX(-50%);clip-path:polygon(45% 0,55% 0,100% 100%,0% 100%);background:linear-gradient(180deg,var(--beam-a),var(--beam-b) 55%,transparent 96%);filter:blur(3px);opacity:1;transition:opacity .7s ease,background .8s ease;pointer-events:none}
-.lamp-scene.is-out .beam{opacity:0}
-.lamp-scene .pool{position:absolute;left:var(--bulb-x);bottom:0%;width:88%;height:14%;border-radius:50%;transform:translateX(-50%);background:radial-gradient(ellipse,var(--wash-strong),transparent 68%);filter:blur(5px);transition:opacity .7s,background .8s ease;pointer-events:none}
-.lamp-scene.is-out .pool{opacity:0}
-.lamp-scene .lamp-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.lamp-scene .bulb-light{transition:opacity .5s}
-.lamp-scene.is-out .bulb-light{opacity:0}
-.lamp-scene .bulb-off{transition:opacity .5s}
-.lamp-scene:not(.is-out) .bulb-off{opacity:0}
-.lamp-scene .bulb-stop-a{stop-color:var(--bulb-a)} .lamp-scene .bulb-stop-b{stop-color:var(--bulb-b)} .lamp-scene .bulb-stop-c{stop-color:var(--bulb-c)}
-.lamp-scene .shade-inner{fill:var(--bulb-b);opacity:.22;transition:opacity .6s ease,fill .8s ease}
-.lamp-scene:not(.is-out) .shade-inner{opacity:.95}
-.lamp-scene .cord-zone{position:absolute;left:63.5%;top:26.5%;width:52px;display:flex;flex-direction:column;align-items:center;transform-origin:top center;transform:rotate(1.2deg);z-index:4;touch-action:none;user-select:none;-webkit-user-select:none}
-.lamp-scene .cord-string{width:2px;height:86px;border-radius:2px;background:repeating-linear-gradient(180deg,#d8c491 0 5px,#a98f52 5px 10px);box-shadow:0 0 0 1px rgba(0,0,0,.25);transform-origin:top center}
-.lamp-scene .cord-knob{margin-top:-2px;width:46px;height:52px;min-height:52px;border:none;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0}
-.lamp-scene .cord-knob .bead{width:17px;height:17px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#ffe9b0,#e9b64f 55%,#9a7422);box-shadow:0 3px 8px rgba(0,0,0,.55),inset 0 -2px 4px rgba(0,0,0,.3);flex:none}
-.lamp-scene .cord-knob .grip{width:13px;height:24px;margin-top:3px;border-radius:7px;background:linear-gradient(180deg,#2c2c2e,#131314);border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 10px rgba(0,0,0,.5);flex:none}
-.lamp-scene .cord-knob:focus-visible{outline:2px solid var(--lx-amber);outline-offset:4px;border-radius:10px}
-.lamp-scene .pull-hint{margin-top:14px;text-align:center;font-size:13.5px;color:var(--lx-dim);max-width:290px;line-height:1.55}
-.lamp-scene .pull-hint strong{color:var(--lx-ink);font-weight:600}
-.lamp-scene .card-col{display:flex;justify-content:center;min-width:0}
-.lamp-scene .lx-card{width:min(440px,100%);position:relative;background:linear-gradient(168deg,rgba(24,32,28,.92),rgba(13,18,16,.96));border:1px solid var(--lx-card-border);border-radius:20px;padding:clamp(24px,3.4vw,36px);box-shadow:0 34px 70px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.3);transition:box-shadow .8s ease,border-color .8s ease}
-.lamp-scene .lx-card.pop{animation:lxpop .55s cubic-bezier(.3,1.4,.5,1)}
-@keyframes lxpop{0%{transform:scale(.965) translateY(10px);opacity:.4}100%{transform:scale(1) translateY(0);opacity:1}}
-.lamp-scene .lx-card.shake{animation:lxshake .4s ease}
-@keyframes lxshake{0%,100%{transform:translateX(0)}22%{transform:translateX(-7px)}48%{transform:translateX(6px)}72%{transform:translateX(-4px)}}
-.lamp-scene .view{display:none}
-.lamp-scene .view.active{display:block;animation:lxviewIn .45s ease both}
-@keyframes lxviewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.lamp-scene .lx-card h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:clamp(28px,4vw,36px);margin:0 0 6px;letter-spacing:.01em;line-height:1.12;color:var(--lx-ink)}
-.lamp-scene .lx-card .sub{margin:0 0 22px;color:var(--lx-dim);font-size:14.5px;line-height:1.55}
-.lamp-scene .lx-card .sub b{color:var(--lx-ink);font-weight:600;word-break:break-all}
-.lamp-scene .tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.06);margin-bottom:22px;position:relative}
-.lamp-scene .tab-ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:9px;background:var(--wash-mid);border:1px solid var(--wash-strong);transition:transform .38s cubic-bezier(.45,0,.2,1),background .45s ease,border-color .45s ease}
-.lamp-scene .tabs.up .tab-ind{transform:translateX(100%)}
-.lamp-scene .tab{position:relative;z-index:1;border:none;background:transparent;color:var(--lx-dim);font-size:14px;font-weight:600;padding:10px;border-radius:9px;min-height:44px;transition:color .25s}
-.lamp-scene .tab[aria-selected="true"]{color:var(--lx-ink)}
-.lamp-scene .dust{position:absolute;left:var(--bulb-x,81.1%);top:var(--bulb-y,38.6%);width:82%;height:59%;transform:translateX(-50%);clip-path:polygon(45% 0,55% 0,100% 100%,0% 100%);pointer-events:none;transition:opacity .7s ease}
-.lamp-scene.is-out .dust{opacity:0}
-.lamp-scene .dust i{position:absolute;border-radius:50%;background:var(--accent-solid);box-shadow:0 0 6px var(--wash-strong);animation:lxdustFloat ease-in-out infinite alternate;transition:background .6s ease}
-@keyframes lxdustFloat{from{transform:translate(0,0)}to{transform:translate(var(--dx,6px),var(--dy,-12px))}}
-.lamp-scene label.f-label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--lx-dim);margin:0 0 7px}
-.lamp-scene .field{margin-bottom:16px}
-.lamp-scene .input-row{position:relative}
-.lamp-scene .input-row input{width:100%;min-height:50px;padding:12px 46px 12px 14px;border-radius:11px;background:var(--lx-field);border:1px solid var(--lx-field-border);color:var(--lx-ink);font-size:15.5px;outline:none;transition:border-color .2s,box-shadow .2s}
-.lamp-scene .input-row input::placeholder{color:#5f6a64}
-.lamp-scene .input-row input:focus{border-color:var(--lx-teal);box-shadow:0 0 0 3px rgba(20,184,166,.22)}
-.lamp-scene .input-row input.invalid{border-color:var(--lx-error);box-shadow:0 0 0 3px rgba(239,68,68,.22)}
-.lamp-scene .input-row input.invalid:focus{border-color:var(--lx-error);box-shadow:0 0 0 3px rgba(239,68,68,.28)}
-.lamp-scene .eye-btn{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:42px;height:42px;min-height:42px;border:none;background:transparent;color:var(--lx-faint);display:flex;align-items:center;justify-content:center;border-radius:9px;font-size:12px;font-weight:700}
-.lamp-scene .eye-btn:hover{color:var(--lx-ink)}
-.lamp-scene .err-msg{display:none;color:var(--lx-error-bright);font-size:13px;margin-top:6px;line-height:1.45}
-.lamp-scene .err-msg.show{display:block}
-.lamp-scene .form-error{display:none;align-items:flex-start;gap:9px;margin:0 0 16px;padding:11px 13px;border-radius:10px;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.45);color:#fecaca;font-size:13.5px;line-height:1.45}
-.lamp-scene .form-error.show{display:flex}
-.lamp-scene .form-error .dot-err{width:8px;height:8px;border-radius:50%;background:var(--lx-error);box-shadow:0 0 10px var(--lx-error);flex:none;margin-top:5px}
-.lamp-scene .pw-checklist{display:none;margin-top:10px;padding:11px 13px;border-radius:10px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.07)}
-.lamp-scene .pw-checklist.show{display:block}
-.lamp-scene .pw-strength{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
-.lamp-scene .pw-strength .val{letter-spacing:0;text-transform:none;font-size:13px}
-.lamp-scene .pw-strength .val.weak{color:var(--lx-amber)}
-.lamp-scene .pw-strength .val.strong{color:var(--lx-teal-bright)}
-.lamp-scene .pw-strength .val.empty{color:var(--lx-faint)}
-.lamp-scene .pw-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:10px}
-.lamp-scene .pw-bar i{display:block;height:100%;width:0%;border-radius:99px;background:var(--lx-amber);transition:width .3s ease,background .3s ease}
-.lamp-scene .pw-bar i.strong{background:var(--lx-teal)}
-.lamp-scene .pw-rules{list-style:none;margin:0;padding:0;display:grid;gap:5px}
-.lamp-scene .pw-rule{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--lx-faint)}
-.lamp-scene .pw-rule .tick{width:16px;height:16px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex:none;color:transparent}
-.lamp-scene .pw-rule.met{color:var(--lx-dim)}
-.lamp-scene .pw-rule.met .tick{background:rgba(20,184,166,.18);border-color:rgba(20,184,166,.55);color:var(--lx-teal-bright)}
-.lamp-scene .pw-rule.failed{color:#fecaca}
-.lamp-scene .pw-rule.failed .tick{background:rgba(239,68,68,.16);border-color:rgba(239,68,68,.6);color:var(--lx-error-bright)}
-.lamp-scene .row-between{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 20px;flex-wrap:wrap}
-.lamp-scene .remember{display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--lx-dim);font-size:13.5px;font-weight:500;padding:6px 2px;min-height:44px}
-.lamp-scene .switch{width:40px;height:23px;border-radius:999px;background:#2a332e;border:1px solid rgba(255,255,255,.14);position:relative;flex:none;transition:background .25s}
-.lamp-scene .switch::after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#cfd4cd;transition:all .25s}
-.lamp-scene .remember[aria-checked="true"] .switch{background:var(--lx-teal-deep)}
-.lamp-scene .remember[aria-checked="true"] .switch::after{left:19px;background:#d9fff8}
-.lamp-scene .forgot{color:var(--lx-teal-bright);font-size:13.5px;font-weight:600;text-decoration:none;padding:10px 2px;display:inline-block;background:none;border:none}
-.lamp-scene .forgot:hover{text-decoration:underline}
-.lamp-scene .cta{width:100%;min-height:52px;border:none;border-radius:12px;font-size:15.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .15s,filter .2s,background .4s;color:#241703}
-.lamp-scene .cta:active{transform:scale(.985)}
-.lamp-scene .cta-teal{background:linear-gradient(180deg,#f0a832,#e08e12);color:#241703;box-shadow:0 10px 26px rgba(240,168,50,.28)}
-.lamp-scene .cta-teal:hover{filter:brightness(1.07)}
-.lamp-scene .cta-ghost{background:transparent;border:1px solid var(--lx-field-border);color:var(--lx-ink);box-shadow:none}
-.lamp-scene .cta-ghost:hover{border-color:rgba(255,255,255,.3)}
-.lamp-scene .cta[disabled]{opacity:.65;cursor:wait}
-.lamp-scene .spinner{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(0,0,0,.25);border-top-color:currentColor;animation:lxspin .7s linear infinite;flex:none}
-@keyframes lxspin{to{transform:rotate(360deg)}}
-.lamp-scene .divider{display:flex;align-items:center;gap:13px;margin:22px 0 16px;color:var(--lx-faint);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-.lamp-scene .divider::before,.lamp-scene .divider::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.09)}
-.lamp-scene .social{width:100%;min-height:48px;padding:0 10px;border-radius:11px;border:1px solid var(--lx-field-border);background:rgba(255,255,255,.03);color:var(--lx-ink);font-size:14px;font-weight:600;line-height:1;display:flex;align-items:center;justify-content:center;gap:9px}
-.lamp-scene .social:hover{background:rgba(255,255,255,.07)}
-.lamp-scene .social .mark{width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center}
-.lamp-scene .social .mark svg{width:18px;height:18px;display:block}
-.lamp-scene .fineprint{margin:18px 0 0;text-align:center;font-size:12.5px;color:var(--lx-faint);line-height:1.6}
-.lamp-scene .state-icon{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:4px 0 18px;font-size:27px;font-weight:700}
-.lamp-scene .state-icon.ok{background:rgba(20,184,166,.16);color:var(--lx-teal-bright);border:1px solid rgba(20,184,166,.45);box-shadow:0 0 30px rgba(20,184,166,.22)}
-.lamp-scene .state-icon.out{background:rgba(245,185,66,.13);color:#ffd88a;border:1px solid rgba(245,185,66,.45);box-shadow:0 0 30px rgba(245,185,66,.2)}
-.lamp-scene .session-box{border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);border-radius:12px;padding:14px 16px;margin:0 0 20px;font-size:13.5px}
-.lamp-scene .session-box .r{display:flex;justify-content:space-between;gap:14px;padding:5px 0}
-.lamp-scene .session-box .r span:first-child{color:var(--lx-faint)}
-.lamp-scene .session-box .r span:last-child{font-weight:600;text-align:right;word-break:break-all}
-.lamp-scene .stack{display:flex;flex-direction:column;gap:11px}
-.lamp-scene .acct-note{margin:0 0 16px;padding:11px 13px;border-radius:10px;background:rgba(245,185,66,.10);border:1px solid rgba(245,185,66,.4);color:#ffe1a1;font-size:13.5px;line-height:1.45}
-.lx-toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);z-index:60;background:#171d1a;border:1px solid rgba(255,255,255,.14);color:#f4f1ea;padding:13px 20px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 18px 40px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,1.3,.5,1);max-width:88vw;text-align:center;font-family:"DM Sans",system-ui,sans-serif}
+.lx-toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);z-index:120;background:#261a15;border:1px solid rgba(243,237,225,.16);color:#f3ede1;padding:13px 20px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 18px 40px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,1.3,.5,1);max-width:88vw;text-align:center;font-family:var(--sans)}
 .lx-toast.show{transform:translate(-50%,0)}
-.acct-fine{color:var(--soft);font-size:.92rem;margin:14px auto 0;max-width:640px;text-align:center}
-@media (max-width:880px){
-  .lamp-scene .lx-stage{grid-template-columns:1fr;gap:6px;padding-top:8px}
-  .lamp-scene .lamp-box{width:min(270px,74vw)}
-  .lamp-scene .pull-hint{margin-top:6px}
-  .lamp-scene .lx-topbar{min-height:58px;padding:4px 16px}
-  .lamp-scene .lx-brand{font-size:12px;letter-spacing:.11em;gap:9px}
-  .lamp-scene .status-pill{font-size:12.5px}
-}
-@media print{.toolbar,.wheel-wrap,.crumbs,.note-tabs,.pad-toolbar,.actions,.hero-links,.lamp-scene,.acct-btn,.lx-toast{display:none!important}.panel,.note-shell,.checkin{position:static;box-shadow:none}}
+@media print{.toolbar,.wheel-wrap,.crumbs,.note-tabs,.pad-toolbar,.actions,.hero-links,.acct-btn,.lx-toast{display:none!important}.panel,.note-shell,.checkin{position:static;box-shadow:none}}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   body,.panel,.note-shell,.checkin,.core-row{transition:none}
   .segwrap{transition:none}
   .panel.rise{animation:none}
-  .lamp-scene .lx-card.pop,.lamp-scene .view.active,.lamp-scene .lx-card.shake,.lamp-scene .dust i,.lamp-scene .spinner{animation:none}
   .rec-dot{animation:none}
   button:active{transform:none}
 }
@@ -475,7 +318,7 @@ html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
 </head>
 <body data-mood="neutral">
 <div class="wrap">
-<div class="brandbar"><span class="brand-word">Feelings <span class="dot" aria-hidden="true">.</span> <em>Wheel</em></span><button type="button" class="acct-btn" id="acct-btn">Sign in</button><button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme" aria-pressed="false" title="Switch theme"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></button></div>
+<div class="brandbar"><span class="brand-word">Feelings <span class="dot" aria-hidden="true">.</span> <em>Wheel</em></span><a class="acct-btn" id="acct-btn" href="login.html" aria-label="Sign in — opens the sign-in page">Sign in</a><button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme" aria-pressed="false" title="Switch theme"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></button></div>
 <header class="hero">
 <p class="hero-pill">Feelings when your needs are met · and when they are not</p>
 <h1>Name what you feel.<br>Then do something small about it.</h1>
@@ -485,7 +328,7 @@ html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
 <a class="btn ghost" href="#explorer">Open the wheel</a>
 </div>
 <p class="hero-note">Free, for everyone. As a guest your words save on this device only; create an account and they follow you from device to device.</p>
-<p class="hero-links"><a href="#lines">Deep dives</a> &nbsp;·&nbsp; <a href="#habit-lab">Habit Lab</a> &nbsp;·&nbsp; <a href="#notes">My Notes</a> &nbsp;·&nbsp; <a href="#account">Account</a></p>
+<p class="hero-links"><a href="#lines">Deep dives</a> &nbsp;·&nbsp; <a href="#habit-lab">Habit Lab</a> &nbsp;·&nbsp; <a href="#notes">My Notes</a> &nbsp;·&nbsp; <a href="login.html">Account</a></p>
 </header>
 
 <section class="block" aria-label="The wheel" style="margin-top:80px">
@@ -608,167 +451,11 @@ html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
 </div>
 </section>
 
-<!-- ACCOUNT -->
-<section class="block" id="account" aria-label="Account">
-<p class="secnum">05 · Account</p>
-<h2 class="sec-title">Take your words<br>with you.</h2>
-<p class="sec-lede">Everything on this page works as a guest — your notes, goals and habit practice save on this device and never leave it. Create a free account and the same words sync to you instead: sign in on any device and pick up where you left off. The lamp is the switch — pull the cord.</p>
-
-<div class="lamp-scene is-out" id="lxScene" data-glow="teal">
-<div class="desk" aria-hidden="true"></div>
-<header class="lx-topbar">
-<div class="lx-brand"><span class="dot" aria-hidden="true"></span><span>Feelings · Wheel</span></div>
-<div class="status-pill" role="status" aria-live="polite"><span class="led" aria-hidden="true"></span><span id="lxStatus">Lamp OFF <em>· Signed out</em></span></div>
-</header>
-<div class="lx-stage">
-<section class="lamp-wrap" aria-label="Desk lamp with pull cord">
-<div class="lamp-box">
-<div class="glow" aria-hidden="true"></div>
-<div class="beam" aria-hidden="true"></div>
-<div class="pool" aria-hidden="true"></div>
-<div class="bulb-halo" aria-hidden="true"></div>
-<div class="dust" id="lxDust" aria-hidden="true"></div>
-<svg class="lamp-svg" viewBox="0 0 360 430" fill="none" aria-hidden="true">
-<ellipse cx="105" cy="402" rx="72" ry="13" fill="#0c0c0d"/>
-<path d="M38 400 Q105 378 172 400 L166 408 Q105 392 44 408 Z" fill="#1b1b1d"/>
-<ellipse cx="105" cy="398" rx="62" ry="10" fill="#26262a"/>
-<circle cx="105" cy="392" r="11" fill="#c9973f"/>
-<circle cx="105" cy="392" r="5.5" fill="#7c5c1e"/>
-<path d="M105 388 L168 268" stroke="#1d1d20" stroke-width="13" stroke-linecap="round"/>
-<path d="M105 388 L168 268" stroke="#34343a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 0" opacity=".7"/>
-<circle cx="172" cy="262" r="14" fill="#222226"/>
-<circle cx="172" cy="262" r="7" fill="#c9973f"/>
-<path d="M178 254 L252 148" stroke="#1d1d20" stroke-width="12" stroke-linecap="round"/>
-<path d="M178 254 L252 148" stroke="#34343a" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
-<path d="M120 340 l10 -8 M128 326 l10 -8 M136 312 l10 -8 M144 298 l10 -8" stroke="#8a8a90" stroke-width="2.4" stroke-linecap="round" opacity=".65"/>
-<circle cx="258" cy="142" r="12.5" fill="#222226"/>
-<circle cx="258" cy="142" r="6" fill="#c9973f"/>
-<defs>
-<radialGradient id="lxBulbGrad" cx="50%" cy="42%" r="65%">
-<stop offset="0%" class="bulb-stop-a"/>
-<stop offset="60%" class="bulb-stop-b"/>
-<stop offset="100%" class="bulb-stop-c"/>
-</radialGradient>
-<linearGradient id="lxShadeGrad" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#2a2a2f"/>
-<stop offset="100%" stop-color="#101012"/>
-</linearGradient>
-</defs>
-<path d="M248 130 L316 98 Q331 92 330 108 L324 168 Q322 184 307 180 L256 160 Q244 155 245 143 Z" fill="url(#lxShadeGrad)"/>
-<path class="shade-inner" d="M256 160 L307 180 Q322 184 324 168 L325 148 L260 144 Z"/>
-<rect x="284" y="140" width="15" height="16" rx="4" fill="#3a3a40"/>
-<rect x="284" y="140" width="15" height="16" rx="4" fill="none" stroke="rgba(255,255,255,.14)"/>
-<g class="bulb-off">
-<circle cx="292" cy="166" r="13" fill="#2b2b30" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
-<circle cx="288" cy="161" r="4" fill="#ffffff" opacity=".14"/>
-</g>
-<g class="bulb-light">
-<circle cx="292" cy="166" r="52" style="fill:var(--wash-strong)" opacity=".14"/>
-<circle cx="292" cy="166" r="34" style="fill:var(--wash-strong)" opacity=".22"/>
-<circle cx="292" cy="166" r="21" style="fill:var(--bulb-b)" opacity=".38"/>
-<circle cx="292" cy="166" r="13" fill="url(#lxBulbGrad)"/>
-<circle cx="288" cy="161" r="4" style="fill:var(--bulb-a)" opacity=".95"/>
-</g>
-</svg>
-<div class="cord-zone" id="lxCordZone">
-<div class="cord-string" id="lxCordString"></div>
-<button class="cord-knob" id="lxCordKnob" type="button" aria-pressed="false" aria-label="Pull cord — turn the lamp on to sign in, off to sign out">
-<span class="bead" aria-hidden="true"></span>
-<span class="grip" aria-hidden="true"></span>
-</button>
-</div>
-</div>
-<p class="pull-hint"><span aria-hidden="true">↓</span> <span id="lxPullHint"><strong>Pull to turn on</strong></span></p>
-</section>
-
-<section class="card-col">
-<div class="lx-card" id="lxCard">
-
-<div class="view active" id="lxViewOut">
-<div class="state-icon out" aria-hidden="true">⏻</div>
-<h1 id="lxOutTitle">The lamp is off.</h1>
-<p class="sub" id="lxOutSub">Pull the cord to sign in — or don't. Everything on this page works as a guest; an account only adds sync.</p>
-<div class="session-box" id="lxOutSession" style="display:none">
-<div class="r"><span>Last session</span><span id="lxOutEmail">None yet</span></div>
-</div>
-<div class="stack">
-<button class="cta cta-teal" id="lxBackIn" type="button">Pull the light on</button>
-</div>
-<p class="fineprint">Guest data never leaves this device.</p>
 </div>
 
-<div class="view" id="lxViewAuth">
-<h1 id="lxAuthTitle">Welcome back</h1>
-<p class="sub" id="lxAuthSub">Sign in to pick up your notes, goals and habit practice where you left them.</p>
-<p class="acct-note" id="lxAcctNote" hidden>Accounts couldn't load just now — check your connection. Everything else on this page still works, and your words keep saving on this device.</p>
-<div class="form-error" id="lxFormError" role="alert"><span class="dot-err" aria-hidden="true"></span><span id="lxFormErrorText">Something went wrong. Try again.</span></div>
-<div class="tabs" id="lxTabs" role="tablist" aria-label="Sign in or sign up">
-<span class="tab-ind" aria-hidden="true"></span>
-<button class="tab" id="lxTabIn" role="tab" aria-selected="true" type="button">Sign In</button>
-<button class="tab" id="lxTabUp" role="tab" aria-selected="false" type="button">Sign Up</button>
-</div>
-<form id="lxAuthForm" novalidate>
-<div class="field" id="lxNameField" style="display:none">
-<label class="f-label" for="lxName">Full name</label>
-<div class="input-row"><input id="lxName" type="text" placeholder="Your name" autocomplete="name"></div>
-</div>
-<div class="field">
-<label class="f-label" for="lxEmail">Email</label>
-<div class="input-row"><input id="lxEmail" type="email" placeholder="you@example.com" autocomplete="email"></div>
-<p class="err-msg" id="lxEmailErr">Enter a valid email address.</p>
-</div>
-<div class="field">
-<label class="f-label" for="lxPass">Password</label>
-<div class="input-row">
-<input id="lxPass" type="password" placeholder="Enter your password" autocomplete="current-password">
-<button class="eye-btn" id="lxEye" type="button" aria-label="Show password">SHOW</button>
-</div>
-<p class="err-msg" id="lxPassErr">Password needs at least 8 characters.</p>
-<div class="pw-checklist" id="lxPwList" aria-live="polite">
-<div class="pw-strength"><span>Password strength</span><span class="val empty" id="lxPwVal">—</span></div>
-<div class="pw-bar" aria-hidden="true"><i id="lxPwBar"></i></div>
-<ul class="pw-rules">
-<li class="pw-rule" data-rule="length"><span class="tick" aria-hidden="true">✓</span> At least 8 characters</li>
-<li class="pw-rule" data-rule="upper"><span class="tick" aria-hidden="true">✓</span> Uppercase letter</li>
-<li class="pw-rule" data-rule="number"><span class="tick" aria-hidden="true">✓</span> Number</li>
-<li class="pw-rule" data-rule="symbol"><span class="tick" aria-hidden="true">✓</span> Symbol (e.g. ! @ # $)</li>
-</ul>
-</div>
-</div>
-<div class="row-between">
-<button class="remember" id="lxRemember" type="button" role="switch" aria-checked="true"><span class="switch" aria-hidden="true"></span> Remember me</button>
-<button class="forgot" id="lxForgot" type="button">Forgot?</button>
-</div>
-<button class="cta cta-teal" id="lxSubmit" type="submit"><span id="lxSubmitLabel">Sign In →</span></button>
-</form>
-<div class="divider">or continue with</div>
-<button class="social" type="button" id="lxGoogle"><span class="mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg></span>Google</button>
-<p class="fineprint">Accounts are handled by Firebase (Google). Your notes live under your account only — the database rules let no one else read them.</p>
-</div>
-
-<div class="view" id="lxViewIn">
-<div class="state-icon ok" aria-hidden="true">✓</div>
-<h1 id="lxInTitle">You're in.</h1>
-<div class="session-box">
-<div class="r"><span>Signed in as</span><span id="lxInEmail"></span></div>
-<div class="r"><span>Name</span><span id="lxInName">—</span></div>
-<div class="r"><span>Your words</span><span id="lxSyncLine">Syncing…</span></div>
-</div>
-<div class="stack">
-<button class="cta cta-teal" id="lxSignOut" type="button">Sign out</button>
-<button class="cta cta-ghost" id="lxToNotes" type="button">Back to My Notes</button>
-</div>
-<p class="fineprint">Signing out doesn't delete anything — your words stay in your account, and a copy stays on this device.</p>
-</div>
-
-</div>
-</section>
-</div>
-</div>
-<p class="acct-fine">Guest data never leaves this device. Account data is stored in Firebase under your account, readable only by you.</p>
 <div class="lx-toast" id="lxToast" role="status"></div>
-</section>
 
+<div class="wrap">
 <section class="block">
 <p class="secnum">How it works</p>
 <h2 class="sec-title">From feeling to habit,<br>in four sittings.</h2>
@@ -940,9 +627,9 @@ if(Array.isArray(d.goals)){goals=d.goals;goalSeq=d.goalSeq||goals.length;renderG
 if(d.hl){hl.core=d.hl.core||hl.core;hl.family=d.hl.family||hl.family;hl.feeling=d.hl.feeling||hl.feeling;hl.habitIdx=d.hl.habitIdx||0;hl.done=d.hl.done||{};hl.planBuilt=!!d.hl.planBuilt;if(d.hl.cue)document.getElementById("hl-cue").value=d.hl.cue;if(typeof d.hl.stack==="string")document.getElementById("hl-stack").value=d.hl.stack;if(d.hl.len)document.getElementById("hl-len").value=d.hl.len}
 restoring=false;renderHabitLab();if(hl.planBuilt)buildPlan();autoGrowPad();updatePadMeta()}
 function restoreSaved(){let raw=null;try{raw=localStorage.getItem(STORE_KEY)}catch(e){storageOK=false}
-if(!raw){setSaveState(storageOK?"Your words save on this device as you write. Sign in below and they sync to your account instead.":"Saving isn't available in this browser session — Download keeps a copy that's yours.");return}
+if(!raw){setSaveState(storageOK?"Your words save on this device as you write. Use Sign in at the top of the page and they sync to your account instead.":"Saving isn't available in this browser session — Download keeps a copy that's yours.");return}
 let d=null;try{d=JSON.parse(raw)}catch(e){}
-if(!d){setSaveState("Your words save on this device as you write. Sign in below and they sync to your account instead.");return}
+if(!d){setSaveState("Your words save on this device as you write. Use Sign in at the top of the page and they sync to your account instead.");return}
 applyStateData(d);
 setSaveState("Picked up where you left off — restored from this device"+(d.savedAt?(" · last saved "+new Date(d.savedAt).toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})):"")+".")}
 let eraseArmed=false,eraseTimer=null;
@@ -983,92 +670,28 @@ if(!blob.size){whisperStatus("I didn't catch any audio that time — try again, 
 wBusy=true;wBtn.disabled=true;whisperStatus("Transcribing on this device…");
 loadWhisper().then(function(){return blob.arrayBuffer()}).then(function(buf){return decodeTo16k(buf)}).then(function(audio){return tfPipe(audio)}).then(function(out){const text=out&&out.text?out.text.trim():"";if(text){appendSpeech(text);saveSoon();whisperStatus("Added to your pad ✓ — tap Whisper dictate any time to add more.")}else{whisperStatus("Whisper didn't catch words that time — try again, a little closer to the mic.")}setTimeout(function(){liveStrip.hidden=true},3400)}).catch(function(){whisperStatus("Whisper couldn't run here — Dictate and typing still work.");setTimeout(function(){liveStrip.hidden=true},3800)}).then(function(){wBusy=false;wBtn.disabled=false})}
 wBtn.addEventListener("click",function(){if(wBusy)return;if(wRecording)stopWhisperRec();else startWhisperRec()});
-/* ===== Account — the lamp sign-in, wired to Firebase (Auth + Firestore sync) =====
-   Guests never touch this: everything above keeps saving to localStorage exactly as before.
-   Signed in, the same state object also syncs to users/{uid}/app/state in Firestore,
-   whose rules (set in the Firebase console) let only that account read or write it. */
+/* ===== Account sync — sign-in lives on its own page (login.html) =====
+   The sign-in page is a separate page in the Kintale brand kit; this page
+   never shows a sign-in form. It only listens for the signed-in state (shared
+   with login.html on the same site) so that, when you're signed in, the same
+   state object also syncs to users/{uid}/app/state in Firestore — whose rules
+   (set in the Firebase console) let only that account read or write it.
+   Guests never touch this: everything keeps saving to localStorage as before. */
 const FIREBASE_CONFIG={apiKey:"AIzaSyDIi6umuwyMnU9sK30bx1lIRYajBe3hxQ8",authDomain:"feelings-wheel-olink.firebaseapp.com",projectId:"feelings-wheel-olink",storageBucket:"feelings-wheel-olink.firebasestorage.app",messagingSenderId:"708736674985",appId:"1:708736674985:web:85b1d4e1e45baee1b20db8"};
 let FB=null,fbUser=null,fbLoadPromise=null,cloudTimer=null,cloudApplying=false;
-let lxMode="off",lxTab="in",lxLastEmail="",lxRememberOn=true;
-function lxEl(id){return document.getElementById(id)}
-const lxScene=lxEl("lxScene");
-function setSyncLine(t){const el=lxEl("lxSyncLine");if(el)el.textContent=t}
 function scheduleCloudSave(data){if(!fbUser||!FB||cloudApplying)return;if(cloudTimer)clearTimeout(cloudTimer);cloudTimer=setTimeout(function(){pushCloud(data)},900)}
-function pushCloud(data){if(!fbUser||!FB)return;FB.F.setDoc(FB.F.doc(FB.db,"users",fbUser.uid,"app","state"),{json:JSON.stringify(data),updatedAt:Date.now()}).then(function(){setSyncLine("Synced · "+timeNow())},function(){setSyncLine("Sync paused — saved on this device; will retry")})}
+function pushCloud(data){if(!fbUser||!FB)return;FB.F.setDoc(FB.F.doc(FB.db,"users",fbUser.uid,"app","state"),{json:JSON.stringify(data),updatedAt:Date.now()}).then(function(){},function(){})}
 function loadFirebase(){if(FB)return Promise.resolve(FB);if(fbLoadPromise)return fbLoadPromise;const V="10.12.5",B="https://www.gstatic.com/firebasejs/"+V+"/";
-fbLoadPromise=Promise.all([import(B+"firebase-app.js"),import(B+"firebase-auth.js"),import(B+"firebase-firestore.js")]).then(function(m){const app=m[0].initializeApp(FIREBASE_CONFIG);FB={A:m[1],F:m[2],auth:m[1].getAuth(app),db:m[2].getFirestore(app)};m[1].onAuthStateChanged(FB.auth,handleFbUser);return FB}).catch(function(){fbLoadPromise=null;const n=lxEl("lxAcctNote");if(n)n.hidden=false;return null});return fbLoadPromise}
-function fbErr(err){const code=err&&err.code?err.code:"";switch(code){
-case "auth/invalid-email":return "That email address doesn't look right — check it and try again.";
-case "auth/invalid-credential":case "auth/user-not-found":case "auth/wrong-password":return "Incorrect email or password. Check both and try again.";
-case "auth/email-already-in-use":return "That email already has an account — try the Sign In tab instead.";
-case "auth/weak-password":return "That password is too weak — use at least 8 characters, with a mix of letters, numbers and a symbol.";
-case "auth/user-disabled":return "This account has been disabled. Contact support if you think that's a mistake.";
-case "auth/too-many-requests":return "Too many attempts in a row — wait a few minutes, then try again.";
-case "auth/network-request-failed":return "No connection — check your network and try again.";
-case "auth/unauthorized-domain":return "Google sign-in isn't enabled for this web address yet. Email sign-in works — or add this domain in Firebase → Authentication → Settings → Authorized domains.";
-case "auth/popup-blocked":return "Your browser blocked the Google window — allow popups for this page, or use email sign-in.";
-case "auth/popup-closed-by-user":case "auth/cancelled-popup-request":return "The Google window closed before sign-in finished — try again, or use email.";
-default:return "Something went wrong"+(code?" ("+code+")":"")+". Try again."}}
+fbLoadPromise=Promise.all([import(B+"firebase-app.js"),import(B+"firebase-auth.js"),import(B+"firebase-firestore.js")]).then(function(m){const app=m[0].initializeApp(FIREBASE_CONFIG);FB={A:m[1],F:m[2],auth:m[1].getAuth(app),db:m[2].getFirestore(app)};m[1].onAuthStateChanged(FB.auth,handleFbUser);return FB}).catch(function(){fbLoadPromise=null;return null});return fbLoadPromise}
 function handleFbUser(user){const wasIn=!!fbUser;fbUser=user||null;renderAccountState();
-if(user){const ref=FB.F.doc(FB.db,"users",user.uid,"app","state");FB.F.getDoc(ref).then(function(snap){let d=null;if(snap.exists()){try{d=JSON.parse(snap.data().json)}catch(e){}}if(d){cloudApplying=true;applyStateData(d);cloudApplying=false;try{localStorage.setItem(STORE_KEY,JSON.stringify(d))}catch(e){}setSaveState("Synced from your account · "+timeNow());setSyncLine("Synced · "+timeNow())}else{pushCloud(collectState())}},function(){setSyncLine("Signed in — sync check failed; saving on this device")});
-if(!wasIn)lxToastMsg("Signed in as "+(user.email||"your account")+" — your words now sync here.")}}
-/* --- Lamp + card state --- */
-function lxSetLamp(on){lxScene.classList.toggle("is-out",!on);lxEl("lxCordKnob").setAttribute("aria-pressed",on?"true":"false")}
-function lxSetStatus(html){lxEl("lxStatus").innerHTML=html}
-function lxShowView(name){[["out","lxViewOut"],["auth","lxViewAuth"],["in","lxViewIn"]].forEach(function(pair){lxEl(pair[1]).classList.toggle("active",pair[0]===name)});const card=lxEl("lxCard");card.classList.remove("pop");void card.offsetWidth;card.classList.add("pop")}
-function renderAccountState(){const btn=lxEl("acct-btn");
-if(fbUser){lxLastEmail=fbUser.email||lxLastEmail;lxMode="in";lxSetLamp(true);lxShowView("in");lxEl("lxInEmail").textContent=fbUser.email||"";lxEl("lxInName").textContent=fbUser.displayName||"—";lxEl("lxInTitle").textContent=fbUser.displayName?("You're in, "+fbUser.displayName.split(" ")[0]+"."):"You're in.";lxSetStatus("Lamp ON <em>· Signed in</em>");lxEl("lxPullHint").innerHTML="<strong>Pull to sign out</strong>";if(btn){btn.textContent=fbUser.displayName||fbUser.email||"Account";btn.setAttribute("aria-label","Account — signed in as "+(fbUser.email||""))}}
-else{if(lxMode==="in")lxMode="off";lxSetLamp(lxMode!=="off");lxShowView(lxMode==="auth"?"auth":"out");lxSetStatus(lxMode==="auth"?"Lamp ON <em>· Not signed in</em>":"Lamp OFF <em>· Signed out</em>");lxEl("lxPullHint").innerHTML=lxMode==="auth"?"<strong>Pull to turn off</strong>":"<strong>Pull to turn on</strong>";if(lxLastEmail){lxEl("lxOutSession").style.display="";lxEl("lxOutEmail").textContent=lxLastEmail;lxEl("lxOutTitle").textContent="Signed out.";lxEl("lxOutSub").textContent="The lamp is off and this device is back to guest mode — words you write here now save on this device only."}if(btn){btn.textContent="Sign in";btn.removeAttribute("aria-label")}}}
-function lxCordToggle(){if(fbUser){lxSignOut();return}
-if(lxMode==="off"){lxMode="auth";lxSetLamp(true);lxShowView("auth");lxSetStatus("Lamp ON <em>· Not signed in</em>");lxEl("lxPullHint").innerHTML="<strong>Pull to turn off</strong>"}
-else if(lxMode==="auth"){lxMode="off";lxSetLamp(false);lxShowView("out");lxSetStatus("Lamp OFF <em>· Signed out</em>");lxEl("lxPullHint").innerHTML="<strong>Pull to turn on</strong>"}}
-lxEl("lxBackIn").addEventListener("click",lxCordToggle);
-lxEl("lxToNotes").addEventListener("click",function(){document.getElementById("notes").scrollIntoView({behavior:"smooth"})});
-lxEl("acct-btn").addEventListener("click",function(){document.getElementById("account").scrollIntoView({behavior:"smooth"});if(!fbUser&&lxMode==="off")setTimeout(lxCordToggle,450)});
-/* Cord: click toggles; a real downward pull toggles too */
-(function(){const zone=lxEl("lxCordZone"),knob=lxEl("lxCordKnob"),string=lxEl("lxCordString");const BASE=86;let drag=null,suppressClick=false;
-knob.addEventListener("pointerdown",function(e){drag={y:e.clientY,moved:false};try{knob.setPointerCapture(e.pointerId)}catch(err){}});
-knob.addEventListener("pointermove",function(e){if(!drag)return;const dy=Math.max(0,Math.min(48,e.clientY-drag.y));if(dy>4)drag.moved=true;string.style.height=(BASE+dy)+"px";zone.style.transform="rotate("+(1.2+dy*0.04)+"deg)"});
-function endDrag(){if(!drag)return;const pulled=parseInt(string.style.height,10)>BASE+26;string.style.height=BASE+"px";zone.style.transform="rotate(1.2deg)";if(drag.moved){suppressClick=true;setTimeout(function(){suppressClick=false},60);if(pulled)lxCordToggle()}drag=null}
-knob.addEventListener("pointerup",endDrag);knob.addEventListener("pointercancel",endDrag);
-knob.addEventListener("click",function(){if(suppressClick)return;lxCordToggle()})})();
-/* Dust motes drifting in the beam */
-(function(){const dust=lxEl("lxDust");if(!dust)return;const frag=document.createDocumentFragment();for(let i=0;i<22;i++){const p=document.createElement("i");const size=(1.6+Math.random()*2.6).toFixed(1);p.style.width=size+"px";p.style.height=size+"px";p.style.left=(10+Math.random()*80)+"%";p.style.top=(4+Math.random()*88)+"%";p.style.opacity=(0.25+Math.random()*0.6).toFixed(2);p.style.setProperty("--dx",(Math.random()*14-7).toFixed(0)+"px");p.style.setProperty("--dy",(-(6+Math.random()*14)).toFixed(0)+"px");p.style.animationDuration=(7+Math.random()*8).toFixed(1)+"s";p.style.animationDelay=(-Math.random()*8).toFixed(1)+"s";frag.appendChild(p)}dust.appendChild(frag)})();
+if(user){const ref=FB.F.doc(FB.db,"users",user.uid,"app","state");FB.F.getDoc(ref).then(function(snap){let d=null;if(snap.exists()){try{d=JSON.parse(snap.data().json)}catch(e){}}if(d){cloudApplying=true;applyStateData(d);cloudApplying=false;try{localStorage.setItem(STORE_KEY,JSON.stringify(d))}catch(e){}setSaveState("Synced from your account · "+timeNow())}else{pushCloud(collectState())}},function(){});
+if(!wasIn)lxToastMsg("Signed in as "+(user.email||"your account")+" — your words now sync here.")}
+else if(wasIn){lxToastMsg("Signed out — this device is back to guest mode.")}}
+function renderAccountState(){const btn=document.getElementById("acct-btn");if(!btn)return;
+if(fbUser){btn.textContent=fbUser.displayName||fbUser.email||"Account";btn.setAttribute("aria-label","Account — signed in as "+(fbUser.email||"")+" — opens the account page")}
+else{btn.textContent="Sign in";btn.setAttribute("aria-label","Sign in — opens the sign-in page")}}
 /* Toast */
-let lxToastTimer=null;function lxToastMsg(t){const el=lxEl("lxToast");if(!el)return;el.textContent=t;el.classList.add("show");if(lxToastTimer)clearTimeout(lxToastTimer);lxToastTimer=setTimeout(function(){el.classList.remove("show")},4200)}
-/* --- Auth form --- */
-function lxSetTab(t){lxTab=t;lxEl("lxTabs").classList.toggle("up",t==="up");lxEl("lxTabIn").setAttribute("aria-selected",t==="in"?"true":"false");lxEl("lxTabUp").setAttribute("aria-selected",t==="up"?"true":"false");lxScene.setAttribute("data-glow",t==="up"?"amber":"teal");lxEl("lxNameField").style.display=t==="up"?"":"none";lxEl("lxAuthTitle").textContent=t==="up"?"Create your account":"Welcome back";lxEl("lxAuthSub").textContent=t==="up"?"Your notes, goals and habit practice — on every device you sign in on.":"Sign in to pick up your notes, goals and habit practice where you left them.";lxEl("lxSubmitLabel").textContent=t==="up"?"Create account →":"Sign In →";lxEl("lxPass").setAttribute("autocomplete",t==="up"?"new-password":"current-password");lxEl("lxPassErr").textContent=t==="up"?"Password needs at least 8 characters.":"Enter your password.";lxHideFormError();lxPwRefresh(false)}
-lxEl("lxTabIn").addEventListener("click",function(){lxSetTab("in")});
-lxEl("lxTabUp").addEventListener("click",function(){lxSetTab("up")});
-function lxPwRules(pw){return{length:pw.length>=8,upper:/[A-Z]/.test(pw),number:/[0-9]/.test(pw),symbol:/[^A-Za-z0-9]/.test(pw)}}
-function lxPwRefresh(failed){const list=lxEl("lxPwList");if(lxTab!=="up"){list.classList.remove("show");return}const pw=lxEl("lxPass").value;list.classList.toggle("show",pw.length>0||!!failed);const r=lxPwRules(pw);let met=0;list.querySelectorAll(".pw-rule").forEach(function(li){const ok=r[li.getAttribute("data-rule")];if(ok)met++;li.classList.toggle("met",!!ok);li.classList.toggle("failed",!!(failed&&!ok))});const val=lxEl("lxPwVal"),bar=lxEl("lxPwBar");bar.style.width=(met*25)+"%";bar.classList.toggle("strong",met>=3);if(!pw.length){val.textContent="—";val.className="val empty"}else if(met>=3){val.textContent="Strong";val.className="val strong"}else{val.textContent="Weak";val.className="val weak"}}
-lxEl("lxPass").addEventListener("input",function(){lxPwRefresh(false)});
-lxEl("lxEye").addEventListener("click",function(){const p=lxEl("lxPass");const show=p.type==="password";p.type=show?"text":"password";this.textContent=show?"HIDE":"SHOW";this.setAttribute("aria-label",show?"Hide password":"Show password")});
-lxEl("lxRemember").addEventListener("click",function(){lxRememberOn=!lxRememberOn;this.setAttribute("aria-checked",lxRememberOn?"true":"false")});
-function lxShowFormError(msg){lxEl("lxFormErrorText").textContent=msg;lxEl("lxFormError").classList.add("show");const card=lxEl("lxCard");card.classList.remove("shake");void card.offsetWidth;card.classList.add("shake")}
-function lxHideFormError(){lxEl("lxFormError").classList.remove("show")}
-function lxFieldError(input,errEl,bad){input.classList.toggle("invalid",bad);errEl.classList.toggle("show",bad);return !bad}
-function lxSetBusy(b){const s=lxEl("lxSubmit");s.disabled=b;lxEl("lxSubmitLabel").innerHTML=b?'<span class="spinner"></span> One moment…':(lxTab==="up"?"Create account →":"Sign In →")}
-function lxPersist(fb){const A=fb.A;return A.setPersistence(fb.auth,lxRememberOn?A.browserLocalPersistence:A.browserSessionPersistence).catch(function(){})}
-lxEl("lxAuthForm").addEventListener("submit",function(ev){ev.preventDefault();lxHideFormError();
-const email=lxEl("lxEmail").value.trim(),pw=lxEl("lxPass").value;
-let ok=lxFieldError(lxEl("lxEmail"),lxEl("lxEmailErr"),!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
-if(lxTab==="up"){if(!lxPwRules(pw).length){lxPwRefresh(true);lxFieldError(lxEl("lxPass"),lxEl("lxPassErr"),true);ok=false}else lxFieldError(lxEl("lxPass"),lxEl("lxPassErr"),false)}
-else if(!pw){lxFieldError(lxEl("lxPass"),lxEl("lxPassErr"),true);ok=false}
-if(!ok)return;
-lxSetBusy(true);
-loadFirebase().then(function(fb){if(!fb){lxSetBusy(false);lxShowFormError("Accounts couldn't load — check your connection. Everything else on this page still works, and your words keep saving on this device.");return}
-lxPersist(fb).then(function(){
-if(lxTab==="up"){const name=lxEl("lxName").value.trim();fb.A.createUserWithEmailAndPassword(fb.auth,email,pw).then(function(cred){if(name)fb.A.updateProfile(cred.user,{displayName:name}).then(function(){renderAccountState()},function(){});lxSetBusy(false)},function(err){lxSetBusy(false);lxShowFormError(fbErr(err))})}
-else{fb.A.signInWithEmailAndPassword(fb.auth,email,pw).then(function(){lxSetBusy(false)},function(err){lxSetBusy(false);lxShowFormError(fbErr(err))})}})})});
-lxEl("lxGoogle").addEventListener("click",function(){lxHideFormError();loadFirebase().then(function(fb){if(!fb){lxShowFormError("Accounts couldn't load — check your connection and try again.");return}
-lxPersist(fb).then(function(){fb.A.signInWithPopup(fb.auth,new fb.A.GoogleAuthProvider()).then(function(){},function(err){lxShowFormError(fbErr(err))})})})});
-lxEl("lxForgot").addEventListener("click",function(){const email=lxEl("lxEmail").value.trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){lxShowFormError("Type your email above first — the reset link goes there.");lxEl("lxEmail").focus();return}
-loadFirebase().then(function(fb){if(!fb){lxShowFormError("Accounts couldn't load — check your connection and try again.");return}
-fb.A.sendPasswordResetEmail(fb.auth,email).then(function(){lxToastMsg("Password reset email sent to "+email+" — check your inbox.")},function(err){lxShowFormError(fbErr(err))})})});
-function lxSignOut(){if(!FB||!fbUser)return;FB.A.signOut(FB.auth).then(function(){lxToastMsg("Signed out — this device is back to guest mode.")},function(){lxToastMsg("Sign-out didn't go through — try again.")})}
-lxEl("lxSignOut").addEventListener("click",lxSignOut);
-lxSetTab("in");
+let lxToastTimer=null;function lxToastMsg(t){const el=document.getElementById("lxToast");if(!el)return;el.textContent=t;el.classList.add("show");if(lxToastTimer)clearTimeout(lxToastTimer);lxToastTimer=setTimeout(function(){el.classList.remove("show")},4200)}
 loadFirebase();
 /* Theme toggle — dark by default, light cream one tap away */
 (function(){var btn=document.getElementById("theme-toggle");if(!btn)return;function sync(){var light=isLight();btn.setAttribute("aria-pressed",light?"true":"false");btn.setAttribute("aria-label",light?"Switch to dark theme":"Switch to light theme");btn.setAttribute("title",light?"Switch to dark theme":"Switch to light theme");var meta=document.querySelector('meta[name="color-scheme"]');if(meta)meta.setAttribute("content",light?"light":"dark")}btn.addEventListener("click",function(){var next=isLight()?"dark":"light";document.documentElement.setAttribute("data-theme",next);document.documentElement.style.colorScheme=next;sync();buildWheel();renderSelection()});sync()})();
