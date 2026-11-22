@@ -1,5 +1,7 @@
 # Feelings Wheel
 
+Created by Oli Tamrat.
+
 A free, interactive feelings wheel for people-skills and clinical development work. Name what you feel, understand the need underneath it, and build a habit around it.
 
 It started from a paper magnet-board wheel — the Nonviolent Communication feelings inventory ("Feelings when your needs are met / not met") — turned into a website anyone can open and use. No account, no sign-up, nothing uploaded anywhere.
@@ -30,4 +32,4 @@ Open https://olitamrat.github.io/feelings-wheel/ — or download `index.html` an
 
 ## License
 
-MIT — use it, share it, adapt it. If it helps someone, that is the point.
+MIT — Copyright (c) 2026 Oli Tamrat. Use it, share it, adapt it. If it helps someone, that is the point.
