@@ -1,19 +1,36 @@
 # Feelings Wheel
 
-Created by Oli Tamrat.
+Created by Olink Technologies.
 
-A free, interactive feelings wheel for people-skills and clinical development work. Name what you feel, understand the need underneath it, and build a habit around it.
+## What it is
 
-It started from a paper magnet-board wheel — the Nonviolent Communication feelings inventory ("Feelings when your needs are met / not met") — turned into a website anyone can open and use. No account, no sign-up, nothing uploaded anywhere.
+A free, interactive feelings wheel. Tap a feeling, see the need underneath it, and build one small habit around it. 12 core feelings, 48 families, 97 specific feelings — the full Nonviolent Communication inventory, turned into a page anyone can open and use. No account, no sign-up, nothing uploaded anywhere.
 
-## What's in it
+## Why I built it
+
+I found a paper magnet-board feelings wheel — "Feelings when your needs are met / not met" — and kept thinking it should be something people could actually use, not just look at. Naming what you feel is a skill, and most of us were never taught it. I wanted a tool that doesn't just label the feeling but shows you the need behind it and what helps — something simple enough to open in the middle of a hard moment, and practical enough to build a habit from.
+
+So I built this: free, for anyone. If it helps one person name what they're feeling and do one small thing about it, it's done its job.
+
+## How it's built
+
+One self-contained page — `index.html`. No server, no database, no account, no tracking. Everything runs in your browser, and nothing you type or say leaves it.
 
 - **The wheel** — 12 core feelings, 48 families, 97 specific feelings. Tap any feeling to see the need behind it and what helps.
 - **Deep dives** — every feeling has a page of its own: what it usually means, what need it points to, and what to try.
 - **Habit Lab** — pick a feeling and build a small habit around it: a cue, an if-then plan, and a 7-day tracker.
 - **Check-in** — a guided "I feel… because I need…" sentence, in under a minute.
-- **My Notes** — a private pad with rotating prompts, word count, and voice dictation. Notes live in your browser for the visit only — use Copy or Download to keep them. Nothing is recorded or sent by this page.
+- **My Notes** — a private pad with rotating prompts, word count, and voice dictation.
 - **Light and dark themes** — dark by default, cream one tap away.
+
+The type is set in Instrument Serif, Schibsted Grotesk, and DM Mono, and the design draws on the Kintale design system.
+
+## Who it's for
+
+- **Anyone working on themselves** — if you want to get better at naming what you feel instead of just reacting to it.
+- **Coaches and therapists** — a free tool to hand a client between sessions, or to open together in one.
+- **Teams and organizations** — people-skills and clinical development work, workshops, check-ins.
+- **Teachers and parents** — emotional literacy starts with having the words.
 
 ## Use it
 
@@ -32,4 +49,4 @@ Open https://olitamrat.github.io/feelings-wheel/ — or download `index.html` an
 
 ## License
 
-MIT — Copyright (c) 2026 Oli Tamrat. Use it, share it, adapt it. If it helps someone, that is the point.
+MIT — Copyright (c) 2026 Olink Technologies. Use it, share it, adapt it. If it helps someone, that is the point.
