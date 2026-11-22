@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Feelings Wheel Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        /* Kintale brand kit */
+        --cream: #f3ede1;
+        --cream-2: #ece3d2;
+        --ink: #241e18;
+        --oxblood: #a8381b;
+        --oxblood-deep: #8c2d15;
+        --peach: #f2a97e;
+        --gold: #e8c26a;
+        --book-cloth: #261a15;
+
+        --bg: var(--cream);
+        --surface: #faf6ec;
+        --surface-2: var(--cream-2);
+        --text: var(--ink);
+        --text-soft: #5c5148;
+        --line: #d8cdb6;
+        --accent: var(--oxblood);
+        --accent-hover: var(--oxblood-deep);
+        --accent-text: #fdf9f0;
+        --field-bg: #fffdf7;
+        --focus: var(--oxblood);
+        --error: #a8281b;
+        --ok: #4c6b2f;
+        --lamp-glow: rgba(232, 194, 106, 0.55);
+        --lamp-body: #261a15;
+        --lamp-line: #241e18;
+        --shadow: 0 24px 60px rgba(38, 26, 21, 0.16), 0 4px 14px rgba(38, 26, 21, 0.08);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1d130e;
+          --surface: var(--book-cloth);
+          --surface-2: #33231b;
+          --text: var(--cream);
+          --text-soft: #c9bba6;
+          --line: #4a382c;
+          --accent: #c8502e;
+          --accent-hover: #d95f38;
+          --accent-text: #fdf6ea;
+          --field-bg: #201711;
+          --focus: var(--peach);
+          --error: #f0927e;
+          --ok: #a9c47e;
+          --lamp-glow: rgba(232, 194, 106, 0.4);
+          --lamp-body: #f3ede1;
+          --lamp-line: #f3ede1;
+          --shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 4px 14px rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      [hidden] { display: none !important; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: "Schibsted Grotesk", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        -webkit-font-smoothing: antialiased;
+      }
+      button, input { font: inherit; }
+      button, [role="button"], summary, a.btn {
+        min-height: 2.75rem;
+      }
+      input:not([type="checkbox"]) { min-height: 3rem; }
+      :focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      .page {
+        flex: 1;
+        width: 100%;
+        max-width: 1060px;
+        margin: 0 auto;
+        padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 4vw, 2.5rem);
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ---------- masthead ---------- */
+      .masthead {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding-bottom: clamp(1.25rem, 3vw, 2rem);
+      }
+      .mark {
+        width: 46px; height: 46px;
+        flex: none;
+        background: var(--book-cloth);
+        border-radius: 9px;
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      @media (prefers-color-scheme: dark) {
+        .mark { background: #17100c; border: 1px solid var(--line); }
+      }
+      .mark span {
+        font-family: "Instrument Serif", serif;
+        font-size: 1.65rem;
+        line-height: 1;
+        color: var(--cream);
+        transform: translateY(-3px);
+      }
+      .mark svg {
+        position: absolute;
+        left: 0; right: 0; bottom: 5px;
+        width: 100%;
+      }
+      .masthead .wordmark {
+        font-family: "Instrument Serif", serif;
+        font-size: 1.45rem;
+        letter-spacing: 0.01em;
+        line-height: 1.1;
+      }
+      .masthead .wordmark em { font-style: italic; color: var(--accent); }
+      .masthead .tag {
+        font-family: "DM Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        margin-top: 0.15rem;
+      }
+
+      /* ---------- layout ---------- */
+      .stage {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+      @media (min-width: 860px) {
+        .stage { grid-template-columns: 0.92fr 1.08fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+      }
+
+      /* ---------- lamp side ---------- */
+      .lamp-side { text-align: left; }
+      .lamp-wrap {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 0.5rem;
+      }
+      .lamp-svg { width: min(300px, 72vw); height: auto; display: block; }
+      .lamp-svg .glow-poly { fill: var(--lamp-glow); }
+      .lamp-svg .body-fill { fill: var(--lamp-body); }
+      .lamp-svg .line-stroke { stroke: var(--lamp-line); }
+      .lamp-svg .peach-fill { fill: #f2a97e; }
+      .lamp-svg .gold-fill { fill: #e8c26a; }
+      .lamp-svg .ox-fill { fill: var(--oxblood); }
+      .cord-hit {
+        cursor: pointer;
+      }
+      .cord-hit:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+      .lamp-headline {
+        font-family: "Instrument Serif", serif;
+        font-weight: 400;
+        font-size: clamp(2rem, 5.2vw, 3.1rem);
+        line-height: 1.08;
+        margin: 0.75rem 0 0.9rem;
+        max-width: 12em;
+      }
+      .lamp-headline em { font-style: italic; color: var(--accent); }
+      .lamp-copy {
+        color: var(--text-soft);
+        font-size: 1.02rem;
+        line-height: 1.6;
+        max-width: 34em;
+        margin: 0 0 1.4rem;
+      }
+      .cord-hint {
+        font-family: "DM Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .cord-hint::before {
+        content: "";
+        width: 22px; height: 1px;
+        background: var(--accent);
+        display: inline-block;
+      }
+      .guest-link {
+        display: inline-block;
+        margin-top: 1.6rem;
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+        padding: 0.55rem 0.1rem;
+        min-height: 2.75rem;
+      }
+      .guest-link:hover { color: var(--accent-hover); }
+
+      /* ---------- form card ---------- */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        padding: clamp(1.4rem, 3.5vw, 2.4rem);
+      }
+      .tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 4px;
+        gap: 4px;
+        margin-bottom: 1.6rem;
+      }
+      .tab {
+        border: 0;
+        background: transparent;
+        color: var(--text-soft);
+        font-weight: 600;
+        font-size: 0.98rem;
+        border-radius: 7px;
+        cursor: pointer;
+        padding: 0.65rem 0.5rem;
+        transition: background 0.18s ease, color 0.18s ease;
+      }
+      .tab[aria-selected="true"] {
+        background: var(--book-cloth);
+        color: var(--cream);
+      }
+      @media (prefers-color-scheme: dark) {
+        .tab[aria-selected="true"] { background: var(--cream); color: var(--book-cloth); }
+      }
+      .tab:hover:not([aria-selected="true"]) { color: var(--text); }
+
+      .field { margin-bottom: 1.05rem; }
+      .field label {
+        display: block;
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        margin-bottom: 0.45rem;
+      }
+      .field input[type="text"],
+      .field input[type="email"],
+      .field input[type="password"] {
+        width: 100%;
+        background: var(--field-bg);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 0.8rem 0.95rem;
+        color: var(--text);
+        font-size: 1rem;
+      }
+      .field input::placeholder { color: var(--text-soft); opacity: 0.75; }
+      .pw-wrap { position: relative; }
+      .pw-wrap input { padding-right: 5.2rem; }
+      .pw-toggle {
+        position: absolute;
+        right: 4px; top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background: transparent;
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.88rem;
+        cursor: pointer;
+        padding: 0.5rem 0.7rem;
+        min-height: 2.5rem;
+        border-radius: 7px;
+      }
+      .pw-toggle:hover { color: var(--accent-hover); }
+
+      .strength {
+        list-style: none;
+        margin: 0.7rem 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.3rem 1rem;
+        font-size: 0.86rem;
+        color: var(--text-soft);
+      }
+      .strength li { display: flex; align-items: center; gap: 0.45rem; }
+      .strength li::before {
+        content: "";
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        border: 1.5px solid var(--line);
+        flex: none;
+      }
+      .strength li.met { color: var(--text); }
+      .strength li.met::before { background: var(--ok); border-color: var(--ok); }
+
+      .row-between {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 0.35rem 0 1.25rem;
+      }
+      .remember {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        cursor: pointer;
+        padding: 0.6rem 0.2rem;
+        min-height: 2.75rem;
+        font-size: 0.95rem;
+      }
+      .remember input {
+        width: 19px; height: 19px;
+        accent-color: var(--accent);
+        margin: 0;
+        cursor: pointer;
+      }
+      .forgot {
+        border: 0;
+        background: none;
+        color: var(--accent);
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0.6rem 0.2rem;
+        min-height: 2.75rem;
+        font-size: 0.95rem;
+      }
+      .forgot:hover { color: var(--accent-hover); text-decoration: underline; }
+
+      .submit {
+        width: 100%;
+        border: 0;
+        border-radius: 10px;
+        background: var(--accent);
+        color: var(--accent-text);
+        font-weight: 700;
+        font-size: 1.02rem;
+        padding: 0.95rem 1rem;
+        cursor: pointer;
+        transition: background 0.18s ease;
+      }
+      .submit:hover { background: var(--accent-hover); }
+      .submit:disabled { opacity: 0.6; cursor: wait; }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        margin: 1.35rem 0;
+        color: var(--text-soft);
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .divider::before, .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+      .google-btn {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        background: var(--field-bg);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        color: var(--text);
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.85rem 1rem;
+        cursor: pointer;
+      }
+      .google-btn:hover { border-color: var(--text-soft); }
+      .google-btn:disabled { opacity: 0.6; cursor: wait; }
+      .google-btn svg { flex: none; }
+
+      .switch-line {
+        text-align: center;
+        margin: 1.4rem 0 0;
+        color: var(--text-soft);
+        font-size: 0.96rem;
+      }
+      .switch-line button {
+        border: 0; background: none;
+        color: var(--accent);
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0.55rem 0.3rem;
+        min-height: 2.75rem;
+        font-size: 0.96rem;
+      }
+      .switch-line button:hover { text-decoration: underline; }
+
+      .message {
+        border-radius: 9px;
+        padding: 0.85rem 1rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 1.1rem;
+        display: none;
+      }
+      .message.show { display: block; }
+      .message.error {
+        background: rgba(168, 40, 27, 0.09);
+        border: 1px solid rgba(168, 40, 27, 0.4);
+        color: var(--error);
+      }
+      .message.notice {
+        background: rgba(232, 194, 106, 0.16);
+        border: 1px solid rgba(168, 56, 27, 0.25);
+        color: var(--text);
+      }
+
+      /* ---------- signed-in state ---------- */
+      .signed-in { display: none; text-align: left; }
+      .signed-in.show { display: block; }
+      .avatar {
+        width: 58px; height: 58px;
+        border-radius: 50%;
+        background: var(--book-cloth);
+        color: var(--cream);
+        font-family: "Instrument Serif", serif;
+        font-size: 1.7rem;
+        display: grid;
+        place-items: center;
+        margin-bottom: 1rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        .avatar { background: var(--cream); color: var(--book-cloth); }
+      }
+      .signed-in h2 {
+        font-family: "Instrument Serif", serif;
+        font-weight: 400;
+        font-size: 1.8rem;
+        margin: 0 0 0.3rem;
+      }
+      .signed-in .who { color: var(--text-soft); margin: 0 0 0.6rem; word-break: break-all; }
+      .signed-in .what {
+        color: var(--text-soft);
+        line-height: 1.6;
+        margin: 0 0 1.5rem;
+        max-width: 36em;
+      }
+      .open-wheel {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: var(--accent);
+        color: var(--accent-text);
+        text-decoration: none;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 0.95rem 1rem;
+        margin-bottom: 0.7rem;
+      }
+      .open-wheel:hover { background: var(--accent-hover); }
+      .sign-out {
+        width: 100%;
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--text);
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+        cursor: pointer;
+      }
+      .sign-out:hover { border-color: var(--text-soft); }
+
+      footer {
+        padding: 1.6rem 1rem 2rem;
+        text-align: center;
+        color: var(--text-soft);
+        font-size: 0.85rem;
+      }
+      footer .credit { font-family: "DM Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .lamp-glow { transition: opacity 0.5s ease; }
+        .cord-ball { transition: transform 0.35s ease; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div class="mark" aria-hidden="true">
+          <span>F</span>
+          <svg viewBox="0 0 46 10" width="46" height="10" aria-hidden="true">
+            <path d="M2 7 Q 9 2, 16 6 T 30 6 T 44 5" fill="none" stroke="#f2a97e" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="41" cy="4" r="2.1" fill="#e8c26a"/>
+          </svg>
+        </div>
+        <div>
+          <div class="wordmark">Feelings <em>Wheel</em></div>
+          <div class="tag">Name it · Need it · Say it</div>
+        </div>
+      </header>
+
+      <main class="stage">
+        <section class="lamp-side" aria-label="About signing in">
+          <div class="lamp-wrap">
+            <svg class="lamp-svg" viewBox="0 0 300 300" role="img" aria-label="A reading lamp. Pull its cord to switch between sign in and sign up.">
+              <!-- light cone -->
+              <polygon class="lamp-glow glow-poly" id="lampGlow" points="96,96 204,96 258,268 42,268" opacity="0.85"/>
+              <!-- stand -->
+              <line class="line-stroke" x1="150" y1="118" x2="150" y2="252" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+              <ellipse class="body-fill" cx="150" cy="262" rx="58" ry="10"/>
+              <!-- shade -->
+              <path class="body-fill" d="M96 118 L118 52 Q150 38 182 52 L204 118 Q150 132 96 118 Z"/>
+              <path class="peach-fill" d="M96 118 Q150 132 204 118 L198 104 Q150 116 102 104 Z"/>
+              <circle class="gold-fill" cx="150" cy="120" r="7"/>
+              <!-- pull cord -->
+              <g class="cord-hit" id="cordHit" tabindex="0" role="button" aria-label="Pull the cord to switch between sign in and sign up">
+                <line class="line-stroke" x1="196" y1="112" x2="196" y2="176" stroke-width="2.5" opacity="0.75"/>
+                <circle class="cord-ball ox-fill" id="cordBall" cx="196" cy="186" r="9"/>
+                <circle cx="196" cy="186" r="22" fill="transparent"/>
+              </g>
+            </svg>
+          </div>
+
+          <h1 class="lamp-headline" id="lampHeadline">Welcome back to your <em>feelings.</em></h1>
+          <p class="lamp-copy" id="lampCopy">
+            Sign in and your notes, goals and Habit Lab sittings follow you from device to device —
+            saved to your own private space, never shared. No account? Everything on the wheel
+            still works as a guest.
+          </p>
+          <p class="cord-hint">Pull the lamp cord to switch</p>
+          <br />
+          <a class="guest-link" href="https://olitamrat.github.io/feelings-wheel/">Continue as a guest →</a>
+        </section>
+
+        <section class="card" aria-label="Sign in">
+          <!-- signed-out / form state -->
+          <div id="formState">
+            <div class="tabs" role="tablist" aria-label="Sign in or sign up">
+              <button class="tab" id="tabSignIn" role="tab" aria-selected="true" type="button">Sign In</button>
+              <button class="tab" id="tabSignUp" role="tab" aria-selected="false" type="button">Sign Up</button>
+            </div>
+
+            <div class="message" id="message" role="alert" aria-live="polite"></div>
+
+            <form id="authForm" novalidate>
+              <div class="field" id="nameField" hidden>
+                <label for="nameInput">Your name</label>
+                <input type="text" id="nameInput" autocomplete="name" placeholder="What should the wheel call you?" />
+              </div>
+              <div class="field">
+                <label for="emailInput">Email</label>
+                <input type="email" id="emailInput" autocomplete="email" placeholder="you@example.com" required />
+              </div>
+              <div class="field">
+                <label for="passwordInput">Password</label>
+                <div class="pw-wrap">
+                  <input type="password" id="passwordInput" autocomplete="current-password" placeholder="Your password" required />
+                  <button class="pw-toggle" id="pwToggle" type="button" aria-label="Show password">Show</button>
+                </div>
+                <ul class="strength" id="strengthList" hidden>
+                  <li data-rule="len">At least 8 characters</li>
+                  <li data-rule="upper">A capital letter</li>
+                  <li data-rule="num">A number</li>
+                  <li data-rule="sym">A symbol (! ? # …)</li>
+                </ul>
+              </div>
+
+              <div class="row-between">
+                <label class="remember">
+                  <input type="checkbox" id="rememberInput" checked />
+                  Remember me
+                </label>
+                <button class="forgot" id="forgotBtn" type="button">Forgot password?</button>
+              </div>
+
+              <button class="submit" id="submitBtn" type="submit">Sign in</button>
+            </form>
+
+            <div class="divider">or</div>
+
+            <button class="google-btn" id="googleBtn" type="button">
+              <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
+                <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+                <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/>
+              </svg>
+              Continue with Google
+            </button>
+
+            <p class="switch-line" id="switchLine">
+              New to the Feelings Wheel?
+              <button type="button" id="switchBtn">Create an account</button>
+            </p>
+          </div>
+
+          <!-- signed-in state -->
+          <div class="signed-in" id="signedInState">
+            <div class="avatar" id="avatarInitial" aria-hidden="true">·</div>
+            <h2 id="signedInTitle">You're signed in.</h2>
+            <p class="who" id="signedInWho"></p>
+            <p class="what">
+              Your notes, goals and Habit Lab sittings now save to your account and sync
+              wherever you open the wheel. On the wheel itself, look for your name in the
+              Account section to see the synced state.
+            </p>
+            <a class="open-wheel" href="https://olitamrat.github.io/feelings-wheel/">Open the Feelings Wheel →</a>
+            <button class="sign-out" id="signOutBtn" type="button">Sign out</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p class="credit">Created by Olink Technologies</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        var firebaseConfig = {
+          apiKey: "AIzaSyDIi6umuwyMnU9sK30bx1lIRYajBe3hxQ8",
+          authDomain: "feelings-wheel-olink.firebaseapp.com",
+          projectId: "feelings-wheel-olink",
+          storageBucket: "feelings-wheel-olink.firebasestorage.app",
+          messagingSenderId: "708736674985",
+          appId: "1:708736674985:web:85b1d4e1e45baee1b20db8"
+        };
+
+        var els = {
+          formState: document.getElementById("formState"),
+          signedInState: document.getElementById("signedInState"),
+          tabSignIn: document.getElementById("tabSignIn"),
+          tabSignUp: document.getElementById("tabSignUp"),
+          form: document.getElementById("authForm"),
+          nameField: document.getElementById("nameField"),
+          nameInput: document.getElementById("nameInput"),
+          emailInput: document.getElementById("emailInput"),
+          passwordInput: document.getElementById("passwordInput"),
+          pwToggle: document.getElementById("pwToggle"),
+          strengthList: document.getElementById("strengthList"),
+          rememberInput: document.getElementById("rememberInput"),
+          forgotBtn: document.getElementById("forgotBtn"),
+          submitBtn: document.getElementById("submitBtn"),
+          googleBtn: document.getElementById("googleBtn"),
+          switchLine: document.getElementById("switchLine"),
+          switchBtn: document.getElementById("switchBtn"),
+          message: document.getElementById("message"),
+          lampHeadline: document.getElementById("lampHeadline"),
+          lampCopy: document.getElementById("lampCopy"),
+          lampGlow: document.getElementById("lampGlow"),
+          cordHit: document.getElementById("cordHit"),
+          cordBall: document.getElementById("cordBall"),
+          avatarInitial: document.getElementById("avatarInitial"),
+          signedInTitle: document.getElementById("signedInTitle"),
+          signedInWho: document.getElementById("signedInWho"),
+          signOutBtn: document.getElementById("signOutBtn")
+        };
+
+        var mode = "signin"; // or "signup"
+        var auth = null;
+
+        function showMessage(text, kind) {
+          els.message.textContent = text;
+          els.message.className = "message show " + (kind || "error");
+        }
+        function clearMessage() {
+          els.message.textContent = "";
+          els.message.className = "message";
+        }
+
+        function setMode(next) {
+          mode = next;
+          var isIn = mode === "signin";
+          els.tabSignIn.setAttribute("aria-selected", isIn ? "true" : "false");
+          els.tabSignUp.setAttribute("aria-selected", isIn ? "false" : "true");
+          els.nameField.hidden = isIn;
+          els.strengthList.hidden = isIn;
+          els.passwordInput.setAttribute("autocomplete", isIn ? "current-password" : "new-password");
+          els.submitBtn.textContent = isIn ? "Sign in" : "Create account";
+          els.switchLine.firstChild.textContent = isIn ? "New to the Feelings Wheel? " : "Already have an account? ";
+          els.switchBtn.textContent = isIn ? "Create an account" : "Sign in";
+          els.lampHeadline.innerHTML = isIn
+            ? 'Welcome back to your <em>feelings.</em>'
+            : 'A quieter way to <em>keep</em> them.';
+          els.lampCopy.textContent = isIn
+            ? "Sign in and your notes, goals and Habit Lab sittings follow you from device to device — saved to your own private space, never shared. No account? Everything on the wheel still works as a guest."
+            : "Create a free account and the wheel remembers with you — your check-ins, notes and goals, kept in your own private space and synced across your devices. Guests keep everything on one device instead.";
+          els.lampGlow.setAttribute("opacity", isIn ? "0.85" : "0.45");
+          els.cordBall.setAttribute("cy", isIn ? "186" : "192");
+          clearMessage();
+        }
+
+        els.tabSignIn.addEventListener("click", function () { setMode("signin"); });
+        els.tabSignUp.addEventListener("click", function () { setMode("signup"); });
+        els.switchBtn.addEventListener("click", function () {
+          setMode(mode === "signin" ? "signup" : "signin");
+        });
+        els.cordHit.addEventListener("click", function () {
+          setMode(mode === "signin" ? "signup" : "signin");
+        });
+        els.cordHit.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setMode(mode === "signin" ? "signup" : "signin");
+          }
+        });
+
+        els.pwToggle.addEventListener("click", function () {
+          var showing = els.passwordInput.type === "text";
+          els.passwordInput.type = showing ? "password" : "text";
+          els.pwToggle.textContent = showing ? "Show" : "Hide";
+          els.pwToggle.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+          els.passwordInput.focus();
+        });
+
+        els.passwordInput.addEventListener("input", function () {
+          var v = els.passwordInput.value;
+          var rules = {
+            len: v.length >= 8,
+            upper: /[A-Z]/.test(v),
+            num: /[0-9]/.test(v),
+            sym: /[^A-Za-z0-9]/.test(v)
+          };
+          var items = els.strengthList.querySelectorAll("li");
+          for (var i = 0; i < items.length; i++) {
+            var key = items[i].getAttribute("data-rule");
+            items[i].classList.toggle("met", !!rules[key]);
+          }
+        });
+
+        function friendlyError(err) {
+          var code = (err && err.code) || "";
+          switch (code) {
+            case "auth/invalid-credential":
+            case "auth/wrong-password":
+            case "auth/user-not-found":
+              return "That email and password don't match an account. Check both and try again — or use Forgot password.";
+            case "auth/email-already-in-use":
+              return "An account with this email already exists. Try signing in instead.";
+            case "auth/invalid-email":
+              return "That email address doesn't look complete. Check it and try again.";
+            case "auth/weak-password":
+              return "That password is too weak. Aim for at least 8 characters with a mix of letters, a number and a symbol.";
+            case "auth/too-many-requests":
+              return "Too many attempts in a row. Wait a few minutes, then try again.";
+            case "auth/network-request-failed":
+              return "The connection dropped before sign-in finished. Check your connection and try again.";
+            case "auth/popup-closed-by-user":
+            case "auth/cancelled-popup-request":
+              return "The Google window closed before sign-in finished. Try again when you're ready.";
+            case "auth/unauthorized-domain":
+              return "Google sign-in isn't switched on for this page's address yet. Email sign-in works — use that for now.";
+            case "auth/user-disabled":
+              return "This account has been disabled. Reach out for help getting back in.";
+            default:
+              return "Something went wrong signing you in. Try again in a moment.";
+          }
+        }
+
+        function setBusy(busy) {
+          els.submitBtn.disabled = busy;
+          els.googleBtn.disabled = busy;
+          els.submitBtn.textContent = busy
+            ? "One moment…"
+            : (mode === "signin" ? "Sign in" : "Create account");
+        }
+
+        function applyPersistence() {
+          var p = els.rememberInput.checked
+            ? firebase.auth.Auth.Persistence.LOCAL
+            : firebase.auth.Auth.Persistence.SESSION;
+          return auth.setPersistence(p);
+        }
+
+        function initFirebase() {
+          if (typeof firebase === "undefined" || !firebase.auth) {
+            showMessage("The sign-in service couldn't load. Check your connection and reload the page.", "error");
+            return;
+          }
+          if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+          auth = firebase.auth();
+
+          auth.onAuthStateChanged(function (user) {
+            if (user) {
+              var name = user.displayName || "";
+              var email = user.email || "";
+              els.avatarInitial.textContent = (name || email || "F").charAt(0).toUpperCase();
+              els.signedInTitle.textContent = name ? "Welcome, " + name.split(" ")[0] + "." : "You're signed in.";
+              els.signedInWho.textContent = email;
+              els.formState.style.display = "none";
+              els.signedInState.classList.add("show");
+            } else {
+              els.formState.style.display = "";
+              els.signedInState.classList.remove("show");
+            }
+          });
+        }
+
+        els.form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          clearMessage();
+          if (!auth) { initFirebase(); if (!auth) return; }
+
+          var email = els.emailInput.value.trim();
+          var password = els.passwordInput.value;
+          var name = els.nameInput.value.trim();
+
+          if (!email || email.indexOf("@") === -1) {
+            showMessage("Enter the email address for your account.", "error");
+            els.emailInput.focus();
+            return;
+          }
+          if (!password) {
+            showMessage("Enter your password.", "error");
+            els.passwordInput.focus();
+            return;
+          }
+          if (mode === "signup" && password.length < 8) {
+            showMessage("For a new account, use a password of at least 8 characters.", "error");
+            els.passwordInput.focus();
+            return;
+          }
+
+          setBusy(true);
+          applyPersistence().then(function () {
+            if (mode === "signin") {
+              return auth.signInWithEmailAndPassword(email, password);
+            }
+            return auth.createUserWithEmailAndPassword(email, password).then(function (cred) {
+              if (name && cred.user) {
+                return cred.user.updateProfile({ displayName: name }).then(function () { return cred; });
+              }
+              return cred;
+            });
+          }).then(function () {
+            // onAuthStateChanged swaps the view.
+          }).catch(function (err) {
+            showMessage(friendlyError(err), "error");
+          }).then(function () {
+            setBusy(false);
+          });
+        });
+
+        els.googleBtn.addEventListener("click", function () {
+          clearMessage();
+          if (!auth) { initFirebase(); if (!auth) return; }
+          setBusy(true);
+          applyPersistence().then(function () {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            return auth.signInWithPopup(provider);
+          }).catch(function (err) {
+            showMessage(friendlyError(err), "error");
+          }).then(function () {
+            setBusy(false);
+          });
+        });
+
+        els.forgotBtn.addEventListener("click", function () {
+          clearMessage();
+          if (!auth) { initFirebase(); if (!auth) return; }
+          var email = els.emailInput.value.trim();
+          if (!email || email.indexOf("@") === -1) {
+            showMessage("Type your email above first, then tap Forgot password and we'll send the reset link there.", "notice");
+            els.emailInput.focus();
+            return;
+          }
+          auth.sendPasswordResetEmail(email).then(function () {
+            showMessage("Reset link sent to " + email + ". Open it to choose a new password.", "notice");
+          }).catch(function (err) {
+            showMessage(friendlyError(err), "error");
+          });
+        });
+
+        els.signOutBtn.addEventListener("click", function () {
+          if (!auth) return;
+          auth.signOut().then(function () {
+            setMode("signin");
+            showMessage("You've signed out. This device is a guest again — anything you do on the wheel now stays on this device only.", "notice");
+          });
+        });
+
+        setMode("signin");
+        initFirebase();
+      })();
+    </script>
+  </body>
+</html>
