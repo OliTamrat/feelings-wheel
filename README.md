@@ -34,12 +34,12 @@ The type is set in Instrument Serif, Schibsted Grotesk, and DM Mono, and the des
 
 ## Use it
 
-Open https://olitamrat.github.io/feelings-wheel/ — or download `index.html` and open it in any browser. It works offline once saved, except the fonts and voice dictation, which need a connection and a supported browser.
+Open https://olitamrat.github.io/feelings-wheel/ — or download `index.html` and open it in any browser. It works offline once saved, except the fonts and the first Whisper model download, which need a connection — and the built-in dictation, which needs a supported browser.
 
 ## Honest limits
 
-- Notes, goals and habits are kept for the visit only. This is a single static page, so there is no account and no saved state. Copy or Download is the way to keep your words.
-- Voice dictation uses your browser's built-in speech recognition and needs a supported browser (Chrome works best). Nothing you say is recorded or sent by this page.
+- Notes, goals and habits save in your browser, on your device — they are never sent anywhere, and you can erase them any time from My Notes. Copy or Download still works as a backup. Saving is per device and per browser: what you save on your phone won't appear on your laptop.
+- Voice dictation has two modes. The built-in one uses your browser's speech recognition and needs a supported browser (Chrome works best). Whisper dictation runs OpenAI's open-source Whisper model entirely on your device — no API key, no server — after a one-time ~40 MB model download; it works in browsers the built-in mode doesn't. Nothing you say is recorded or sent by this page in either mode.
 
 ## Credits
 
