@@ -314,21 +314,65 @@ html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
   .rec-dot{animation:none}
   button:active{transform:none}
 }
+
+/* ---------- Pages — each area is its own page, addressed by hash ---------- */
+.view[hidden]{display:none}
+.view>section.block:first-child{margin-top:52px}
+.mainnav{display:flex;flex-wrap:wrap;gap:6px;padding:16px 0 0}
+.mainnav a{color:var(--soft);text-decoration:none;font-weight:600;font-size:.95rem;border:1.5px solid var(--cloth-line);border-radius:999px;padding:9px 18px;min-height:44px;display:inline-flex;align-items:center}
+.mainnav a:hover{color:var(--ink);border-color:var(--peach)}
+.mainnav a[aria-current="page"]{background:var(--peach);border-color:var(--peach);color:#221407}
+html[data-theme="light"] .mainnav a{border-color:#b8a888}
+html[data-theme="light"] .mainnav a:hover{border-color:var(--ox)}
+html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--ox);border-color:var(--ox);color:#fff}
+/* Home — rows out to each area, same list language as the chapters */
+.area-list{border-bottom:1px solid var(--line);margin-top:26px}
+.area-row{display:flex;gap:22px;align-items:flex-start;padding:26px 4px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.area-row:hover .area-name{color:var(--accent)}
+.area-titles{flex:1;min-width:0;display:block}
+.area-name{display:block;font-weight:700;font-size:1.3rem;line-height:1.25}
+.area-desc{display:block;color:var(--soft);margin-top:5px;font-size:1rem;max-width:620px}
+.area-arrow{font-family:var(--mono);font-size:1.3rem;color:var(--accent);line-height:1;padding-top:6px}
+@media(max-width:560px){.area-row{gap:14px}.area-row .ch-num{flex-basis:44px;font-size:1.7rem}}
+/* Bottom tab bar — phones only; the top nav carries wider screens */
+.tabbar{display:none}
+.lx-toast{pointer-events:none;opacity:0;visibility:hidden;transition:transform .45s cubic-bezier(.3,1.3,.5,1),opacity .3s ease,visibility .45s}
+.lx-toast.show{opacity:1;visibility:visible}
+@media(max-width:860px){
+  .mainnav{display:none}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:110;background:var(--paper);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));gap:4px}
+  html[data-theme="dark"] .tabbar{background:#171310}
+  .tabbar a{flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;padding:8px 2px;border-radius:12px;color:var(--soft);text-decoration:none;font-weight:600;font-size:.82rem;text-align:center}
+  .tabbar a[aria-current="page"]{background:var(--ox-soft);color:var(--ink)}
+  .lx-toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+}
+@media print{.mainnav,.tabbar{display:none!important}}
+/* Phones: tighten the hero so both opening buttons clear the fixed tab bar */
+@media(max-width:560px){
+  .brandbar{padding-top:calc(12px + env(safe-area-inset-top,0px));padding-bottom:12px}
+  .hero{padding:38px 0 8px}
+  .hero h1{font-size:2.55rem;margin:24px 0 16px}
+  .hero p.lede{font-size:1.05rem}
+  .hero-cta{margin-top:26px}
+}
 </style>
 </head>
 <body data-mood="neutral">
 <div class="wrap">
 <div class="brandbar"><span class="brand-word">Feelings <span class="dot" aria-hidden="true">.</span> <em>Wheel</em></span><a class="acct-btn" id="acct-btn" href="login.html" aria-label="Sign in — opens the sign-in page">Sign in</a><button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme" aria-pressed="false" title="Switch theme"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></button></div>
+<nav class="mainnav" aria-label="Main"><a href="#/" data-nav="home">Wheel</a><a href="#/chapters" data-nav="chapters">Chapters</a><a href="#/habits" data-nav="habits">Habit Lab</a><a href="#/checkin" data-nav="checkin">Check-in</a><a href="#/notes" data-nav="notes">My Notes</a></nav>
+<main id="main">
+<div class="view" data-view="home">
 <header class="hero">
 <p class="hero-pill">Feelings when your needs are met · and when they are not</p>
 <h1>Name what you feel.<br>Then do something small about it.</h1>
 <p class="lede">All 97 feelings from your board — with a deep dive for every line, a habit builder, and a writing pad. One feeling at a time, named precisely, is a feeling you can act on.</p>
 <div class="hero-cta">
-<a class="btn" href="#checkin-anchor" id="hero-checkin">Start a check-in</a>
-<a class="btn ghost" href="#explorer">Open the wheel</a>
+<a class="btn" href="#/checkin" id="hero-checkin">Start a check-in</a>
+<a class="btn ghost" href="#/" data-scrollto="explorer">Open the wheel</a>
 </div>
 <p class="hero-note">Free, for everyone. As a guest your words save on this device only; create an account and they follow you from device to device.</p>
-<p class="hero-links"><a href="#lines">Deep dives</a> &nbsp;·&nbsp; <a href="#habit-lab">Habit Lab</a> &nbsp;·&nbsp; <a href="#notes">My Notes</a> &nbsp;·&nbsp; <a href="login.html">Account</a></p>
+<p class="hero-links"><a href="#/chapters">Deep dives</a> &nbsp;·&nbsp; <a href="#/habits">Habit Lab</a> &nbsp;·&nbsp; <a href="#/notes">My Notes</a> &nbsp;·&nbsp; <a href="login.html">Account</a></p>
 </header>
 
 <section class="block" aria-label="The wheel" style="margin-top:80px">
@@ -343,18 +387,43 @@ html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
 <div class="wheel-wrap"><svg id="wheel" viewBox="0 0 720 720" role="group" aria-label="Feelings wheel"></svg><div class="legend"><span><span class="dot" style="background:#c99b3f"></span>Needs met — top</span><span><span class="dot" style="background:#a8381b"></span>Needs not met — bottom</span><span>Tap centre → family → exact feeling</span></div></div>
 <p class="wheel-note">The tints follow the board: gold, peach and teal when a need is met; oxblood when it is not.</p>
 <aside class="panel page" id="panel" aria-live="polite"></aside>
-<div id="checkin-anchor"></div>
-<section class="checkin page" id="checkin" aria-label="Guided check-in"></section>
 </section>
 
+<section class="block" aria-label="Explore the areas">
+<p class="secnum">Explore</p>
+<h2 class="sec-title">Pick what to work on.</h2>
+<p class="sec-lede">Each area has its own page — go straight to the one you need, and use the navigation to move between them.</p>
+<div class="area-list">
+<a class="area-row" href="#/chapters"><span class="ch-num" aria-hidden="true">02</span><span class="area-titles"><span class="area-name">The 12 chapters</span><span class="area-desc">A deep dive for every core feeling — its four families, the exact words under each, and a starter habit for every line.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
+<a class="area-row" href="#/habits"><span class="ch-num" aria-hidden="true">03</span><span class="area-titles"><span class="area-name">Habit Lab</span><span class="area-desc">Turn one feeling into one tiny habit: pick the habit, anchor it to something you already do, and follow the 7-day practice plan.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
+<a class="area-row" href="#/checkin"><span class="ch-num" aria-hidden="true">✓</span><span class="area-titles"><span class="area-name">Daily check-in</span><span class="area-desc">Four quick steps — needs met or not, core feeling, family, exact word — ending in a first step you can take right away.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
+<a class="area-row" href="#/notes"><span class="ch-num" aria-hidden="true">04</span><span class="area-titles"><span class="area-name">My Notes</span><span class="area-desc">Write about a feeling you just named, or set a goal and its first small step. Type, or tap the mic and talk — it saves as you go.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<section class="block">
+<p class="secnum">How it works</p>
+<h2 class="sec-title">From feeling to habit,<br>in four sittings.</h2>
+<div style="margin-top:26px">
+<div class="how-step"><span class="ch-num" aria-hidden="true">01</span><div><h3>Notice &amp; name it precisely</h3><p>“Mad” and “furious” need different responses. Drill centre → family → exact word.</p></div></div>
+<div class="how-step"><span class="ch-num" aria-hidden="true">02</span><div><h3>See what it's associated with</h3><p>Every deep dive shows triggers, body signals, inner voice, and the need underneath — so the feeling makes sense.</p></div></div>
+<div class="how-step"><span class="ch-num" aria-hidden="true">03</span><div><h3>Write it down</h3><p>Open My Notes from any feeling and put it into words — type, or dictate out loud. A named feeling, written down, is one you can act on.</p></div></div>
+<div class="how-step"><span class="ch-num" aria-hidden="true">04</span><div><h3>Turn it into a habit</h3><p>Send the feeling to the Habit Lab, pick one tiny habit, anchor it, and follow the 7-day plan.</p></div></div>
+</div>
+</section>
+</div><!-- /home -->
+
+<div class="view" data-view="chapters" hidden>
 <section class="block" id="lines">
 <p class="secnum">02 · Deep dives</p>
 <h2 class="sec-title">Every line, drilled down.</h2>
 <p class="sec-lede">Twelve chapters — one for each core feeling. Open a chapter to find its four families, and under each family the specific feelings, every one with its own deep dive and its own habit. Tap any row.</p>
 <div class="core-list" id="core-list"></div>
 </section>
+</div><!-- /chapters -->
 
 <!-- HABIT LAB -->
+<div class="view" data-view="habits" hidden>
 <section class="block" id="habit-lab" aria-label="Habit Lab">
 <p class="secnum">03 · Habit Lab</p>
 <h2 class="sec-title">One feeling.<br>One tiny habit.</h2>
@@ -405,8 +474,10 @@ html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
 <div class="actions no-print"><button type="button" class="btn" id="hl-copy">Copy my plan</button><button type="button" class="btn ghost" id="hl-download">Download plan (.txt)</button><button type="button" class="btn ghost" id="hl-write-goal">Write a goal for this habit →</button></div>
 </div>
 </section>
+</div><!-- /habits -->
 
 <!-- MY NOTES -->
+<div class="view" data-view="notes" hidden>
 <section class="block" id="notes" aria-label="My Notes">
 <p class="secnum">04 · My Notes</p>
 <h2 class="sec-title">Write it down —<br>feelings &amp; goals.</h2>
@@ -450,23 +521,23 @@ html[data-theme="light"] .acct-btn:hover{border-color:var(--ox)}
 </div>
 </div>
 </section>
+</div><!-- /notes -->
 
+<div class="view" data-view="checkin" hidden>
+<section class="block" aria-label="Guided check-in">
+<p class="secnum">Check-in</p>
+<h2 class="sec-title">Four steps to the<br>exact word.</h2>
+<p class="sec-lede">Start broad — are your needs met, or not? — then narrow: the core feeling, its family, and finally the precise word, with a first step you can take right away.</p>
+<section class="checkin page" id="checkin" aria-label="Guided check-in"></section>
+</section>
+</div><!-- /checkin -->
+</main>
 </div>
 
+<nav class="tabbar" aria-label="Main"><a href="#/" data-nav="home">Wheel</a><a href="#/chapters" data-nav="chapters">Chapters</a><a href="#/habits" data-nav="habits">Habit Lab</a><a href="#/checkin" data-nav="checkin">Check-in</a><a href="#/notes" data-nav="notes">My Notes</a></nav>
 <div class="lx-toast" id="lxToast" role="status"></div>
 
 <div class="wrap">
-<section class="block">
-<p class="secnum">How it works</p>
-<h2 class="sec-title">From feeling to habit,<br>in four sittings.</h2>
-<div style="margin-top:26px">
-<div class="how-step"><span class="ch-num" aria-hidden="true">01</span><div><h3>Notice &amp; name it precisely</h3><p>“Mad” and “furious” need different responses. Drill centre → family → exact word.</p></div></div>
-<div class="how-step"><span class="ch-num" aria-hidden="true">02</span><div><h3>See what it's associated with</h3><p>Every deep dive shows triggers, body signals, inner voice, and the need underneath — so the feeling makes sense.</p></div></div>
-<div class="how-step"><span class="ch-num" aria-hidden="true">03</span><div><h3>Write it down</h3><p>Open My Notes from any feeling and put it into words — type, or dictate out loud. A named feeling, written down, is one you can act on.</p></div></div>
-<div class="how-step"><span class="ch-num" aria-hidden="true">04</span><div><h3>Turn it into a habit</h3><p>Send the feeling to the Habit Lab, pick one tiny habit, anchor it, and follow the 7-day plan.</p></div></div>
-</div>
-</section>
-
 <footer><p class="free">Free, forever.</p><p style="margin:0 0 4px">Created by Olink Technologies.</p><p style="margin:0 0 4px">Built to help people name what they feel and build one small habit at a time.</p><p style="margin:0 0 4px">As a guest, your notes, goals and habit practice save in this browser, on this device — they are never sent anywhere, and you can erase them any time from My Notes. When you sign in, they also sync to your private account (Firebase, locked to you by its security rules) so you can pick them up on another device; signing out returns you to device-only. Whisper dictation runs on your device too; its model downloads once and stays cached in your browser.</p><p>Adapted from the Nonviolent Communication feelings inventory (Marshall Rosenberg). For personal growth, coaching, and clinical work — this tool supports emotional literacy and habit practice; it is not a diagnostic tool and does not replace professional support. If a feeling is overwhelming or unsafe, please reach out to a trusted person or professional.</p><p class="signoff">Feelings <span class="dot" aria-hidden="true">.</span> <em>Wheel</em></p></footer>
 </div>
 <script>
@@ -524,7 +595,8 @@ document.querySelectorAll("#wheel .seg").forEach(el=>{function act(){const l=el.
 /* State */
 let sel={core:null,family:null,feeling:null};let filter="all";
 function findFamily(core,name){return core.families.find(f=>f.name===name)||null}
-function select(cid,fam,feel,opts){opts=opts||{};sel={core:cid||null,family:fam||null,feeling:feel||null};document.body.setAttribute("data-mood",sel.core?byId[sel.core].side:"neutral");renderSelection();syncHabitFocus();if(opts.scroll)document.getElementById("panel").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function revealPanel(){if(currentView!=="home"){showView("home");try{history.replaceState(null,"","#/")}catch(e){}}setTimeout(()=>{const p=document.getElementById("panel");if(p)p.scrollIntoView({behavior:"smooth",block:"nearest"})},70)}
+function select(cid,fam,feel,opts){opts=opts||{};sel={core:cid||null,family:fam||null,feeling:feel||null};document.body.setAttribute("data-mood",sel.core?byId[sel.core].side:"neutral");renderSelection();syncHabitFocus();if(opts.scroll)revealPanel()}
 function renderSelection(){document.querySelectorAll("#wheel .segwrap").forEach(el=>{el.classList.remove("dim","dim-soft","selected");const cid=el.getAttribute("data-core");const core=byId[cid];let d="";if(filter!=="all"&&core.side!==filter)d="dim";else if(sel.core&&cid!==sel.core)d="dim";else if(sel.core&&sel.family&&el.getAttribute("data-level")!=="core"&&el.getAttribute("data-family")!==sel.family)d="dim-soft";if(d)el.classList.add(d);const lv=el.getAttribute("data-level");let is=false;if(sel.feeling&&lv==="feeling"&&el.getAttribute("data-feeling")===sel.feeling&&cid===sel.core)is=true;else if(!sel.feeling&&sel.family&&lv==="family"&&el.getAttribute("data-family")===sel.family&&cid===sel.core)is=true;else if(!sel.family&&sel.core&&lv==="core"&&cid===sel.core)is=true;if(is)el.classList.add("selected")});const c1=document.getElementById("cl1"),c2=document.getElementById("cl2");if(c1){if(sel.feeling){c1.textContent=sel.feeling;c2.textContent=byId[sel.core].name}else if(sel.core){c1.textContent=byId[sel.core].name;c2.textContent=sel.family||(byId[sel.core].side==="met"?"needs met":"needs not met")}else{c1.textContent="97 feelings";c2.textContent="12 core feelings"}}renderCrumbs();renderPanel();document.querySelectorAll("#core-list .core-row").forEach(card=>{card.classList.toggle("dim",filter!=="all"&&byId[card.getAttribute("data-card")].side!==filter)})}
 function renderCrumbs(){const nav=document.getElementById("crumbs");let h='<button type="button" data-crumb="all"'+(!sel.core?' class="current"':"")+">All feelings</button>";if(sel.core){const core=byId[sel.core];h+='<span aria-hidden="true">›</span><button type="button" data-crumb="core"'+(!sel.family?' class="current"':"")+">"+esc(core.name)+"</button>";if(sel.family)h+='<span aria-hidden="true">›</span><button type="button" data-crumb="family"'+(!sel.feeling?' class="current"':"")+">"+esc(sel.family)+"</button>";if(sel.feeling)h+='<span aria-hidden="true">›</span><button type="button" class="current">'+esc(sel.feeling)+"</button>"}nav.innerHTML=h;nav.querySelectorAll("button[data-crumb]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-crumb");if(k==="all")select(null,null,null);else if(k==="core")select(sel.core,null,null);else if(k==="family")select(sel.core,sel.family,null)}))}
 function badge(core){return '<span class="badge '+core.side+'">'+(core.side==="met"?"● Needs met":"● Needs not met")+"</span>"}
@@ -532,7 +604,7 @@ function assocHTML(core){const g=GUIDE[core.id];return '<h3>What this feeling is
 function stepsHTML(core){const g=GUIDE[core.id];const title=core.side==="met"?"Build on it — make the good feeling stick":"Get out of it — a 3-step exit routine";return "<h3>"+title+'</h3><ol class="steps">'+g.steps.map((s,i)=>'<li><span class="stepnum">'+(i+1)+"</span><div><b>"+esc(s[0])+"</b><p>"+esc(s[1])+"</p></div></li>").join("")+'</ol><div class="micro"><b>'+esc(g.micro.t)+'</b><br>'+esc(g.micro.d)+"</div>"}
 function safetyHTML(){return '<div class="micro" style="margin-top:14px"><b>A gentle note</b><br>If this low mood lasts for weeks, please talk to a doctor or counsellor — a wheel can\'t carry that alone.</div>'}
 function chipRow(items,kind,active){return '<div class="chiprow">'+items.map(it=>'<button type="button" class="chip'+(it===active?" active":"")+'" data-chip="'+kind+'" data-value="'+esc(it)+'">'+esc(it)+"</button>").join("")+"</div>"}
-function wirePanel(p){p.querySelectorAll("[data-chip]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-chip"),v=b.getAttribute("data-value");if(k==="family")select(sel.core,v,null);else select(sel.core,sel.family,v)}));const cb=p.querySelector("[data-copy]");if(cb)cb.addEventListener("click",()=>copyText(cb.getAttribute("data-copy"),cb));const hb=p.querySelector("[data-habit]");if(hb)hb.addEventListener("click",()=>{document.getElementById("habit-lab").scrollIntoView({behavior:"smooth"})});const wb=p.querySelector("[data-write]");if(wb)wb.addEventListener("click",()=>{openNotes("feelings",currentNotePayload())});p.querySelectorAll("[data-ci-start]").forEach(b=>b.addEventListener("click",startCheckin))}
+function wirePanel(p){p.querySelectorAll("[data-chip]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-chip"),v=b.getAttribute("data-value");if(k==="family")select(sel.core,v,null);else select(sel.core,sel.family,v)}));const cb=p.querySelector("[data-copy]");if(cb)cb.addEventListener("click",()=>copyText(cb.getAttribute("data-copy"),cb));const hb=p.querySelector("[data-habit]");if(hb)hb.addEventListener("click",()=>{go("#/habits")});const wb=p.querySelector("[data-write]");if(wb)wb.addEventListener("click",()=>{openNotes("feelings",currentNotePayload())});p.querySelectorAll("[data-ci-start]").forEach(b=>b.addEventListener("click",startCheckin))}
 function currentNotePayload(){if(!sel.core)return null;const core=byId[sel.core];const name=sel.feeling||sel.family||core.name;return{coreId:sel.core,coreName:core.name,family:sel.family,feeling:name,path:(core.name+(sel.family?" › "+sel.family:"")+(sel.feeling?" › "+sel.feeling:"")),sentence:sentenceFor(core,name),side:core.side}}
 function renderPanel(){const p=document.getElementById("panel");p.classList.remove("rise");void p.offsetWidth;p.classList.add("rise");
 if(!sel.core){p.removeAttribute("data-side");p.innerHTML="<h2>Start anywhere — then go deep</h2><hr class='rule'><p style='color:var(--soft)'>Tap a core feeling in the centre, then a family, then the exact feeling. Each level unlocks more: at the feeling level you get what it's associated with, what it feels like in your body, a 3-step response, a 60-second practice, a habit matched to it — and a writing pad one tap away.</p><h3>Try one now</h3>"+chipRow(["Angry","Afraid","Sad","Ashamed","Joyful","Peaceful"],"corepick",null)+'<div class="actions"><button type="button" class="btn" data-ci-start="1">Start a guided check-in</button></div>';p.querySelectorAll("[data-chip]").forEach(b=>b.addEventListener("click",()=>{const c=CORES.find(x=>x.name===b.getAttribute("data-value"));if(c)select(c.id,null,null)}));p.querySelectorAll("[data-ci-start]").forEach(b=>b.addEventListener("click",startCheckin));return}
@@ -543,7 +615,7 @@ if(!sel.feeling){p.innerHTML="<h2>"+esc(fam.name)+"</h2>"+'<hr class="rule"><p c
 const sentence=sentenceFor(core,sel.feeling);
 p.innerHTML="<h2>"+esc(sel.feeling)+"</h2>"+'<hr class="rule"><p class="pathline">'+esc(core.name)+" › "+esc(fam.name)+" › "+esc(sel.feeling)+"</p>"+badge(core)+'<p style="margin:10px 0 0"><b>'+esc(fam.name)+":</b> "+esc(FAMILY_NOTES[fam.name]||"")+" <b>"+esc(sel.feeling)+"</b> is this family's sharper, more specific word for it.</p>"+assocHTML(core)+stepsHTML(core)+(fam.name==="Depressed"?safetyHTML():"")+"<h3>Say it in a sentence</h3><div class='sentence'>“"+esc(sentence)+"”</div>"+'<div class="actions"><button type="button" class="btn" data-copy="'+esc(sentence)+'">Copy the sentence</button><button type="button" class="btn" data-habit="1">Turn this feeling into a habit →</button><button type="button" class="btn ghost" data-write="1">Write about this</button><button type="button" class="btn ghost" data-ci-start="1">New check-in</button></div>';wirePanel(p)}
 /* List / lines */
-function buildList(){const grid=document.getElementById("core-list");let h="";ORDER.forEach((id,idx)=>{const core=byId[id];const g=GUIDE[id];const num=String(idx+1).padStart(2,"0");h+='<article class="core-row" data-card="'+id+'"><button type="button" class="core-head" data-expand="'+id+'" aria-expanded="'+(idx===0?"true":"false")+'" aria-controls="core-body-'+id+'"><span class="ch-num" aria-hidden="true">'+num+'</span><span class="core-titles"><span class="core-name">'+esc(core.name)+(core.qualifier?' <span class="core-qual">('+esc(core.qualifier)+")</span>":"")+'</span><span class="core-desc">'+esc(g.assoc)+'</span></span><span class="core-meta"><span class="badge '+core.side+'">'+(core.side==="met"?"Needs met":"Needs not met")+'</span><span class="core-toggle" aria-hidden="true">'+(idx===0?"–":"+")+'</span></span></button><div class="core-body" id="core-body-'+id+'"'+(idx===0?"":" hidden")+">";core.families.forEach(fam=>{h+='<div class="famline"><div class="famline-head"><button type="button" data-lf="'+esc(fam.name)+'" data-core="'+id+'">'+esc(fam.name)+'</button><span class="fam-count">'+fam.feelings.length+' feelings</span></div><p class="fam-note">'+esc(FAMILY_NOTES[fam.name]||"")+"</p>";fam.feelings.forEach(f=>{h+='<button type="button" class="feel-row" data-feel="'+esc(f)+'" data-family="'+esc(fam.name)+'" data-core="'+id+'"><b>'+esc(f)+'</b><span>Deep dive + habit →</span></button>'});h+="</div>"});h+='<div class="card-habit"><b>Starter habit · '+esc(core.name)+'</b>'+esc(g.habits[0].t)+" — "+esc(g.habits[0].a)+'. <button type="button" data-card-habit="'+id+'" style="background:none;border:0;font-weight:700;text-decoration:underline;padding:0">Use in Habit Lab</button></div></div></article>'});grid.innerHTML=h;grid.querySelectorAll("[data-expand]").forEach(b=>b.addEventListener("click",()=>{const id=b.getAttribute("data-expand");const body=document.getElementById("core-body-"+id);const open=body.hidden;body.hidden=!open;b.setAttribute("aria-expanded",open?"true":"false");b.querySelector(".core-toggle").textContent=open?"–":"+";select(id,null,null)}));grid.querySelectorAll("[data-lf]").forEach(b=>b.addEventListener("click",()=>select(b.getAttribute("data-core"),b.getAttribute("data-lf"),null,{scroll:true})));grid.querySelectorAll("[data-feel]").forEach(b=>b.addEventListener("click",()=>select(b.getAttribute("data-core"),b.getAttribute("data-family"),b.getAttribute("data-feel"),{scroll:true})));grid.querySelectorAll("[data-card-habit]").forEach(b=>b.addEventListener("click",()=>{const cid=b.getAttribute("data-card-habit");select(cid,byId[cid].families[0].name,byId[cid].families[0].feelings[0]);document.getElementById("habit-lab").scrollIntoView({behavior:"smooth"})}))}
+function buildList(){const grid=document.getElementById("core-list");let h="";ORDER.forEach((id,idx)=>{const core=byId[id];const g=GUIDE[id];const num=String(idx+1).padStart(2,"0");h+='<article class="core-row" data-card="'+id+'"><button type="button" class="core-head" data-expand="'+id+'" aria-expanded="'+(idx===0?"true":"false")+'" aria-controls="core-body-'+id+'"><span class="ch-num" aria-hidden="true">'+num+'</span><span class="core-titles"><span class="core-name">'+esc(core.name)+(core.qualifier?' <span class="core-qual">('+esc(core.qualifier)+")</span>":"")+'</span><span class="core-desc">'+esc(g.assoc)+'</span></span><span class="core-meta"><span class="badge '+core.side+'">'+(core.side==="met"?"Needs met":"Needs not met")+'</span><span class="core-toggle" aria-hidden="true">'+(idx===0?"–":"+")+'</span></span></button><div class="core-body" id="core-body-'+id+'"'+(idx===0?"":" hidden")+">";core.families.forEach(fam=>{h+='<div class="famline"><div class="famline-head"><button type="button" data-lf="'+esc(fam.name)+'" data-core="'+id+'">'+esc(fam.name)+'</button><span class="fam-count">'+fam.feelings.length+' feelings</span></div><p class="fam-note">'+esc(FAMILY_NOTES[fam.name]||"")+"</p>";fam.feelings.forEach(f=>{h+='<button type="button" class="feel-row" data-feel="'+esc(f)+'" data-family="'+esc(fam.name)+'" data-core="'+id+'"><b>'+esc(f)+'</b><span>Deep dive + habit →</span></button>'});h+="</div>"});h+='<div class="card-habit"><b>Starter habit · '+esc(core.name)+'</b>'+esc(g.habits[0].t)+" — "+esc(g.habits[0].a)+'. <button type="button" data-card-habit="'+id+'" style="background:none;border:0;font-weight:700;text-decoration:underline;padding:0">Use in Habit Lab</button></div></div></article>'});grid.innerHTML=h;grid.querySelectorAll("[data-expand]").forEach(b=>b.addEventListener("click",()=>{const id=b.getAttribute("data-expand");const body=document.getElementById("core-body-"+id);const open=body.hidden;body.hidden=!open;b.setAttribute("aria-expanded",open?"true":"false");b.querySelector(".core-toggle").textContent=open?"–":"+";select(id,null,null)}));grid.querySelectorAll("[data-lf]").forEach(b=>b.addEventListener("click",()=>select(b.getAttribute("data-core"),b.getAttribute("data-lf"),null,{scroll:true})));grid.querySelectorAll("[data-feel]").forEach(b=>b.addEventListener("click",()=>select(b.getAttribute("data-core"),b.getAttribute("data-family"),b.getAttribute("data-feel"),{scroll:true})));grid.querySelectorAll("[data-card-habit]").forEach(b=>b.addEventListener("click",()=>{const cid=b.getAttribute("data-card-habit");select(cid,byId[cid].families[0].name,byId[cid].families[0].feelings[0]);go("#/habits")}))}
 /* Filter + search */
 document.querySelectorAll(".filter-group button").forEach(b=>b.addEventListener("click",()=>{filter=b.getAttribute("data-filter");document.querySelectorAll(".filter-group button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));renderSelection()}));
 const IDX=[];CORES.forEach(c=>c.families.forEach(f=>{IDX.push({type:"family",name:f.name,core:c,family:f.name,feeling:null});f.feelings.forEach(fe=>IDX.push({type:"feeling",name:fe,core:c,family:f.name,feeling:fe}))}));
@@ -552,13 +624,14 @@ si.addEventListener("input",()=>{const q=si.value.trim().toLowerCase();if(!q){sr
 document.addEventListener("click",e=>{if(!e.target.closest(".search-box"))sr.classList.remove("open")});
 /* Check-in */
 const checkinEl=document.getElementById("checkin");let ci=null;
-function startCheckin(){ci={step:1,side:null,core:null,family:null,feeling:null};checkinEl.classList.add("open");renderCheckin();checkinEl.scrollIntoView({behavior:"smooth"})}
+function beginCheckin(){ci={step:1,side:null,core:null,family:null,feeling:null};checkinEl.classList.add("open");renderCheckin()}
+function startCheckin(){beginCheckin();go("#/checkin")}
 var _oc=document.getElementById("open-checkin");if(_oc)_oc.addEventListener("click",startCheckin);
 var _nc=document.getElementById("nav-checkin");if(_nc)_nc.addEventListener("click",e=>{e.preventDefault();startCheckin()});
 document.getElementById("hero-checkin").addEventListener("click",e=>{e.preventDefault();startCheckin()});
 function ciOpts(items,attr){return '<div class="ci-options">'+items.map(it=>'<button type="button" data-ci="'+attr+'" data-value="'+esc(it.value)+'"'+(it.big?' class="big"':"")+">"+esc(it.label)+"</button>").join("")+"</div>"}
 function renderCheckin(){if(!ci)return;let h="<h2>How are you feeling right now?</h2>";if(ci.step===1){h+='<p style="color:var(--soft)">Step 1 of 4 — are your needs met, or not?</p>'+ciOpts([{value:"met",label:"My needs are met",big:1},{value:"notmet",label:"My needs are not met",big:1}],"side")}else if(ci.step===2){h+='<p style="color:var(--soft)">Step 2 of 4 — pick the core feeling closest to yours</p>'+ciOpts(CORES.filter(c=>c.side===ci.side).map(c=>({value:c.id,label:c.name})),"core")}else if(ci.step===3){const core=byId[ci.core];h+='<p style="color:var(--soft)">Step 3 of 4 — which family under '+esc(core.name)+'</p>'+ciOpts(core.families.map(f=>({value:f.name,label:f.name})),"family")}else if(ci.step===4){const core=byId[ci.core],fam=findFamily(core,ci.family);h+='<p style="color:var(--soft)">Step 4 of 4 — name it precisely</p>'+ciOpts(fam.feelings.map(f=>({value:f,label:f})),"feeling")}else{const core=byId[ci.core];const sentence=sentenceFor(core,ci.feeling);const g=GUIDE[core.id];h+='<p style="color:var(--soft)">Your check-in</p><h2 style="font-size:1.6rem">'+esc(ci.feeling)+'</h2><p>'+esc(core.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+"</p>"+badge(core)+"<p>"+esc(g.assoc)+"</p><p><strong>First step:</strong> "+esc(g.steps[0][0])+" — "+esc(g.steps[0][1])+'</p><div class="sentence">“'+esc(sentence)+'”</div><div class="actions"><button type="button" class="btn" data-ci-habit="1">Turn this into a habit in the Habit Lab →</button><button type="button" class="btn ghost" data-ci-write="1">Write about it</button><button type="button" class="btn ghost" data-ci-again="1">Start again</button></div>'}
-if(ci.step>1&&ci.step<5)h+='<div class="actions"><button type="button" class="btn ghost" data-ci-back="1">Back</button></div>';checkinEl.innerHTML=h;checkinEl.querySelectorAll("[data-ci]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-ci"),v=b.getAttribute("data-value");if(k==="side"){ci.side=v;ci.step=2}else if(k==="core"){ci.core=v;ci.step=3}else if(k==="family"){ci.family=v;ci.step=4}else{ci.feeling=v;ci.step=5;select(ci.core,ci.family,ci.feeling)}renderCheckin()}));const back=checkinEl.querySelector("[data-ci-back]");if(back)back.addEventListener("click",()=>{ci.step--;renderCheckin()});const ag=checkinEl.querySelector("[data-ci-again]");if(ag)ag.addEventListener("click",startCheckin);const hb=checkinEl.querySelector("[data-ci-habit]");if(hb)hb.addEventListener("click",()=>document.getElementById("habit-lab").scrollIntoView({behavior:"smooth"}));const wb=checkinEl.querySelector("[data-ci-write]");if(wb)wb.addEventListener("click",()=>{const core=byId[ci.core];openNotes("feelings",{coreId:ci.core,coreName:core.name,family:ci.family,feeling:ci.feeling,path:core.name+" › "+ci.family+" › "+ci.feeling,sentence:sentenceFor(core,ci.feeling),side:core.side})})}
+if(ci.step>1&&ci.step<5)h+='<div class="actions"><button type="button" class="btn ghost" data-ci-back="1">Back</button></div>';checkinEl.innerHTML=h;checkinEl.querySelectorAll("[data-ci]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-ci"),v=b.getAttribute("data-value");if(k==="side"){ci.side=v;ci.step=2}else if(k==="core"){ci.core=v;ci.step=3}else if(k==="family"){ci.family=v;ci.step=4}else{ci.feeling=v;ci.step=5;select(ci.core,ci.family,ci.feeling)}renderCheckin()}));const back=checkinEl.querySelector("[data-ci-back]");if(back)back.addEventListener("click",()=>{ci.step--;renderCheckin()});const ag=checkinEl.querySelector("[data-ci-again]");if(ag)ag.addEventListener("click",startCheckin);const hb=checkinEl.querySelector("[data-ci-habit]");if(hb)hb.addEventListener("click",()=>go("#/habits"));const wb=checkinEl.querySelector("[data-ci-write]");if(wb)wb.addEventListener("click",()=>{const core=byId[ci.core];openNotes("feelings",{coreId:ci.core,coreName:core.name,family:ci.family,feeling:ci.feeling,path:core.name+" › "+ci.family+" › "+ci.feeling,sentence:sentenceFor(core,ci.feeling),side:core.side})})}
 /* ===== Habit Lab ===== */
 let hl={core:"angry",family:"Frustrated",feeling:"Aggravated",habitIdx:0,done:{},planText:"",planBuilt:false};
 function hlFeelingsOptions(){const selEl=document.getElementById("hl-feeling");let h="";CORES.forEach(c=>{h+='<optgroup label="'+esc(c.name)+" — "+(c.side==="met"?"needs met":"needs not met")+'">';c.families.forEach(f=>f.feelings.forEach(fe=>{h+='<option value="'+c.id+"|"+esc(f.name)+"|"+esc(fe)+'"'+(c.id===hl.core&&fe===hl.feeling?" selected":"")+">"+esc(fe)+" ("+esc(c.name)+")</option>"}));h+="</optgroup>"});selEl.innerHTML=h}
@@ -583,7 +656,7 @@ function switchNoteTab(tab){document.querySelectorAll("[data-ntab]").forEach(b=>
 document.querySelectorAll("[data-ntab]").forEach(b=>b.addEventListener("click",()=>switchNoteTab(b.getAttribute("data-ntab"))));
 function setNoteContext(payload){noteCtx=payload;const chip=document.getElementById("note-ctx");if(!payload){chip.hidden=true;chip.innerHTML="";saveSoon();return}chip.hidden=false;chip.className="ctx-chip"+(payload.side==="notmet"?" notmet":"");chip.innerHTML="<span>Writing about: <b>"+esc(payload.feeling)+"</b> — "+esc(payload.path)+'</span><button type="button" id="ctx-clear">Clear</button>';document.getElementById("ctx-clear").addEventListener("click",()=>setNoteContext(null));saveSoon()}
 function insertIntoPad(text){if(pad.value.trim()){if(!/\n\s*$/.test(pad.value))pad.value+="\n\n";pad.value+=text+"\n"}else{pad.value=text+"\n\n"}autoGrowPad();updatePadMeta();saveSoon();pad.focus()}
-function openNotes(tab,payload){switchNoteTab(tab||"feelings");if(payload){setNoteContext(payload);insertIntoPad(payload.sentence)}document.getElementById("notes").scrollIntoView({behavior:"smooth"});if(!payload&&tab==="feelings")setTimeout(()=>pad.focus(),450)}
+function openNotes(tab,payload){switchNoteTab(tab||"feelings");if(payload){setNoteContext(payload);insertIntoPad(payload.sentence)}go("#/notes");if(!payload&&tab==="feelings")setTimeout(()=>pad.focus(),450)}
 function autoGrowPad(){pad.style.height="auto";pad.style.height=Math.max(190,pad.scrollHeight+4)+"px"}
 function updatePadMeta(){const words=pad.value.trim()?pad.value.trim().split(/\s+/).length:0;document.getElementById("pad-count").textContent=words+(words===1?" word":" words")}
 pad.addEventListener("input",()=>{autoGrowPad();updatePadMeta();saveSoon()});
@@ -695,7 +768,25 @@ let lxToastTimer=null;function lxToastMsg(t){const el=document.getElementById("l
 loadFirebase();
 /* Theme toggle — dark by default, light cream one tap away */
 (function(){var btn=document.getElementById("theme-toggle");if(!btn)return;function sync(){var light=isLight();btn.setAttribute("aria-pressed",light?"true":"false");btn.setAttribute("aria-label",light?"Switch to dark theme":"Switch to light theme");btn.setAttribute("title",light?"Switch to dark theme":"Switch to light theme");var meta=document.querySelector('meta[name="color-scheme"]');if(meta)meta.setAttribute("content",light?"light":"dark")}btn.addEventListener("click",function(){var next=isLight()?"dark":"light";document.documentElement.setAttribute("data-theme",next);document.documentElement.style.colorScheme=next;sync();buildWheel();renderSelection()});sync()})();
+/* ===== Pages — each area is its own page, addressed by hash =====
+   #/ is the Wheel home, #/chapters the 12 deep dives (a chapter opens
+   directly at #/chapters/<core-id>), #/habits the Habit Lab, #/checkin the
+   guided check-in, #/notes My Notes. One navigation — the top nav on wide
+   screens, the bottom tab bar on phones — is shared by every page, and the
+   browser back button walks back through the pages like any site. */
+let currentView="home";
+const VIEW_TITLES={home:"Feelings Wheel — Name it. Understand it. Build a habit around it.",chapters:"The 12 Chapters — Feelings Wheel",habits:"Habit Lab — Feelings Wheel",checkin:"Check-in — Feelings Wheel",notes:"My Notes — Feelings Wheel"};
+function showView(name){if(!document.querySelector('.view[data-view="'+name+'"]'))name="home";currentView=name;document.querySelectorAll(".view").forEach(v=>{v.hidden=v.getAttribute("data-view")!==name});document.querySelectorAll("[data-nav]").forEach(a=>{if(a.getAttribute("data-nav")===name)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});document.title=VIEW_TITLES[name]||VIEW_TITLES.home}
+function openChapter(id){showView("chapters");const body=document.getElementById("core-body-"+id);if(body&&body.hidden){const btn=document.querySelector('[data-expand="'+id+'"]');if(btn)btn.click()}if(body)setTimeout(()=>{const row=body.closest(".core-row");if(row)row.scrollIntoView({behavior:"smooth",block:"start"})},80)}
+function applyRoute(){const h=location.hash||"#/";if(h.indexOf("#/")!==0){showView("home");const t=document.getElementById(h.slice(1));if(t)setTimeout(()=>t.scrollIntoView({behavior:"smooth"}),60);return}
+const parts=h.slice(2).split("/");const name=parts[0]||"home";
+if(name==="chapters"&&parts[1]&&byId[parts[1]]){openChapter(parts[1]);return}
+if(name==="checkin"){showView("checkin");if(!ci)beginCheckin();window.scrollTo(0,0);return}
+showView(name);window.scrollTo(0,0)}
+window.addEventListener("hashchange",applyRoute);
+function go(route){if(location.hash===route)applyRoute();else location.hash=route}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-scrollto]");if(!a)return;e.preventDefault();showView("home");try{history.replaceState(null,"","#/")}catch(err){}const t=document.getElementById(a.getAttribute("data-scrollto"));if(t)t.scrollIntoView({behavior:"smooth"})});
 /* Init */
-buildWheel();buildList();renderSelection();restoreSaved();renderHabitLab();if(hl.planBuilt)buildPlan();autoGrowPad();updatePadMeta();
+buildWheel();buildList();renderSelection();restoreSaved();renderHabitLab();if(hl.planBuilt)buildPlan();autoGrowPad();updatePadMeta();applyRoute();
 </script>
 </body></html>
