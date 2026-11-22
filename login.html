@@ -26,8 +26,9 @@
       /* ---------- The lamp sign-in scene — the original teal design, restored as-is ----------
          The room stays dark; only the lamp's light wash shifts:
          teal for sign in, warm amber for sign up / signed out. Red means one thing only: an error.
-         The one requested change: the Sign In / Sign Up tab pill is teal in BOTH modes —
-         it no longer flips to amber/yellow on Sign Up. Nothing else was touched. */
+         The Sign In / Sign Up tab pill stays teal in both modes, and the lamp light
+         stays teal. The one accent borrowed from the main Feelings Wheel page is the
+         peach #F2A97E on the CTA button. Nothing else changed. */
       .lamp-scene{
         --lx-teal:#14b8a6; --lx-teal-bright:#2dd4bf; --lx-teal-deep:#0f766e;
         --lx-amber:#f5b942; --lx-amber-soft:#ffd88a;
@@ -103,8 +104,9 @@
       .lamp-scene .lx-card .sub{margin:0 0 22px;color:var(--lx-dim);font-size:14.5px;line-height:1.55}
       .lamp-scene .lx-card .sub b{color:var(--lx-ink);font-weight:600;word-break:break-all}
       .lamp-scene .tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.06);margin-bottom:22px;position:relative}
-      /* THE requested change: tab pill is teal in both modes (was: followed the lamp wash, amber on Sign Up) */
-      .lamp-scene .tab-ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:9px;background:rgba(20,184,166,.16);border:1px solid rgba(45,212,191,.45);transition:transform .38s cubic-bezier(.45,0,.2,1),background .45s ease,border-color .45s ease}
+      /* Tab pill stays teal in both modes — the design's own colour.
+         The peach from the main page lives on the CTA button only, not here. */
+      .lamp-scene .tab-ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:9px;background:rgba(20,184,166,.16);border:1px solid rgba(20,184,166,.45);transition:transform .38s cubic-bezier(.45,0,.2,1),background .45s ease,border-color .45s ease}
       .lamp-scene .tabs.up .tab-ind{transform:translateX(100%)}
       .lamp-scene .tab{position:relative;z-index:1;border:none;background:transparent;color:var(--lx-dim);font-size:14px;font-weight:600;padding:10px;border-radius:9px;min-height:44px;transition:color .25s;cursor:pointer}
       .lamp-scene .tab[aria-selected="true"]{color:var(--lx-ink)}
@@ -154,7 +156,7 @@
       .lamp-scene .forgot:hover{text-decoration:underline}
       .lamp-scene .cta{width:100%;min-height:52px;border:none;border-radius:12px;font-size:15.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .15s,filter .2s,background .4s;color:#241703;text-decoration:none;cursor:pointer}
       .lamp-scene .cta:active{transform:scale(.985)}
-      .lamp-scene .cta-teal{background:linear-gradient(180deg,#eecf85,#e8c26a);color:#241703;box-shadow:0 10px 26px rgba(232,194,106,.30)}
+      .lamp-scene .cta-teal{background:linear-gradient(180deg,#f6bc94,#f2a97e);color:#241703;box-shadow:0 10px 26px rgba(242,169,126,.30)}
       .lamp-scene .cta-teal:hover{filter:brightness(1.07)}
       .lamp-scene .cta-ghost{background:transparent;border:1px solid var(--lx-field-border);color:var(--lx-ink);box-shadow:none}
       .lamp-scene .cta-ghost:hover{border-color:rgba(255,255,255,.3)}
@@ -467,7 +469,7 @@
         var lxToastTimer = null;
         function lxToastMsg(t) { var el = lxEl("lxToast"); if (!el) return; el.textContent = t; el.classList.add("show"); if (lxToastTimer) clearTimeout(lxToastTimer); lxToastTimer = setTimeout(function () { el.classList.remove("show"); }, 4200); }
 
-        /* --- Auth form (original behaviour; tab pill colour is the only visual change) --- */
+        /* --- Auth form (original behaviour) --- */
         function lxSetTab(t) {
           lxTab = t;
           lxEl("lxTabs").classList.toggle("up", t === "up");
