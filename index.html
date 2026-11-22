@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="dark light"/>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5NiA5NiIgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2Ij48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iODQiIGhlaWdodD0iODQiIHJ4PSIyMiIgZmlsbD0iIzE0MTAwQyIgc3Ryb2tlPSIjMkEyNDFFIiBzdHJva2Utd2lkdGg9IjIiLz48ZyBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEzIj48cGF0aCBkPSJNNDggMjIgQTI2IDI2IDAgMCAxIDc0IDQ4IiBzdHJva2U9IiNFOEMyNkEiLz48cGF0aCBkPSJNNzQgNDggQTI2IDI2IDAgMCAxIDQ4IDc0IiBzdHJva2U9IiM3RkIzQkEiLz48cGF0aCBkPSJNNDggNzQgQTI2IDI2IDAgMCAxIDIyIDQ4IiBzdHJva2U9IiNDODUwMkUiLz48cGF0aCBkPSJNMjIgNDggQTI2IDI2IDAgMCAxIDQ4IDIyIiBzdHJva2U9IiNGMkE5N0UiLz48L2c+PGNpcmNsZSBjeD0iNDgiIGN5PSI0OCIgcj0iNS41IiBmaWxsPSIjRjNFREUxIi8+PC9zdmc+Cg==" type="image/svg+xml">
+<title>Feelings Wheel — Name it. Understand it. Build a habit around it.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  /* Design tokens — near-black ground, cream text, peach accent */
+  --bg:#0b0a09; --paper:#171310; --surface:#171310; --surface2:#211a13;
+  --ink:#f3ede1; --ink-deep:#fffaf0; --soft:#a79b85; --line:#2e2822;
+  --accent:#F2A97E;
+  --ox:#a8381b; --ox-dark:#8a2b12; --ox-line:rgba(242,169,126,.35); --ox-soft:rgba(242,169,126,.12); --oxBg:#3a1c0f; --ox-ink:#f2a183;
+  --peach:#F2A97E; --gold:#e8c26a;
+  --cloth-line:#3a2d1e; --taupe:#4a3a28;
+  --teal-deep:#2f5d63; --metBg:#2e2a12; --met-ink:#f2d492;
+  --book-shadow:0 36px 85px rgba(0,0,0,.55),0 0 0 1px #2c2317;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:"Schibsted Grotesk",system-ui,-apple-system,sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+/* Light theme — warm cream paper, ink text, oxblood accents */
+html[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f3ede1; --paper:#fffaf0; --surface:#fffdf7; --surface2:#efe6d3;
+  --ink:#241E18; --ink-deep:#171310; --soft:#6f6152; --line:#ddd0b8;
+  --accent:#a8381b;
+  --ox-line:rgba(168,56,27,.28); --ox-soft:rgba(168,56,27,.08); --oxBg:#f9e6da; --ox-ink:#8a2b12;
+  --cloth-line:#d9cdb4; --taupe:#c9b995;
+  --metBg:#f7e8bd; --met-ink:#6b5518;
+  --book-shadow:0 24px 60px rgba(36,30,24,.14),0 0 0 1px #e0d3b5;
+  --shadow:0 10px 30px rgba(36,30,24,.08);
+}
+html[data-theme="light"] body{background:radial-gradient(1100px 620px at 88% -6%,rgba(242,169,126,.35),rgba(243,237,225,0) 62%),var(--bg)}
+html[data-theme="light"] .hero p.lede{color:#4a4036}
+html[data-theme="light"] .micro{background:#fff7d6;border-color:#e8c26a;color:#5c4a12}
+html[data-theme="light"] .seg{stroke:#f3ede1}
+html[data-theme="light"] .btn{background:var(--ox);border-color:var(--ox);color:#fff}
+html[data-theme="light"] .btn.ghost{background:transparent;color:var(--ink);border-color:#b8a888}
+html[data-theme="light"] .btn.danger{color:var(--ox)}
+html[data-theme="light"] .btn.armed{background:var(--ox-dark);border-color:var(--ox-dark);color:#fff}
+html[data-theme="light"] .filter-group button[aria-pressed="true"]{background:var(--ox);color:#fff}
+html[data-theme="light"] .chip.active{background:var(--ox);border-color:var(--ox);color:#fff}
+html[data-theme="light"] .note-tabs button[aria-selected="true"]{background:var(--ox);color:#fff}
+html[data-theme="light"] .daybtn.done{background:var(--ox);border-color:var(--ox);color:#fff}
+html[data-theme="light"] .mic-btn{background:var(--ox);border-color:var(--ox);color:#fff}
+html[data-theme="light"] .mic-btn.listening{background:#7d2f12;border-color:#7d2f12;color:#fff}
+html[data-theme="light"] .habit-pick[aria-pressed="true"]{border-color:var(--ox)}
+/* Book pages — panel, check-in and notes read as cream pages on the dark ground */
+html[data-theme="dark"] .page{
+  --paper:#f7f1e3; --surface:#fffdf6; --surface2:#eee3cb;
+  --ink:#241E18; --ink-deep:#171310; --soft:#6f6152; --line:#ddd0b8;
+  --cloth-line:#d9cdb4; --taupe:#c9b995; --accent:#a8381b;
+  --metBg:#f3e2ac; --met-ink:#6b5518; --oxBg:#f8dfcf; --ox-ink:#8a2b12; --ox-soft:rgba(168,56,27,.08);
+  background:var(--paper); color:var(--ink);
+  border:1px solid #e0d3b5; box-shadow:0 30px 70px rgba(0,0,0,.5);
+}
+html[data-theme="dark"] .page .micro{background:#fbf0cd;border-color:#e3c878;color:#5c4a12}
+html[data-theme="dark"] .page .btn.ghost{border-color:#b8a888;color:var(--ink)}
+html[data-theme="dark"] .page .btn.danger{color:var(--ox)}
+body,.panel,.note-shell,.checkin,.core-row{transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1100px 620px at 88% -6%,rgba(168,56,27,.16),rgba(11,10,9,0) 62%),var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:active{transform:scale(.98)}
+:focus-visible{outline:3px solid var(--peach);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px calc(104px + env(safe-area-inset-bottom,0px))}
+/* Header — the product's own name, set in the reference type style */
+.brandbar{display:flex;align-items:center;gap:14px;padding:calc(18px + env(safe-area-inset-top,0px)) 0 16px;border-bottom:1px solid var(--line)}
+.brand-word{font-family:var(--serif);font-size:1.6rem;line-height:1;color:var(--ink-deep)}
+.brand-word .dot{color:var(--peach)}
+.brand-word em{font-style:italic;color:var(--peach)}
+html[data-theme="light"] .brand-word .dot,html[data-theme="light"] .brand-word em{color:var(--ox)}
+.theme-toggle{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--cloth-line);background:transparent;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0;margin-left:auto}
+.theme-toggle:hover{border-color:var(--peach)}
+html[data-theme="light"] .theme-toggle{border-color:#b8a888}
+html[data-theme="light"] .theme-toggle:hover{border-color:var(--ox)}
+@media(max-width:560px){.brand-word{font-size:1.4rem}}
+/* Hero — centered editorial, one idea on the screen */
+.hero{padding:76px 0 10px;max-width:800px;margin:0 auto;text-align:center}
+.hero-pill{display:inline-block;font-family:var(--mono);font-size:.84rem;letter-spacing:.06em;color:var(--peach);border:1px solid rgba(242,169,126,.45);border-radius:999px;padding:10px 22px;margin:0}
+html[data-theme="light"] .hero-pill{color:var(--ox);border-color:rgba(168,56,27,.4)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.9rem,7.5vw,4.9rem);line-height:1.06;margin:30px 0 22px;color:var(--ink-deep)}
+.hero p.lede{font-size:1.18rem;color:#d8cbb2;max-width:620px;margin:0 auto}
+.hero-cta{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:36px}
+.hero-cta a{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:14px 36px;font-size:1.05rem;min-width:min(340px,100%)}
+.hero-note{color:var(--soft);font-size:.95rem;margin:22px 0 0}
+.hero-links{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:16px 0 0;color:var(--soft)}
+.hero-links a{color:var(--soft);text-decoration:none}
+.hero-links a:hover{color:var(--peach)}
+html[data-theme="light"] .hero-links a:hover{color:var(--ox)}
+.btn{border-radius:999px;padding:11px 22px;min-height:48px;font-weight:600;border:1.5px solid var(--peach);background:var(--peach);color:#221407;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:#57432c}
+.btn.small{min-height:42px;padding:8px 14px;font-size:.9rem}
+.btn.danger{border-color:var(--ox);color:var(--ox-ink)}
+.btn.armed{background:var(--ox-dark);border-color:var(--ox-dark);color:#fff}
+/* Section pattern — mono kicker, serif headline, one idea per screen */
+section.block{margin-top:96px}
+.secnum{font-family:var(--mono);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.sec-title{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,5vw,3.1rem);line-height:1.08;margin:0 0 12px;color:var(--ink-deep)}
+.sec-lede{color:var(--soft);max-width:640px;margin:0 0 8px;font-size:1.08rem}
+/* Toolbar — search lives with the wheel, quietly */
+.toolbar{display:flex;flex-direction:column;align-items:center;gap:14px;margin:30px auto 4px;max-width:600px;scroll-margin-top:24px}
+.search-box{position:relative;width:100%}
+.search-box input{width:100%;min-height:54px;padding:12px 22px;border:1px solid var(--cloth-line);border-radius:999px;background:transparent;color:var(--ink);text-align:center}
+.search-box input::placeholder{color:var(--soft)}
+.search-results{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:50;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--book-shadow);display:none;overflow:hidden;text-align:left}
+html[data-theme="dark"] .search-results{background:#1c1712}
+.search-results.open{display:block}
+.search-results button{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 16px;color:var(--ink);border-bottom:1px solid var(--line);min-height:48px}
+.search-results .sr-name{font-weight:700}
+.search-results .sr-path{display:block;font-size:.85rem;color:var(--soft)}
+.filter-group{display:flex;background:transparent;border:1px solid var(--cloth-line);border-radius:999px;padding:4px;gap:4px}
+.filter-group button{border:0;background:none;color:var(--soft);font-weight:600;border-radius:999px;padding:8px 14px;min-height:44px}
+.filter-group button[aria-pressed="true"]{background:var(--peach);color:#221407}
+/* Wheel */
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;min-height:44px;margin:22px 0 4px;font-family:var(--mono);font-size:.82rem;letter-spacing:.04em}
+.crumbs button{border:0;background:none;color:var(--soft);border-radius:999px;padding:8px 10px;font:inherit;min-height:40px}
+.crumbs button.current{color:var(--accent)}
+.crumbs span{color:var(--soft)}
+.wheel-wrap{max-width:640px;margin:10px auto 0}
+.wheel-wrap svg{display:block;width:100%;height:auto}
+.segwrap{transition:opacity .25s}
+.seg{cursor:pointer;stroke:#0b0a09;stroke-width:1.4}
+.segwrap text{fill:#241E18;pointer-events:none}
+.segwrap.dim{opacity:.14}
+.segwrap.dim-soft{opacity:.4}
+.segwrap.selected .seg{stroke:var(--peach);stroke-width:3;filter:drop-shadow(0 0 7px rgba(242,169,126,.5))}
+html[data-theme="light"] .segwrap.selected .seg{stroke:var(--ox);filter:drop-shadow(0 0 7px rgba(168,56,27,.45))}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;padding:14px 4px 4px;color:var(--soft);font-size:.88rem}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}
+.wheel-note{color:var(--soft);font-size:.95rem;margin:14px auto 0;max-width:600px;text-align:center}
+/* The panel — a book page */
+.panel,.note-shell,.checkin{background:var(--paper);border:1px solid var(--taupe);box-shadow:var(--book-shadow);color:var(--ink)}
+.panel{border-radius:8px;padding:36px;max-width:840px;margin:38px auto 0}
+@media(max-width:560px){.panel{padding:26px 20px}}
+.panel.rise{animation:rise .38s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.5vw,3rem);line-height:1.05;margin:0 0 4px;color:var(--ink-deep)}
+.panel .rule{height:1px;background:var(--cloth-line);border:0;margin:16px 0 6px}
+.badge{display:inline-block;border-radius:999px;padding:5px 12px;font-size:.82rem;font-weight:600}
+.badge.met{background:var(--metBg);color:var(--met-ink)}
+.badge.notmet{background:var(--oxBg);color:var(--ox-ink)}
+.pathline{color:var(--soft);font-size:.88rem;margin:6px 0;font-family:var(--mono)}
+.panel h3{margin:26px 0 10px;font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.assoc-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 26px}
+@media(max-width:480px){.assoc-grid{grid-template-columns:1fr}}
+.assoc b{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px;color:var(--soft);font-weight:500}
+.assoc p,.assoc ul{margin:0;font-size:.95rem}
+.assoc ul{padding-left:16px}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.steps li:first-child{border-top:0;padding-top:2px}
+.stepnum{flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:var(--ox);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:.92rem;font-family:var(--mono)}
+.panel[data-side="met"] .stepnum{background:var(--teal-deep)}
+.panel[data-side="notmet"] .stepnum{background:var(--ox)}
+.steps b{display:block;font-family:var(--serif);font-size:1.15rem;font-weight:400}
+.steps p{margin:2px 0 0;color:var(--soft);font-size:.95rem}
+.micro{background:#2b2110;border:1px solid #6b5518;border-radius:10px;padding:14px 16px;color:#ecd28f;margin-top:8px}
+.sentence{background:var(--surface2);border-radius:10px;padding:16px 18px;font-weight:400;font-size:1.2rem;font-family:var(--serif)}
+.chiprow{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--cloth-line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;min-height:44px;font-weight:600}
+.chip.active{background:var(--peach);color:#221407;border-color:var(--peach)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+/* Deep dives — a chapter list, not a card grid */
+.core-list{border-bottom:1px solid var(--line);margin-top:26px}
+.core-row{border-top:1px solid var(--line)}
+.core-row.dim{opacity:.35}
+.core-head{display:flex;gap:22px;align-items:flex-start;width:100%;background:none;border:0;padding:28px 4px;text-align:left;color:var(--ink)}
+.ch-num{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:2.1rem;line-height:1;flex:0 0 62px;padding-top:2px}
+.core-titles{flex:1;min-width:0;display:block}
+.core-name{display:block;font-weight:700;font-size:1.3rem;line-height:1.25}
+.core-qual{font-weight:400;color:var(--soft);font-size:1rem}
+.core-desc{display:block;color:var(--soft);margin-top:5px;font-size:1rem;max-width:620px}
+.core-meta{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex:0 0 auto}
+.core-toggle{font-family:var(--mono);font-size:1.3rem;color:var(--accent);line-height:1}
+.core-body{padding:2px 4px 30px 84px}
+@media(max-width:560px){.core-body{padding-left:4px}.ch-num{flex-basis:44px;font-size:1.7rem}.core-head{gap:14px}}
+.famline{border-top:1px solid var(--line);padding:14px 0 2px;margin-top:14px}
+.famline-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.famline-head button{background:none;border:0;font-weight:700;padding:4px 0;text-align:left;color:var(--ink);font-size:1.05rem}
+.fam-count{color:var(--soft);font-size:.82rem;font-family:var(--mono)}
+.fam-note{font-size:.92rem;color:var(--soft);margin:2px 0 8px}
+.feel-row{display:flex;width:100%;justify-content:space-between;gap:10px;background:none;border:0;border-top:1px dashed var(--line);padding:11px 2px;text-align:left;color:var(--ink);min-height:48px;align-items:center}
+.feel-row:hover{background:var(--surface2)}
+.feel-row b{font-weight:600}
+.feel-row span{color:var(--accent);font-size:.85rem;white-space:nowrap}
+.card-habit{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;font-size:.95rem;color:var(--soft)}
+.card-habit b{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);font-weight:500;margin-bottom:4px}
+.card-habit button{color:var(--ink)}
+/* Habit Lab — open numbered sittings on the ground */
+.stepblock{border-top:1px solid var(--line);padding:36px 0 8px;margin-top:36px}
+.stepblock .s-num{font-family:var(--mono);color:var(--accent);font-size:.95rem;margin:0}
+.stepblock .art{display:block;margin:16px 0 4px;color:var(--peach)}
+html[data-theme="light"] .stepblock .art{color:var(--ox)}
+.stepblock h3{font-family:var(--serif);font-weight:400;font-size:1.8rem;margin:6px 0 8px;color:var(--ink-deep)}
+.stepblock p.hint{color:var(--soft);font-size:.98rem;margin:0 0 14px;max-width:600px}
+.stepblock label{font-weight:700;display:block;margin-bottom:6px}
+.stepblock select,.stepblock input[type="text"]{width:100%;max-width:560px;padding:12px 14px;border:1.5px solid var(--cloth-line);border-radius:10px;background:var(--surface);color:var(--ink);margin-bottom:12px;min-height:48px}
+html[data-theme="dark"] .stepblock select,html[data-theme="dark"] .stepblock input[type="text"]{background:#171310}
+.direction-box{border-radius:12px;padding:14px 16px;margin:6px 0 4px;max-width:640px}
+.habit-pick{display:block;width:100%;max-width:640px;text-align:left;border:1.5px solid var(--cloth-line);background:transparent;border-radius:12px;padding:14px 16px;margin-bottom:10px;color:var(--ink);min-height:48px}
+.habit-pick[aria-pressed="true"]{border-color:var(--peach);background:var(--ox-soft)}
+.habit-pick b{display:block;font-family:var(--serif);font-size:1.15rem;font-weight:400}
+.habit-pick span{font-size:.92rem;color:var(--soft)}
+.ifthen{background:#f7f1e3;color:#241E18;border-radius:8px;padding:18px 20px;font-size:1.25rem;line-height:1.5;font-family:var(--serif);max-width:640px;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+html[data-theme="light"] .ifthen{background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line)}
+.plan-list{list-style:none;padding:0;margin:12px 0;max-width:680px}
+.plan-list li{display:flex;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.plan-list li:first-child{border-top:0}
+.daytag{flex:0 0 58px;font-weight:500;font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:3px}
+.week{display:flex;gap:8px;flex-wrap:wrap}
+.daybtn{width:48px;height:48px;border-radius:50%;border:2px solid var(--cloth-line);background:transparent;font-weight:500;color:var(--ink);font-family:var(--mono)}
+.daybtn.done{background:var(--peach);border-color:var(--peach);color:#221407}
+/* Check-in — a page that opens under the wheel */
+.checkin{margin:30px auto 0;max-width:840px;border-radius:8px;padding:30px;display:none}
+@media(max-width:560px){.checkin{padding:24px 20px}}
+.checkin.open{display:block}
+.checkin h2{font-family:var(--serif);font-weight:400;margin:0 0 6px;color:var(--ink-deep);font-size:1.9rem}
+.ci-options{display:flex;flex-wrap:wrap;gap:10px}
+.ci-options button{border:1.5px solid var(--cloth-line);background:transparent;color:var(--ink);border-radius:12px;padding:14px 18px;min-height:54px;font-weight:600}
+.ci-options button.big{flex:1 1 200px}
+/* My Notes — a book page */
+.note-shell{border-radius:8px;padding:30px;max-width:840px;margin:26px auto 0}
+@media(max-width:560px){.note-shell{padding:22px 18px}}
+.note-tabs{display:flex;gap:6px;background:var(--surface2);border-radius:999px;padding:5px;width:fit-content;max-width:100%;margin-bottom:20px}
+.note-tabs button{border:0;background:transparent;color:var(--soft);font-weight:600;border-radius:999px;padding:10px 22px;min-height:48px;font-size:1rem}
+.note-tabs button[aria-selected="true"]{background:var(--peach);color:#221407}
+.ctx-chip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--metBg);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:.95rem}
+.ctx-chip.notmet{background:var(--oxBg)}
+.ctx-chip button{margin-left:auto;border:1px solid currentColor;background:transparent;border-radius:999px;padding:6px 12px;font-weight:600;min-height:36px;color:inherit}
+.prompt-line{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
+.prompt-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--soft)}
+.prompt-text{font-family:var(--serif);font-style:italic;font-size:1.3rem;margin:0;flex:1 1 220px}
+.pad-wrap{border:1.5px solid var(--cloth-line);border-radius:12px;background:var(--surface);overflow:hidden}
+.pad{width:100%;border:0;resize:none;display:block;background:transparent;color:var(--ink);font-family:var(--serif);font-size:1.15rem;line-height:1.85;padding:18px 20px 8px;min-height:190px}
+.pad:focus{outline:none}
+.pad-wrap:focus-within{border-color:var(--peach);box-shadow:0 0 0 3px var(--ox-soft)}
+.live-strip{display:flex;gap:10px;align-items:flex-start;margin:0 20px;padding:10px 14px;background:var(--oxBg);border-radius:10px;font-size:.95rem}
+.rec-dot{flex:0 0 12px;width:12px;height:12px;border-radius:50%;background:#e06a41;margin-top:6px;animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.pad-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--cloth-line)}
+.mic-btn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--peach);background:var(--peach);color:#221407;border-radius:999px;padding:10px 18px;min-height:48px;font-weight:600}
+.mic-btn.listening{background:var(--ox);border-color:var(--ox);color:#fff}
+.mic-btn:disabled{background:var(--surface2);border-color:var(--line);color:var(--soft);cursor:not-allowed;transform:none}
+.mic-note{font-size:.88rem;color:var(--soft);flex:1 1 200px}
+.pad-meta{margin-left:auto;font-size:.85rem;color:var(--soft);font-weight:500;white-space:nowrap;font-family:var(--mono)}
+.mic-privacy{font-size:.85rem;color:var(--soft);margin:10px 2px 0}
+.goal-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.goal-form{grid-template-columns:1fr}}
+.goal-form label{font-weight:700;display:block;margin-bottom:6px;font-size:.95rem}
+.goal-form input[type="text"]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);min-height:48px}
+.goal-form .full{grid-column:1/-1}
+.goal-form textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-family:var(--serif);font-size:1.05rem;line-height:1.7;padding:12px 14px;resize:vertical;min-height:96px}
+.goal-card{display:flex;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:12px;align-items:flex-start}
+.goal-check{flex:0 0 48px;width:48px;height:48px;border-radius:50%;border:2px solid var(--teal-deep);background:transparent;color:transparent;font-size:1.3rem;font-weight:900;display:flex;align-items:center;justify-content:center}
+.goal-check.done{background:var(--teal-deep);color:#fff}
+.goal-card .g-body{flex:1;min-width:0}
+.goal-card h4{margin:0;font-family:var(--serif);font-weight:400;font-size:1.3rem;line-height:1.2}
+.goal-card.done h4{text-decoration:line-through;color:var(--soft)}
+.goal-card p{margin:4px 0 0;font-size:.93rem;color:var(--soft)}
+.goal-card p b{color:var(--ink)}
+.goal-remove{border:0;background:none;color:var(--soft);font-weight:600;padding:8px;min-height:40px}
+.goal-empty{color:var(--soft);border:1px dashed var(--cloth-line);border-radius:12px;padding:18px;text-align:center;margin-top:12px}
+/* How it works — numbered sittings */
+.how-step{border-top:1px solid var(--line);padding:28px 4px;display:grid;grid-template-columns:62px 1fr;gap:22px}
+.how-step .ch-num{padding-top:4px}
+.how-step h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:0 0 4px;color:var(--ink-deep)}
+.how-step p{margin:0;color:var(--soft);max-width:600px}
+@media(max-width:560px){.how-step{grid-template-columns:44px 1fr;gap:14px}}
+/* Footer */
+footer{margin-top:96px;border-top:1px solid var(--line);padding-top:24px;color:var(--soft);font-size:.92rem;max-width:760px}
+footer .free{font-family:var(--serif);font-size:1.3rem;color:var(--ink-deep);margin:0 0 6px}
+footer .signoff{font-family:var(--serif);font-size:1.1rem;color:var(--ink-deep);margin-top:16px}
+footer .signoff .dot{color:var(--peach)}
+footer .signoff em{font-style:italic;color:var(--peach)}
+html[data-theme="light"] footer .signoff .dot,html[data-theme="light"] footer .signoff em{color:var(--ox)}
+@media print{.toolbar,.wheel-wrap,.crumbs,.note-tabs,.pad-toolbar,.actions,.hero-links{display:none!important}.panel,.note-shell,.checkin{position:static;box-shadow:none}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body,.panel,.note-shell,.checkin,.core-row{transition:none}
+  .segwrap{transition:none}
+  .panel.rise{animation:none}
+  .rec-dot{animation:none}
+  button:active{transform:none}
+}
+</style>
+</head>
+<body data-mood="neutral">
+<div class="wrap">
+<div class="brandbar"><span class="brand-word">Feelings <span class="dot" aria-hidden="true">.</span> <em>Wheel</em></span><button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme" aria-pressed="false" title="Switch theme"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></button></div>
+<header class="hero">
+<p class="hero-pill">Feelings when your needs are met · and when they are not</p>
+<h1>Name what you feel.<br>Then do something small about it.</h1>
+<p class="lede">All 97 feelings from your board — with a deep dive for every line, a habit builder, and a writing pad. One feeling at a time, named precisely, is a feeling you can act on.</p>
+<div class="hero-cta">
+<a class="btn" href="#checkin-anchor" id="hero-checkin">Start a check-in</a>
+<a class="btn ghost" href="#explorer">Open the wheel</a>
+</div>
+<p class="hero-note">Free, for everyone. Nothing you write here leaves this page.</p>
+<p class="hero-links"><a href="#lines">Deep dives</a> &nbsp;·&nbsp; <a href="#habit-lab">Habit Lab</a> &nbsp;·&nbsp; <a href="#notes">My Notes</a></p>
+</header>
+
+<section class="block" aria-label="The wheel" style="margin-top:80px">
+<p class="secnum">01 · The wheel</p>
+<h2 class="sec-title">Start at the centre.<br>End at the exact word.</h2>
+<p class="sec-lede">Tap a core feeling in the middle, then a family, then the specific feeling. Each level unlocks more — what the feeling is associated with, what it feels like in your body, and a step-by-step response.</p>
+<div class="toolbar" id="explorer">
+<div class="search-box"><input id="search" type="search" placeholder="Type a feeling — try ‘furious’, ‘calm’, ‘ashamed’…" aria-label="Search feelings" autocomplete="off"><div class="search-results" id="search-results" role="listbox"></div></div>
+<div class="filter-group" role="group" aria-label="Filter"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="met" aria-pressed="false">Needs met</button><button type="button" data-filter="notmet" aria-pressed="false">Needs not met</button></div>
+</div>
+<nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+<div class="wheel-wrap"><svg id="wheel" viewBox="0 0 720 720" role="group" aria-label="Feelings wheel"></svg><div class="legend"><span><span class="dot" style="background:#c99b3f"></span>Needs met — top</span><span><span class="dot" style="background:#a8381b"></span>Needs not met — bottom</span><span>Tap centre → family → exact feeling</span></div></div>
+<p class="wheel-note">The tints follow the board: gold, peach and teal when a need is met; oxblood when it is not.</p>
+<aside class="panel page" id="panel" aria-live="polite"></aside>
+<div id="checkin-anchor"></div>
+<section class="checkin page" id="checkin" aria-label="Guided check-in"></section>
+</section>
+
+<section class="block" id="lines">
+<p class="secnum">02 · Deep dives</p>
+<h2 class="sec-title">Every line, drilled down.</h2>
+<p class="sec-lede">Twelve chapters — one for each core feeling. Open a chapter to find its four families, and under each family the specific feelings, every one with its own deep dive and its own habit. Tap any row.</p>
+<div class="core-list" id="core-list"></div>
+</section>
+
+<!-- HABIT LAB -->
+<section class="block" id="habit-lab" aria-label="Habit Lab">
+<p class="secnum">03 · Habit Lab</p>
+<h2 class="sec-title">One feeling.<br>One tiny habit.</h2>
+<p class="sec-lede">Pick one feeling you want to work with. If it's a hard one, the Lab builds a habit that helps you get out of it faster. If it's a good one, it builds a habit that makes it happen more often. Small, specific, anchored to something you already do.</p>
+
+<div class="stepblock">
+<p class="s-num">01</p>
+<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><path d="M4 38 C 40 20, 70 44, 105 40 C 140 36, 155 46, 180 26 C 205 6, 225 8, 245 26 C 262 41, 280 40, 296 32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+<h3>Choose your focus feeling</h3>
+<p class="hint" id="hl-focus-hint">Start from the wheel, a line above, or pick here.</p>
+<label for="hl-feeling">I want to work with…</label>
+<select id="hl-feeling"></select>
+<div id="hl-direction"></div>
+</div>
+
+<div class="stepblock">
+<p class="s-num">02</p>
+<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 8 H 240" opacity=".35"/><path d="M10 18 H 290" opacity=".35"/><path d="M10 28 H 180" /><path d="M10 38 H 260" opacity=".35"/><path d="M10 48 H 130" /></g></svg>
+<h3>Pick one tiny habit</h3>
+<p class="hint">Three options matched to this feeling. Pick one — not all three.</p>
+<div id="hl-habits"></div>
+</div>
+
+<div class="stepblock">
+<p class="s-num">03</p>
+<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="60" cy="26" r="15"/><circle cx="112" cy="26" r="15"/><path d="M75 26 H 97" opacity=".6"/><path d="M140 26 H 290" opacity=".35"/></g></svg>
+<h3>Anchor it &amp; make it tiny</h3>
+<p class="hint">Habits stick when they are attached to something you already do, and so small you can't say no.</p>
+<label for="hl-cue">When will you do it?</label>
+<select id="hl-cue"><option>After I pour my morning coffee / tea</option><option>When I first feel this feeling</option><option>After lunch</option><option>When I get in the car</option><option>After I sit at my desk</option><option>Before bed</option><option>After dinner</option></select>
+<label for="hl-stack">Or write your own cue</label>
+<input type="text" id="hl-stack" placeholder="e.g. After I drop the kids at school">
+<label for="hl-len">How long?</label>
+<select id="hl-len"><option value="2 minutes">2 minutes — tiny</option><option value="5 minutes">5 minutes</option><option value="10 minutes">10 minutes</option></select>
+<h3 style="margin-top:22px">Your if–then plan</h3>
+<div class="ifthen" id="hl-ifthen"></div>
+<div class="actions"><button type="button" class="btn" id="hl-build">Build my 7-day plan →</button></div>
+</div>
+
+<div class="stepblock">
+<p class="s-num">04</p>
+<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 40 V 26"/><path d="M54 40 V 20"/><path d="M96 40 V 30"/><path d="M138 40 V 14"/><path d="M180 40 V 24"/><path d="M222 40 V 18"/><path d="M264 40 V 10"/></g></svg>
+<h3>Your 7-day practice plan</h3>
+<p class="hint" id="hl-plan-hint">Press “Build my 7-day plan” and your week appears here — a little more each day, never a jump.</p>
+<div id="hl-plan"></div>
+<h3 style="margin-top:24px">This week — tap a day when you did it</h3>
+<div class="week" id="hl-week"></div><p class="hint" id="hl-week-msg" style="margin-top:8px"></p>
+<div class="actions no-print"><button type="button" class="btn" id="hl-copy">Copy my plan</button><button type="button" class="btn ghost" id="hl-download">Download plan (.txt)</button><button type="button" class="btn ghost" id="hl-write-goal">Write a goal for this habit →</button></div>
+</div>
+</section>
+
+<!-- MY NOTES -->
+<section class="block" id="notes" aria-label="My Notes">
+<p class="secnum">04 · My Notes</p>
+<h2 class="sec-title">Write it down —<br>feelings &amp; goals.</h2>
+<p class="sec-lede">An actionable pad, not a blank page. Write about a feeling you just named, or set a goal and the first small step toward it. Type, or tap the mic and talk — your words stay in this page, and Download keeps a copy that's yours.</p>
+<div class="note-shell page">
+<div class="note-tabs" role="tablist" aria-label="Notes tabs">
+<button type="button" role="tab" id="tab-feelings" aria-selected="true" data-ntab="feelings">Feelings</button>
+<button type="button" role="tab" id="tab-goals" aria-selected="false" data-ntab="goals">Goals</button>
+</div>
+
+<div id="notes-feelings" role="tabpanel" aria-labelledby="tab-feelings">
+<div class="ctx-chip" id="note-ctx" hidden></div>
+<div class="prompt-line"><span class="prompt-label">Prompt</span><p class="prompt-text" id="note-prompt">Right now I feel…</p><button type="button" class="btn small ghost" id="prompt-next">New prompt</button><button type="button" class="btn small" id="prompt-use">Write with this prompt</button></div>
+<div class="pad-wrap">
+<textarea class="pad" id="pad" rows="6" placeholder="Start writing — or tap Dictate and just talk…" aria-label="Feelings writing pad"></textarea>
+<div class="live-strip" id="live-strip" hidden><span class="rec-dot" aria-hidden="true"></span><span id="live-text">Listening… speak now.</span></div>
+<div class="pad-toolbar">
+<button type="button" class="mic-btn" id="mic-btn" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15a3.5 3.5 0 0 0 3.5-3.5v-5a3.5 3.5 0 1 0-7 0v5A3.5 3.5 0 0 0 12 15Z" fill="currentColor"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18.5V21M8.5 21h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span id="mic-label">Dictate</span></button>
+<span class="mic-note" id="mic-note"></span>
+<span class="pad-meta"><span id="pad-date"></span> · <span id="pad-count">0 words</span></span>
+</div>
+</div>
+<p class="mic-privacy">Nothing is recorded or sent by this app — dictation is handled by your browser. Your writing lives in this page for this visit; use Download or Copy to keep it.</p>
+<div class="actions"><button type="button" class="btn" id="note-copy">Copy note</button><button type="button" class="btn ghost" id="note-download">Download note (.md)</button><button type="button" class="btn ghost danger" id="note-clear">Clear pad</button></div>
+</div>
+
+<div id="notes-goals" role="tabpanel" aria-labelledby="tab-goals" hidden>
+<p class="hint" id="goal-prefill-hint" style="color:var(--soft);margin:0 0 14px" hidden></p>
+<div class="goal-form">
+<div><label for="g-goal">My goal</label><input type="text" id="g-goal" placeholder="e.g. Reply calmly, even when I'm frustrated"></div>
+<div><label for="g-need">Because I need…</label><input type="text" id="g-need" list="needs-list" placeholder="Pick a need, or type your own"><datalist id="needs-list"></datalist></div>
+<div><label for="g-step">My first small step</label><input type="text" id="g-step" placeholder="e.g. Pause 90 seconds and name my need before replying"></div>
+<div><label for="g-cue">I'll do it when…</label><input type="text" id="g-cue" placeholder="e.g. After I pour my morning coffee"></div>
+<div class="full"><label for="g-free">More about this goal (free writing)</label><textarea id="g-free" placeholder="Why this matters to you, what might get in the way, what 'done' looks like…"></textarea></div>
+</div>
+<div class="actions"><button type="button" class="btn" id="goal-save">Save goal</button><button type="button" class="btn ghost" id="goals-download">Download all goals (.md)</button></div>
+<div id="goal-list" aria-live="polite"></div>
+</div>
+</div>
+</section>
+
+<section class="block">
+<p class="secnum">How it works</p>
+<h2 class="sec-title">From feeling to habit,<br>in four sittings.</h2>
+<div style="margin-top:26px">
+<div class="how-step"><span class="ch-num" aria-hidden="true">01</span><div><h3>Notice &amp; name it precisely</h3><p>“Mad” and “furious” need different responses. Drill centre → family → exact word.</p></div></div>
+<div class="how-step"><span class="ch-num" aria-hidden="true">02</span><div><h3>See what it's associated with</h3><p>Every deep dive shows triggers, body signals, inner voice, and the need underneath — so the feeling makes sense.</p></div></div>
+<div class="how-step"><span class="ch-num" aria-hidden="true">03</span><div><h3>Write it down</h3><p>Open My Notes from any feeling and put it into words — type, or dictate out loud. A named feeling, written down, is one you can act on.</p></div></div>
+<div class="how-step"><span class="ch-num" aria-hidden="true">04</span><div><h3>Turn it into a habit</h3><p>Send the feeling to the Habit Lab, pick one tiny habit, anchor it, and follow the 7-day plan.</p></div></div>
+</div>
+</section>
+
+<footer><p class="free">Free, forever.</p><p style="margin:0 0 4px">Built to help people name what they feel and build one small habit at a time.</p><p>Adapted from the Nonviolent Communication feelings inventory (Marshall Rosenberg). For personal growth, coaching, and clinical work — this tool supports emotional literacy and habit practice; it is not a diagnostic tool and does not replace professional support. If a feeling is overwhelming or unsafe, please reach out to a trusted person or professional.</p><p class="signoff">Feelings <span class="dot" aria-hidden="true">.</span> <em>Wheel</em></p></footer>
+</div>
+<script>
+"use strict";
+const CORES=[
+{id:"joyful",name:"Joyful",qualifier:"",side:"met",color:"#c99b3f",needs:["celebration","play","connection","meaning"],helps:"Pause and savour it. Name what made it possible, so you can repeat it.",families:[{name:"Grateful",feelings:["Thankful","Appreciation"]},{name:"Excited",feelings:["Enthusiastic","Passionate"]},{name:"Ecstatic",feelings:["Elated","Thrilled"]},{name:"Happy",feelings:["Glad-Pleased","Delighted"]}]},
+{id:"intrigued",name:"Intrigued",qualifier:"attentive",side:"met",color:"#40767e",needs:["learning","discovery","stimulation","growth"],helps:"Follow the thread — give yourself ten minutes to explore what caught you.",families:[{name:"Engaged",feelings:["Interested","Absorbed"]},{name:"Fascinated",feelings:["Engrossed","Curious"]},{name:"Entranced",feelings:["Captivated","Mesmerized"]},{name:"Energetic",feelings:["Animated","Refreshed"]}]},
+{id:"trusting",name:"Trusting",qualifier:"security",side:"met",color:"#5f8f6e",needs:["safety","reliability","honesty"],helps:"Notice what made it safe. Tell the person — trust grows when it is named.",families:[{name:"Assured",feelings:["Certain","Convinced"]},{name:"Hopeful",feelings:["Optimistic","Expectant"]},{name:"Secure",feelings:["Safe","Comforted"]},{name:"Confident",feelings:["Positive","Relieved"]}]},
+{id:"loving",name:"Loving",qualifier:"attraction",side:"met",color:"#d98a5e",needs:["connection","affection","belonging","closeness"],helps:"Let it show — a word, a gesture, time together.",families:[{name:"Connected",feelings:["Close","Intimate"]},{name:"Caring",feelings:["Compassionate","Tenderness"]},{name:"Affectionate",feelings:["Fondness","Friendly"]},{name:"Adoration",feelings:["Admiration","Reverence"]}]},
+{id:"peaceful",name:"Peaceful",qualifier:"acceptance",side:"met",color:"#8a9a5b",needs:["rest","harmony","balance","ease"],helps:"Protect the conditions — rest, boundaries, a slower hour.",families:[{name:"Content",feelings:["Satisfied","Comfortable"]},{name:"Relaxed",feelings:["Serene","Calm"]},{name:"Tranquil",feelings:["Quiet","Centered"]},{name:"Harmonious",feelings:["Congruous","Balanced"]}]},
+{id:"proud",name:"Proud",qualifier:"self-acceptance",side:"met",color:"#b7793f",needs:["recognition","competence","contribution","self-worth"],helps:"Name the effort behind it, not just the outcome — and let yourself receive it.",families:[{name:"Powerful",feelings:["Empowered","Effectual"]},{name:"Encouraged",feelings:["Brave","Courageous"]},{name:"Self-Esteem",feelings:["Fulfilled","Pleased"]},{name:"Self-Confident",feelings:["Poised","Self-Assured"]}]},
+{id:"angry",name:"Angry",qualifier:"judgment",side:"notmet",color:"#a8381b",needs:["respect","fairness","choice","boundaries"],helps:"Pause before acting. Name the need underneath — respect, fairness, choice — and ask for it plainly.",families:[{name:"Frustrated",feelings:["Aggravated","Upset"]},{name:"Annoyed",feelings:["Irritate","Resentful"]},{name:"Envious",feelings:["Jealous","Animosity"]},{name:"Mad",feelings:["Furious","Enraged"]}]},
+{id:"disgusted",name:"Disgusted",qualifier:"repulsion",side:"notmet",color:"#93392b",needs:["health","integrity","alignment with your values"],helps:"Step back from what violates your values, and name the boundary.",families:[{name:"Averse",feelings:["Reluctant","Resistant"]},{name:"Apathetic",feelings:["Uninterested","Bored"]},{name:"Repulsive",feelings:["Sickened","Nauseous"]},{name:"Contempt",feelings:["Scorn","Hateful"]}]},
+{id:"afraid",name:"Afraid",qualifier:"threatened",side:"notmet",color:"#7d2f35",needs:["safety","security","predictability"],helps:"Name the specific threat. Ask what would make you ten percent safer right now.",families:[{name:"Insecure",feelings:["Suspicious","Apprehensive"]},{name:"Anxious",feelings:["Concerned","Worried"]},{name:"Vulnerable",feelings:["Helpless","Susceptible"]},{name:"Scared",feelings:["Frightened","Terrified"]}]},
+{id:"surprised",name:"Surprised",qualifier:"caught off guard",side:"notmet",color:"#9c4a2f",needs:["clarity","preparation","orientation"],helps:"Slow down. Gather one fact before reacting.",families:[{name:"Astonished",feelings:["Amazed","Shocked"]},{name:"Distracted",feelings:["Preoccupied","Hesitant"]},{name:"Startled",feelings:["Stunned","Stressed"]},{name:"Overwhelmed",feelings:["Confused","Puzzled"]}]},
+{id:"sad",name:"Sad",qualifier:"loss",side:"notmet",color:"#6e2f2a",needs:["connection","support","having the loss named"],helps:"Let the loss be named. Ask for comfort or company — grief needs a witness.",families:[{name:"Unhappy",feelings:["Disappointed","Discouraged"]},{name:"Grief & Sorrow",feelings:["Devastated","Heartbroken"]},{name:"Pain & Hurt",feelings:["Despair","Miserable"]},{name:"Depressed",feelings:["Fatigued","Tired","Hopeless"]}]},
+{id:"ashamed",name:"Ashamed",qualifier:"self-judgment",side:"notmet",color:"#8e3a4a",needs:["acceptance","belonging","self-compassion"],helps:"Separate the act from the person. Talk to someone safe. Self-compassion first.",families:[{name:"Awkward",feelings:["Uncomfortable","Self-conscious"]},{name:"Guilty",feelings:["Regretful","Remorseful"]},{name:"Embarrassed",feelings:["Mortified","Horrified"]},{name:"Humiliation",feelings:["Chagrined","Flustered"]}]}
+];
+const ORDER=["joyful","intrigued","trusting","loving","peaceful","ashamed","sad","surprised","afraid","disgusted","angry","proud"];
+const byId={};CORES.forEach(c=>byId[c.id]=c);
+/* ---- Per-core guide: associations + action ---- */
+const GUIDE={
+joyful:{assoc:"Joyful shows up when something worth celebrating is actually happening — not forced positivity, but a real moment of play, connection or meaning landing.",triggers:["Good news shared with someone","Play, music, laughter, movement","Finishing something that mattered"],body:["Lightness in chest & shoulders","Smiling without trying","More energy & bounce"],voice:"“This is good. I want to remember this — and share it.”",target:"More joyful, on purpose",steps:[["Savour for 20 seconds","Stay with the good feeling instead of rushing on. Notice where you feel it. Research on savouring shows lingering extends the benefit."],["Name what made it possible","Was it a person, a choice you made, luck? Naming the cause makes it repeatable."],["Share it within the day","Tell one person specifically what happened. Joy shared is joy anchored."]],micro:{t:"Savour & snapshot (60 seconds)",d:"Close your eyes, replay the best 10 seconds like a photo, breathe slowly, and write one line about it."},habits:[{t:"One-line joy log",a:"write one line about one good moment",w:"It trains your attention to notice joy earlier, not just in hindsight."},{t:"Share the good news",a:"tell one person one good thing that happened",w:"Capitalisation — sharing good news with a responsive person multiplies its effect."},{t:"Play repeat",a:"repeat one small playful thing that worked this week",w:"Joy often comes from repeatable small pleasures, not big events."}]},
+intrigued:{assoc:"Intrigued is attention with appetite — your mind has caught a thread and wants to pull it. It is associated with learning, novelty and being fully absorbed.",triggers:["A question you can't drop","A new person, place or idea","A problem that feels solvable"],body:["Leaning in, eyes focused","Alert, awake feeling","Time passing unnoticed"],voice:"“Wait — how does that work? Tell me more.”",target:"More curious & engaged",steps:[["Give it 10 protected minutes","Set a timer and explore with no phone. Curiosity dies by interruption, not by boredom."],["Ask one better question","Replace ‘what is this?’ with ‘what happens if…?’ or ‘why does this matter?’"],["Capture one insight","Write one sentence about what you learned. That turns interest into growth."]],micro:{t:"Curiosity sprint (10 minutes)",d:"One question, one source, one note. Stop at the timer — leave wanting more."},habits:[{t:"Daily question",a:"write down one question I am curious about",w:"A written question primes your brain to notice answers all day."},{t:"10-minute explore",a:"spend 10 minutes learning about one interesting thing",w:"Short, daily exploration compounds into real knowledge."},{t:"Teach one thing",a:"explain one new thing I learned to someone",w:"Teaching locks in learning and spreads the energy."}]},
+trusting:{assoc:"Trusting grows where people do what they said they would do, repeatedly. It is associated with safety, reliability and honesty over time.",triggers:["Promises kept, even small ones","Honesty when it would be easier to hide","Consistency over time"],body:["Shoulders down, breathing easy","Less scanning for danger","Able to rest & delegate"],voice:"“I can rely on this. I don't have to carry it all.”",target:"Steadier trust & safety",steps:[["Name what made it safe","Be specific: ‘You told me early, even though it was bad news.’ Specific praise builds more trust."],["Return the trust visibly","Delegate one small thing or share one honest thing. Trust is reciprocal."],["Record it","Keep a short note of kept promises. On anxious days, evidence beats rumination."]],micro:{t:"Trust evidence note (2 minutes)",d:"Write one kept promise from this week — who, what, when. Read it back slowly."},habits:[{t:"Name one kept promise",a:"name one thing someone did that they said they would do",w:"Noticing reliability rewires a threat-scanning habit."},{t:"One honest sentence",a:"say one honest, kind sentence I would normally hold back",w:"Small honesty, delivered kindly, is how trust is built."},{t:"Ask clearly, once",a:"make one clear, specific request instead of hinting",w:"Clear requests give people a fair chance to be reliable."}]},
+loving:{assoc:"Loving is associated with closeness, affection and belonging — feeling chosen, seen and wanted by your people, and choosing them back.",triggers:["Unrushed time together","Being listened to & remembered","Small acts of care"],body:["Warmth in chest","Relaxed, open posture","Wanting proximity & touch"],voice:"“These are my people. I belong here.”",target:"Closer connection",steps:[["Make it visible today","A word, a message, a gesture — love that stays private doesn't nourish the relationship."],["Be fully present for 5 minutes","Phone away, eye contact, listen to understand — not to reply."],["Receive as well as give","Let someone's care land. Say ‘thank you, that meant a lot’ instead of deflecting."]],micro:{t:"5-minute presence (5 minutes)",d:"Phone in another room. Ask ‘what was the best part of your day?’ and just listen."},habits:[{t:"One specific appreciation",a:"tell one person one specific thing I appreciate about them",w:"Specific appreciation is felt; generic praise slides off."},{t:"Phone-free first 5",a:"spend the first 5 minutes with family phone-free",w:"The first minutes set the tone for the whole evening."},{t:"Reach out first",a:"message one person I care about before they message me",w:"Initiating is a habit — waiting is not a connection strategy."}]},
+peaceful:{assoc:"Peaceful is associated with rest, harmony and enough-ness — nothing urgent pulling at you, and no fight inside you about it.",triggers:["A slower pace & fewer inputs","Nature, quiet, order around you","Loose ends closed, boundaries held"],body:["Slow, deep breathing","Loose jaw & shoulders","Heavy, restful limbs"],voice:"“Nothing is required of me right now. This is enough.”",target:"More calm you can return to",steps:[["Protect the conditions","Peace is usually environmental: quieter, slower, fewer screens. Guard one of those today."],["Extend it deliberately","Add 10 minutes to the calm activity instead of filling the gap with scrolling."],["Create a return cue","Same music, same walk, same tea — a cue your body learns to associate with calm."]],micro:{t:"Box breathing (2 minutes)",d:"Breathe in 4, hold 4, out 4, hold 4 — for 4 rounds. Then sit quietly for 30 seconds."},habits:[{t:"Same-time wind-down",a:"start the same calm wind-down at the same time",w:"A predictable cue teaches your nervous system to settle faster."},{t:"One slow thing",a:"do one daily task slowly on purpose — tea, walk, shower",w:"Slowness practised in small things transfers to hard moments."},{t:"Close one loose end",a:"finish or schedule one small loose end",w:"Open loops are a hidden tax on peace of mind."}]},
+proud:{assoc:"Proud is associated with effort that paid off and values lived out — competence, contribution and being recognised, including by yourself.",triggers:["Hard work finishing well","Doing the hard-but-right thing","Being thanked or recognised"],body:["Standing taller, chest open","Steady eye contact","Grounded energy"],voice:"“I did that. The effort was worth it.”",target:"Healthy, grounded pride",steps:[["Name the effort, not just the result","‘I practised for weeks’ builds durable confidence; ‘I got lucky’ doesn't."],["Let yourself receive it","Accept the compliment fully: ‘Thank you — I'm proud of this too.’ No deflecting."],["Use it as fuel, kindly","Ask: what does this prove I can do next? Pride should fund courage, not pressure."]],micro:{t:"Effort receipt (2 minutes)",d:"Write: what I did, what it cost, what it produced. Keep it where you can re-read it."},habits:[{t:"Done list, not just to-do",a:"write 3 things I actually completed today",w:"A done list makes progress visible and builds self-trust."},{t:"Weekly win share",a:"share one win, however small, with one person",w:"Witnessed wins consolidate into identity: ‘I'm someone who…’"},{"t":"Credit the effort aloud",a:"say out loud what effort went into one result",w:"Naming effort protects pride from becoming fragile."}]},
+angry:{assoc:"Anger is associated with a blocked goal, a crossed boundary, or something that feels unfair. It is information — often about respect, fairness, choice or boundaries — not a character flaw.",triggers:["Feeling disrespected or dismissed","Unfairness — rules applied unevenly","A boundary crossed after you said no"],body:["Heat in face, tight jaw & fists","Fast heartbeat, shallow breath","Urge to act or speak immediately"],voice:"“This isn't fair. This has to stop.”",target:"Calm, clear & boundaried",steps:[["Regulate first — 90 seconds","Don't decide or send anything while flooded. Walk, cold water on face, slow exhale. The adrenaline peak passes in about 90 seconds if you don't refuel it."],["Name the need under the anger","Ask: is this about respect, fairness, choice, or a boundary? Anger with a named need becomes a request instead of an explosion."],["Ask plainly, once","Use: ‘When X happened, I felt angry because I need Y. Would you be willing to Z?’ Then stop and listen."]],micro:{t:"90-second reset",d:"Stand, unclench jaw and hands, breathe out slowly 6 times, splash cold water. Only then decide."},habits:[{t:"Pause & name before replying",a:"wait 90 seconds and name my need before I reply",w:"A practised pause turns reaction into response."},{t:"Walk it out — 5 minutes",a:"walk briskly for 5 minutes before a hard conversation",w:"Movement metabolises stress hormones and clears thinking."},{t:"Boundary sentence practice",a:"write one calm boundary sentence for a recurring frustration",w:"A rehearsed sentence is available when an improvised one isn't."}]},
+disgusted:{assoc:"Disgust is associated with something that violates your values, your health, or your sense of what's acceptable — your system pushing something away.",triggers:["Behaviour that breaks your values","Dishonesty, exploitation, cruelty","Something unhealthy or contaminating"],body:["Nausea, stomach turning","Pulling back, nose wrinkling","Urge to leave or clean"],voice:"“This is wrong. I don't want this near me.”",target:"Aligned & clear-boundaried",steps:[["Create distance first","Physically step back or leave if you can. Disgust is a ‘move away’ signal — honour it before analysing it."],["Separate the strands","Is this about health, integrity, or values? Each needs a different response — don't let one masquerade as another."],["Name the boundary, not just the feeling","‘I won't be part of X’ is actionable. ‘That's disgusting’ alone usually starts a fight."]],micro:{t:"Step-back & sort (3 minutes)",d:"Move away, breathe, then write: what exactly crossed the line — health, honesty, or values?"},habits:[{t:"One values check",a:"check one decision against my written values",w:"Decisions checked early rarely become disgust later."},{t:"Clean one small space",a:"clean or clear one small physical space",w:"Order outside supports a sense of integrity inside — especially when apathy is the flavour."},{t:"Say no early, kindly",a:"decline one thing that doesn't fit, early and kindly",w:"Early no's prevent the build-up that becomes contempt."}]},
+afraid:{assoc:"Fear is associated with threat — real or anticipated — to safety, security or predictability. It narrows attention to danger, which helps in emergencies and hurts when it stays on.",triggers:["Uncertainty about money, health, work","A specific person, place or task","News & worst-case imagining"],body:["Racing heart, tight chest","Shallow breath, tense muscles","Stomach knots, trouble sleeping"],voice:"“What if it goes wrong? I need to be ready.”",target:"Safer & steadier",steps:[["Name the specific threat","‘I'm afraid’ is fog; ‘I'm afraid I'll miss the payment on Friday’ is a problem you can work on."],["Ask the 10% question","What would make me 10% safer right now? One call, one check, one plan B — small safety is real safety."],["Shrink the horizon","Worried about the month? Handle today. Fear grows in large timeframes and shrinks in small ones."]],micro:{t:"5-4-3-2-1 grounding (2 minutes)",d:"Name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste. It returns attention to the present, where you are actually safe."},habits:[{t:"Fact before forecast",a:"check one real fact before imagining outcomes",w:"One verified fact collapses a whole chain of what-ifs."},{t:"Worry window",a:"write worries down and review them at one set time",w:"Containing worry to a window frees the rest of the day."},{t:"Prepare one small thing",a:"prepare one small thing for tomorrow, tonight",w:"Preparation is fear's antidote — it converts dread into readiness."}]},
+surprised:{assoc:"Surprise is associated with being caught off guard — the world changed faster than your expectations. It can tip into stress or overwhelm when too much arrives at once.",triggers:["Sudden news, good or bad","Plans changing without warning","Too many new things at once"],body:["Startle, gasp, frozen moment","Racing thoughts","Difficulty deciding"],voice:"“Wait — what? I wasn't ready for this.”",target:"Oriented & clear-headed",steps:[["Slow the first minute down","Breathe, sit, get water. Surprise hijacks speed — deliberately going slow restores choice."],["Gather one fact","Before reacting, verify one thing: what exactly happened? Half of overwhelm is incomplete information."],["Sort: now / later / never","Write everything swirling, then tag each item. Most of it is ‘later’ — and that is a relief you can feel."]],micro:{t:"One-fact pause (2 minutes)",d:"Ask: what do I actually know for certain? Write only that. Act only on that, for now."},habits:[{t:"Morning preview",a:"preview today's calendar and name one possible surprise",w:"Previewing removes the ‘caught off guard’ sting from most changes."},{t:"Capture, don't juggle",a:"write every new input into one list immediately",w:"A trusted list stops your mind rehearsing everything at once."},{t:"One thing at a time block",a:"work on one thing for 15 minutes with everything else closed",w:"Single-tasking is the direct antidote to overwhelm."}]},
+sad:{assoc:"Sadness is associated with loss — of a person, a hope, a role, or how things were supposed to be. It slows you down because something needs grieving, not fixing.",triggers:["Loss, endings, goodbyes","Disappointed hopes","Feeling unseen or unsupported"],body:["Heaviness, low energy","Tears close to the surface","Wanting to withdraw"],voice:"“Something that mattered is gone, or didn't happen.”",target:"Supported & less alone",steps:[["Let the loss be named","Say precisely what was lost — even just to yourself or on paper. Unnamed grief stays heavy; named grief can be carried."],["Ask for a witness, not a fix","Tell one safe person: ‘I don't need advice, I just need you to know.’ Grief needs company more than solutions."],["One gentle, nourishing thing","Warm food, daylight, rest, a walk with someone. Sadness is not the time for self-improvement pressure."]],micro:{t:"Name the loss (3 minutes)",d:"Complete this sentence in writing: ‘What I lost was… What I miss most is…’ Then close the notebook gently."},habits:[{t:"Daylight in the first hour",a:"get outside into daylight within an hour of waking",w:"Morning light is one of the strongest natural mood regulators."},{t:"One human contact a day",a:"have one real conversation, however short",w:"Sadness pulls toward isolation; one contact a day pushes back gently."},{t:"Move a little, daily",a:"walk for 10 minutes, even slowly",w:"Gentle movement reliably lifts low mood — intensity is not required."}]},
+ashamed:{assoc:"Shame is associated with self-judgment — the feeling that you, not just your action, are wrong. It thrives in secrecy and shrinks when spoken to a safe person.",triggers:["A mistake made public, or imagined public","Comparing yourself to others","Old criticism echoing in a new moment"],body:["Wanting to hide or disappear","Face hot, eyes down","Small, collapsed posture"],voice:"“I'm the problem. If they really knew me…”",target:"Self-compassion & belonging",steps:[["Separate act from person","‘I did something I regret’ is true and workable. ‘I am a bad person’ is shame talking — and it is not evidence."],["Speak it to someone safe","Shame's one rule is secrecy. One trusted conversation — ‘this is hard to say…’ — breaks most of its power."],["Self-compassion sentence","Use: ‘This is a moment of struggle. Struggle is part of being human. May I be kind to myself.’ Awkward at first, effective with repetition."]],micro:{t:"Act vs. person (2 minutes)",d:"Write two columns: ‘What I did’ and ‘Who I am’. Keep the first honest and the second kind — and notice they are different lists."},habits:[{t:"Self-compassion break",a:"say one kind, true sentence to myself when I stumble",w:"Practised self-kindness replaces the inner critic's default setting."},{t:"Repair one small thing",a:"make one small repair or apology where one is owed",w:"Action dissolves guilt; rumination feeds it."},{t:"Share one imperfect thing",a:"share one unfinished or imperfect thing with a safe person",w:"Being accepted while imperfect is the direct cure for shame."}]}
+};
+const FAMILY_NOTES={Grateful:"Thankfulness for something received — a gift, help, or luck you didn't have to earn.",Excited:"Energy rising toward something coming — anticipation with momentum.",Ecstatic:"Joy at full volume — hard to contain, and you don't want to.",Happy:"The everyday, steady form of joy — glad to be here, in this.",Engaged:"Attention fully given — you are in it, not watching it.",Fascinated:"Interest that pulls you closer — you keep wanting the next detail.",Entranced:"Absorbed so deeply the outside world goes quiet for a while.",Energetic:"Fuel in the tank — animated, refreshed, ready to move.",Assured:"Settled certainty — the question feels answered.",Hopeful:"Looking forward with expectation — the future feels open.",Secure:"Safe and comforted — the guard can come down.",Confident:"Positive and relieved — you trust yourself to handle it.",Connected:"Closeness — the distance between you and your people feels small.",Caring:"Warmth turned outward — their wellbeing matters to you.",Affectionate:"Fondness that wants expression — friendly, tender, near.",Adoration:"Deep admiration — almost reverence for someone or something.",Content:"Satisfied and comfortable — wanting nothing extra right now.",Relaxed:"Serene and calm — tension has left the building.",Tranquil:"Quiet and centred — stillness that feels chosen.",Harmonious:"Everything in its place — congruous, balanced, no friction.",Powerful:"Empowered and effectual — your actions move things.",Encouraged:"Brave because someone — or something — is behind you.", "Self-Esteem":"Fulfilled and pleased with who you are being.", "Self-Confident":"Poised and self-assured — steady in your own skin.",Frustrated:"Blocked — effort is being spent and the door won't open.",Annoyed:"Irritation at a repeated friction — smaller than anger, but persistent.",Envious:"Wanting what someone else has — and feeling the gap.",Mad:"Anger at full heat — furious, enraged, ready to act.",Averse:"Reluctant and resistant — every part of you leaning away.",Apathetic:"Uninterested and bored — the opposite problem: nothing pulls you.",Repulsive:"Sickened — your body itself is rejecting something.",Contempt:"Scorn — looking down on something as beneath respect.",Insecure:"Suspicious and apprehensive — unsure of your standing.",Anxious:"Concerned and worried — mind running ahead to problems.",Vulnerable:"Helpless and susceptible — exposed, without protection.",Scared:"Frightened to terrified — the threat feels close and real.",Astonished:"Amazed and shocked — reality just outran your expectations.",Distracted:"Preoccupied and hesitant — attention split too many ways.",Startled:"Stunned and stressed — jolted before you could prepare.",Overwhelmed:"Confused and puzzled — more arriving than you can process.",Unhappy:"Disappointed and discouraged — hopes didn't land.", "Grief & Sorrow":"Devastated and heartbroken — loss at its deepest.", "Pain & Hurt":"Despair and misery — hurting, not just sad.",Depressed:"Fatigued, tired, hopeless — energy and expectation both low.",Awkward:"Uncomfortable and self-conscious — unsure how you're coming across.",Guilty:"Regretful and remorseful — conscience pointing at an action.",Embarrassed:"Mortified — exposure you didn't choose.",Humiliation:"Chagrined and flustered — dignity feeling publicly dented."};
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function mixWhite(hex,amt){const n=parseInt(hex.slice(1),16);let r=(n>>16)&255,g=(n>>8)&255,b=n&255;r=Math.round(r+(255-r)*amt);g=Math.round(g+(255-g)*amt);b=Math.round(b+(255-b)*amt);return "rgb("+r+","+g+","+b+")"}
+function sentenceFor(core,feeling){const need=core.needs[0];return core.side==="met"?("I feel "+feeling.toLowerCase()+" because my need for "+need+" is being met."):("I feel "+feeling.toLowerCase()+" because I need "+need+".")}
+function copyText(text,btn){function done(){if(!btn)return;const o=btn.textContent;btn.textContent="Copied ✓";setTimeout(()=>btn.textContent=o,1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){})}}
+function downloadFile(name,content){const blob=new Blob([content],{type:"text/plain;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function todayStamp(){return new Date().toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"})}
+function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+/* Wheel geometry */
+const CX=360,CY=360,R_CORE=[48,130],R_FAM=[130,216],R_FEEL=[216,330],R_RIM=347;
+function polar(r,d){const rad=d*Math.PI/180;return[CX+r*Math.sin(rad),CY-r*Math.cos(rad)]}
+function sector(a,b,c,d){const p1=polar(b,c),p2=polar(b,d),p3=polar(a,d),p4=polar(a,c);return "M"+p1[0].toFixed(2)+" "+p1[1].toFixed(2)+" A"+b+" "+b+" 0 0 1 "+p2[0].toFixed(2)+" "+p2[1].toFixed(2)+" L"+p3[0].toFixed(2)+" "+p3[1].toFixed(2)+" A"+a+" "+a+" 0 0 0 "+p4[0].toFixed(2)+" "+p4[1].toFixed(2)+" Z"}
+function textEl(r,am,fs,fw,t){const p=polar(r,am);const rot=am>180?am+90:am-90;return '<text x="'+p[0].toFixed(1)+'" y="'+p[1].toFixed(1)+'" font-size="'+fs+'" font-weight="'+fw+'" text-anchor="middle" dominant-baseline="central" transform="rotate('+rot.toFixed(1)+" "+p[0].toFixed(1)+" "+p[1].toFixed(1)+')">'+esc(t)+"</text>"}
+function isLight(){return document.documentElement.getAttribute("data-theme")==="light"}
+function buildWheel(){const light=isLight();const wheelBg=light?"#fffaf0":"#171310",rimTopBand=light?"#e8c26a":"#4d3f1c",rimBotBand=light?"#d98a5e":"#5a2c1c",rimText=light?"#241E18":"#e8dcc2",centerStroke=light?"#c9b995":"#4a3a28",centerMain=light?"#241E18":"#f3ede1",centerSub=light?"#6f6152":"#b3a58c";let s='<circle cx="360" cy="360" r="359" fill="'+wheelBg+'"/>';const tA=polar(R_RIM,336),tB=polar(R_RIM,144),bA=polar(R_RIM,324),bB=polar(R_RIM,156),bdA=polar(R_RIM,330),bdB=polar(R_RIM,150);s+='<defs><path id="rim-top" d="M'+tA[0].toFixed(1)+" "+tA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+tB[0].toFixed(1)+" "+tB[1].toFixed(1)+'"/><path id="rim-bottom" d="M'+bA[0].toFixed(1)+" "+bA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 0 "+bB[0].toFixed(1)+" "+bB[1].toFixed(1)+'"/></defs>';s+='<path d="M'+bdA[0].toFixed(1)+" "+bdA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+bdB[0].toFixed(1)+" "+bdB[1].toFixed(1)+'" fill="none" stroke="'+rimTopBand+'" stroke-width="30"/><path d="M'+bdB[0].toFixed(1)+" "+bdB[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+bdA[0].toFixed(1)+" "+bdA[1].toFixed(1)+'" fill="none" stroke="'+rimBotBand+'" stroke-width="30"/>';s+='<text font-size="16.5" font-weight="800" letter-spacing="2.5" fill="'+rimText+'"><textPath href="#rim-top" startOffset="50%" text-anchor="middle">FEELINGS WHEN YOUR NEEDS ARE MET</textPath></text><text font-size="16.5" font-weight="800" letter-spacing="2.5" fill="'+rimText+'"><textPath href="#rim-bottom" startOffset="50%" text-anchor="middle">FEELINGS WHEN YOUR NEEDS ARE NOT MET</textPath></text>';
+ORDER.forEach((id,i)=>{const core=byId[id];const a0=i*30,a1=a0+30;s+='<g class="segwrap" data-level="core" data-core="'+id+'"><path class="seg" data-level="core" data-core="'+id+'" tabindex="0" role="button" aria-label="Core feeling: '+esc(core.name)+'" d="'+sector(R_CORE[0],R_CORE[1],a0+.4,a1-.4)+'" fill="'+core.color+'"/>'+textEl((R_CORE[0]+R_CORE[1])/2,(a0+a1)/2,16,800,core.name)+"</g>";core.families.forEach((fam,fi)=>{const fa0=a0+fi*7.5,fa1=fa0+7.5;s+='<g class="segwrap" data-level="family" data-core="'+id+'" data-family="'+esc(fam.name)+'"><path class="seg" data-level="family" data-core="'+id+'" data-family="'+esc(fam.name)+'" tabindex="0" role="button" aria-label="Family: '+esc(fam.name)+'" d="'+sector(R_FAM[0],R_FAM[1],fa0+.3,fa1-.3)+'" fill="'+mixWhite(core.color,.38)+'"/>'+textEl((R_FAM[0]+R_FAM[1])/2,(fa0+fa1)/2,11.5,700,fam.name)+"</g>";const step=7.5/fam.feelings.length;fam.feelings.forEach((feel,si)=>{const sa0=fa0+si*step,sa1=sa0+step;s+='<g class="segwrap" data-level="feeling" data-core="'+id+'" data-family="'+esc(fam.name)+'" data-feeling="'+esc(feel)+'"><path class="seg" data-level="feeling" data-core="'+id+'" data-family="'+esc(fam.name)+'" data-feeling="'+esc(feel)+'" tabindex="0" role="button" aria-label="Feeling: '+esc(feel)+'" d="'+sector(R_FEEL[0],R_FEEL[1],sa0+.25,sa1-.25)+'" fill="'+mixWhite(core.color,.66)+'"/>'+textEl((R_FEEL[0]+R_FEEL[1])/2,(sa0+sa1)/2,11.5,600,feel)+"</g>"})})});
+s+='<circle cx="360" cy="360" r="46" fill="'+wheelBg+'" stroke="'+centerStroke+'" stroke-width="2"/><text id="cl1" x="360" y="350" text-anchor="middle" font-size="14" font-weight="800" fill="'+centerMain+'">97 feelings</text><text id="cl2" x="360" y="370" text-anchor="middle" font-size="11.5" fill="'+centerSub+'">12 core feelings</text>';document.getElementById("wheel").innerHTML=s;
+document.querySelectorAll("#wheel .seg").forEach(el=>{function act(){const l=el.getAttribute("data-level"),cid=el.getAttribute("data-core");if(l==="core")select(cid,null,null);else if(l==="family")select(cid,el.getAttribute("data-family"),null);else select(cid,el.getAttribute("data-family"),el.getAttribute("data-feeling"))}el.addEventListener("click",act);el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act()}})});
+}
+/* State */
+let sel={core:null,family:null,feeling:null};let filter="all";
+function findFamily(core,name){return core.families.find(f=>f.name===name)||null}
+function select(cid,fam,feel,opts){opts=opts||{};sel={core:cid||null,family:fam||null,feeling:feel||null};document.body.setAttribute("data-mood",sel.core?byId[sel.core].side:"neutral");renderSelection();syncHabitFocus();if(opts.scroll)document.getElementById("panel").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function renderSelection(){document.querySelectorAll("#wheel .segwrap").forEach(el=>{el.classList.remove("dim","dim-soft","selected");const cid=el.getAttribute("data-core");const core=byId[cid];let d="";if(filter!=="all"&&core.side!==filter)d="dim";else if(sel.core&&cid!==sel.core)d="dim";else if(sel.core&&sel.family&&el.getAttribute("data-level")!=="core"&&el.getAttribute("data-family")!==sel.family)d="dim-soft";if(d)el.classList.add(d);const lv=el.getAttribute("data-level");let is=false;if(sel.feeling&&lv==="feeling"&&el.getAttribute("data-feeling")===sel.feeling&&cid===sel.core)is=true;else if(!sel.feeling&&sel.family&&lv==="family"&&el.getAttribute("data-family")===sel.family&&cid===sel.core)is=true;else if(!sel.family&&sel.core&&lv==="core"&&cid===sel.core)is=true;if(is)el.classList.add("selected")});const c1=document.getElementById("cl1"),c2=document.getElementById("cl2");if(c1){if(sel.feeling){c1.textContent=sel.feeling;c2.textContent=byId[sel.core].name}else if(sel.core){c1.textContent=byId[sel.core].name;c2.textContent=sel.family||(byId[sel.core].side==="met"?"needs met":"needs not met")}else{c1.textContent="97 feelings";c2.textContent="12 core feelings"}}renderCrumbs();renderPanel();document.querySelectorAll("#core-list .core-row").forEach(card=>{card.classList.toggle("dim",filter!=="all"&&byId[card.getAttribute("data-card")].side!==filter)})}
+function renderCrumbs(){const nav=document.getElementById("crumbs");let h='<button type="button" data-crumb="all"'+(!sel.core?' class="current"':"")+">All feelings</button>";if(sel.core){const core=byId[sel.core];h+='<span aria-hidden="true">›</span><button type="button" data-crumb="core"'+(!sel.family?' class="current"':"")+">"+esc(core.name)+"</button>";if(sel.family)h+='<span aria-hidden="true">›</span><button type="button" data-crumb="family"'+(!sel.feeling?' class="current"':"")+">"+esc(sel.family)+"</button>";if(sel.feeling)h+='<span aria-hidden="true">›</span><button type="button" class="current">'+esc(sel.feeling)+"</button>"}nav.innerHTML=h;nav.querySelectorAll("button[data-crumb]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-crumb");if(k==="all")select(null,null,null);else if(k==="core")select(sel.core,null,null);else if(k==="family")select(sel.core,sel.family,null)}))}
+function badge(core){return '<span class="badge '+core.side+'">'+(core.side==="met"?"● Needs met":"● Needs not met")+"</span>"}
+function assocHTML(core){const g=GUIDE[core.id];return '<h3>What this feeling is associated with</h3><p style="margin:0 0 12px">'+esc(g.assoc)+'</p><div class="assoc-grid"><div class="assoc"><b>Common triggers</b><ul>'+g.triggers.map(t=>"<li>"+esc(t)+"</li>").join("")+'</ul></div><div class="assoc"><b>In your body</b><ul>'+g.body.map(t=>"<li>"+esc(t)+"</li>").join("")+'</ul></div><div class="assoc"><b>Inner voice</b><p>'+esc(g.voice)+'</p></div><div class="assoc"><b>Needs underneath</b><p>'+core.needs.map(esc).join(", ")+'</p></div></div>'}
+function stepsHTML(core){const g=GUIDE[core.id];const title=core.side==="met"?"Build on it — make the good feeling stick":"Get out of it — a 3-step exit routine";return "<h3>"+title+'</h3><ol class="steps">'+g.steps.map((s,i)=>'<li><span class="stepnum">'+(i+1)+"</span><div><b>"+esc(s[0])+"</b><p>"+esc(s[1])+"</p></div></li>").join("")+'</ol><div class="micro"><b>'+esc(g.micro.t)+'</b><br>'+esc(g.micro.d)+"</div>"}
+function safetyHTML(){return '<div class="micro" style="margin-top:14px"><b>A gentle note</b><br>If this low mood lasts for weeks, please talk to a doctor or counsellor — a wheel can\'t carry that alone.</div>'}
+function chipRow(items,kind,active){return '<div class="chiprow">'+items.map(it=>'<button type="button" class="chip'+(it===active?" active":"")+'" data-chip="'+kind+'" data-value="'+esc(it)+'">'+esc(it)+"</button>").join("")+"</div>"}
+function wirePanel(p){p.querySelectorAll("[data-chip]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-chip"),v=b.getAttribute("data-value");if(k==="family")select(sel.core,v,null);else select(sel.core,sel.family,v)}));const cb=p.querySelector("[data-copy]");if(cb)cb.addEventListener("click",()=>copyText(cb.getAttribute("data-copy"),cb));const hb=p.querySelector("[data-habit]");if(hb)hb.addEventListener("click",()=>{document.getElementById("habit-lab").scrollIntoView({behavior:"smooth"})});const wb=p.querySelector("[data-write]");if(wb)wb.addEventListener("click",()=>{openNotes("feelings",currentNotePayload())});p.querySelectorAll("[data-ci-start]").forEach(b=>b.addEventListener("click",startCheckin))}
+function currentNotePayload(){if(!sel.core)return null;const core=byId[sel.core];const name=sel.feeling||sel.family||core.name;return{coreId:sel.core,coreName:core.name,family:sel.family,feeling:name,path:(core.name+(sel.family?" › "+sel.family:"")+(sel.feeling?" › "+sel.feeling:"")),sentence:sentenceFor(core,name),side:core.side}}
+function renderPanel(){const p=document.getElementById("panel");p.classList.remove("rise");void p.offsetWidth;p.classList.add("rise");
+if(!sel.core){p.removeAttribute("data-side");p.innerHTML="<h2>Start anywhere — then go deep</h2><hr class='rule'><p style='color:var(--soft)'>Tap a core feeling in the centre, then a family, then the exact feeling. Each level unlocks more: at the feeling level you get what it's associated with, what it feels like in your body, a 3-step response, a 60-second practice, a habit matched to it — and a writing pad one tap away.</p><h3>Try one now</h3>"+chipRow(["Angry","Afraid","Sad","Ashamed","Joyful","Peaceful"],"corepick",null)+'<div class="actions"><button type="button" class="btn" data-ci-start="1">Start a guided check-in</button></div>';p.querySelectorAll("[data-chip]").forEach(b=>b.addEventListener("click",()=>{const c=CORES.find(x=>x.name===b.getAttribute("data-value"));if(c)select(c.id,null,null)}));p.querySelectorAll("[data-ci-start]").forEach(b=>b.addEventListener("click",startCheckin));return}
+const core=byId[sel.core];p.setAttribute("data-side",core.side);
+if(!sel.family){p.innerHTML="<h2>"+esc(core.name)+"</h2>"+(core.qualifier?'<p style="color:var(--soft);font-style:italic;margin:0">('+esc(core.qualifier)+")</p>":"")+'<hr class="rule"><p class="pathline">'+esc(core.name)+"</p>"+badge(core)+"<h3>Its four families — pick one to drill down</h3>"+chipRow(core.families.map(f=>f.name),"family",null)+'<p style="color:var(--soft);font-size:.93rem;margin-top:10px">'+core.families.map(f=>"<b>"+esc(f.name)+":</b> "+esc(FAMILY_NOTES[f.name]||"")).join("<br>")+"</p>"+assocHTML(core)+stepsHTML(core)+'<div class="actions"><button type="button" class="btn" data-habit="1">Build a habit for '+esc(core.name)+' →</button><button type="button" class="btn ghost" data-write="1">Write about this</button></div>';wirePanel(p);return}
+const fam=findFamily(core,sel.family);
+if(!sel.feeling){p.innerHTML="<h2>"+esc(fam.name)+"</h2>"+'<hr class="rule"><p class="pathline">'+esc(core.name)+" › "+esc(fam.name)+"</p>"+badge(core)+'<p style="margin:10px 0 0">'+esc(FAMILY_NOTES[fam.name]||"")+'</p><h3>Specific feelings in this family — each has its own deep dive</h3>'+chipRow(fam.feelings,"feeling",null)+assocHTML(core)+stepsHTML(core)+(fam.name==="Depressed"?safetyHTML():"")+'<div class="actions"><button type="button" class="btn" data-habit="1">Build a habit for this →</button><button type="button" class="btn ghost" data-write="1">Write about this</button></div>';wirePanel(p);return}
+const sentence=sentenceFor(core,sel.feeling);
+p.innerHTML="<h2>"+esc(sel.feeling)+"</h2>"+'<hr class="rule"><p class="pathline">'+esc(core.name)+" › "+esc(fam.name)+" › "+esc(sel.feeling)+"</p>"+badge(core)+'<p style="margin:10px 0 0"><b>'+esc(fam.name)+":</b> "+esc(FAMILY_NOTES[fam.name]||"")+" <b>"+esc(sel.feeling)+"</b> is this family's sharper, more specific word for it.</p>"+assocHTML(core)+stepsHTML(core)+(fam.name==="Depressed"?safetyHTML():"")+"<h3>Say it in a sentence</h3><div class='sentence'>“"+esc(sentence)+"”</div>"+'<div class="actions"><button type="button" class="btn" data-copy="'+esc(sentence)+'">Copy the sentence</button><button type="button" class="btn" data-habit="1">Turn this feeling into a habit →</button><button type="button" class="btn ghost" data-write="1">Write about this</button><button type="button" class="btn ghost" data-ci-start="1">New check-in</button></div>';wirePanel(p)}
+/* List / lines */
+function buildList(){const grid=document.getElementById("core-list");let h="";ORDER.forEach((id,idx)=>{const core=byId[id];const g=GUIDE[id];const num=String(idx+1).padStart(2,"0");h+='<article class="core-row" data-card="'+id+'"><button type="button" class="core-head" data-expand="'+id+'" aria-expanded="'+(idx===0?"true":"false")+'" aria-controls="core-body-'+id+'"><span class="ch-num" aria-hidden="true">'+num+'</span><span class="core-titles"><span class="core-name">'+esc(core.name)+(core.qualifier?' <span class="core-qual">('+esc(core.qualifier)+")</span>":"")+'</span><span class="core-desc">'+esc(g.assoc)+'</span></span><span class="core-meta"><span class="badge '+core.side+'">'+(core.side==="met"?"Needs met":"Needs not met")+'</span><span class="core-toggle" aria-hidden="true">'+(idx===0?"–":"+")+'</span></span></button><div class="core-body" id="core-body-'+id+'"'+(idx===0?"":" hidden")+">";core.families.forEach(fam=>{h+='<div class="famline"><div class="famline-head"><button type="button" data-lf="'+esc(fam.name)+'" data-core="'+id+'">'+esc(fam.name)+'</button><span class="fam-count">'+fam.feelings.length+' feelings</span></div><p class="fam-note">'+esc(FAMILY_NOTES[fam.name]||"")+"</p>";fam.feelings.forEach(f=>{h+='<button type="button" class="feel-row" data-feel="'+esc(f)+'" data-family="'+esc(fam.name)+'" data-core="'+id+'"><b>'+esc(f)+'</b><span>Deep dive + habit →</span></button>'});h+="</div>"});h+='<div class="card-habit"><b>Starter habit · '+esc(core.name)+'</b>'+esc(g.habits[0].t)+" — "+esc(g.habits[0].a)+'. <button type="button" data-card-habit="'+id+'" style="background:none;border:0;font-weight:700;text-decoration:underline;padding:0">Use in Habit Lab</button></div></div></article>'});grid.innerHTML=h;grid.querySelectorAll("[data-expand]").forEach(b=>b.addEventListener("click",()=>{const id=b.getAttribute("data-expand");const body=document.getElementById("core-body-"+id);const open=body.hidden;body.hidden=!open;b.setAttribute("aria-expanded",open?"true":"false");b.querySelector(".core-toggle").textContent=open?"–":"+";select(id,null,null)}));grid.querySelectorAll("[data-lf]").forEach(b=>b.addEventListener("click",()=>select(b.getAttribute("data-core"),b.getAttribute("data-lf"),null,{scroll:true})));grid.querySelectorAll("[data-feel]").forEach(b=>b.addEventListener("click",()=>select(b.getAttribute("data-core"),b.getAttribute("data-family"),b.getAttribute("data-feel"),{scroll:true})));grid.querySelectorAll("[data-card-habit]").forEach(b=>b.addEventListener("click",()=>{const cid=b.getAttribute("data-card-habit");select(cid,byId[cid].families[0].name,byId[cid].families[0].feelings[0]);document.getElementById("habit-lab").scrollIntoView({behavior:"smooth"})}))}
+/* Filter + search */
+document.querySelectorAll(".filter-group button").forEach(b=>b.addEventListener("click",()=>{filter=b.getAttribute("data-filter");document.querySelectorAll(".filter-group button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));renderSelection()}));
+const IDX=[];CORES.forEach(c=>c.families.forEach(f=>{IDX.push({type:"family",name:f.name,core:c,family:f.name,feeling:null});f.feelings.forEach(fe=>IDX.push({type:"feeling",name:fe,core:c,family:f.name,feeling:fe}))}));
+const si=document.getElementById("search"),sr=document.getElementById("search-results");
+si.addEventListener("input",()=>{const q=si.value.trim().toLowerCase();if(!q){sr.classList.remove("open");sr.innerHTML="";return}const hits=IDX.filter(e=>e.name.toLowerCase().indexOf(q)!==-1).slice(0,8);sr.innerHTML=hits.length?hits.map((e,i)=>'<button type="button" data-hit="'+i+'"><span class="sr-name">'+esc(e.name)+'</span><span class="sr-path">'+esc(e.core.name+" › "+e.family+(e.feeling?" › "+e.name:" (family)"))+"</span></button>").join(""):'<div style="padding:14px 16px;color:var(--soft)">No match — try a shorter word.</div>';sr.querySelectorAll("[data-hit]").forEach((b,i)=>b.addEventListener("click",()=>{const e=hits[i];select(e.core.id,e.family,e.feeling,{scroll:true});si.value="";sr.classList.remove("open")}));sr.classList.add("open")});
+document.addEventListener("click",e=>{if(!e.target.closest(".search-box"))sr.classList.remove("open")});
+/* Check-in */
+const checkinEl=document.getElementById("checkin");let ci=null;
+function startCheckin(){ci={step:1,side:null,core:null,family:null,feeling:null};checkinEl.classList.add("open");renderCheckin();checkinEl.scrollIntoView({behavior:"smooth"})}
+var _oc=document.getElementById("open-checkin");if(_oc)_oc.addEventListener("click",startCheckin);
+var _nc=document.getElementById("nav-checkin");if(_nc)_nc.addEventListener("click",e=>{e.preventDefault();startCheckin()});
+document.getElementById("hero-checkin").addEventListener("click",e=>{e.preventDefault();startCheckin()});
+function ciOpts(items,attr){return '<div class="ci-options">'+items.map(it=>'<button type="button" data-ci="'+attr+'" data-value="'+esc(it.value)+'"'+(it.big?' class="big"':"")+">"+esc(it.label)+"</button>").join("")+"</div>"}
+function renderCheckin(){if(!ci)return;let h="<h2>How are you feeling right now?</h2>";if(ci.step===1){h+='<p style="color:var(--soft)">Step 1 of 4 — are your needs met, or not?</p>'+ciOpts([{value:"met",label:"My needs are met",big:1},{value:"notmet",label:"My needs are not met",big:1}],"side")}else if(ci.step===2){h+='<p style="color:var(--soft)">Step 2 of 4 — pick the core feeling closest to yours</p>'+ciOpts(CORES.filter(c=>c.side===ci.side).map(c=>({value:c.id,label:c.name})),"core")}else if(ci.step===3){const core=byId[ci.core];h+='<p style="color:var(--soft)">Step 3 of 4 — which family under '+esc(core.name)+'</p>'+ciOpts(core.families.map(f=>({value:f.name,label:f.name})),"family")}else if(ci.step===4){const core=byId[ci.core],fam=findFamily(core,ci.family);h+='<p style="color:var(--soft)">Step 4 of 4 — name it precisely</p>'+ciOpts(fam.feelings.map(f=>({value:f,label:f})),"feeling")}else{const core=byId[ci.core];const sentence=sentenceFor(core,ci.feeling);const g=GUIDE[core.id];h+='<p style="color:var(--soft)">Your check-in</p><h2 style="font-size:1.6rem">'+esc(ci.feeling)+'</h2><p>'+esc(core.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+"</p>"+badge(core)+"<p>"+esc(g.assoc)+"</p><p><strong>First step:</strong> "+esc(g.steps[0][0])+" — "+esc(g.steps[0][1])+'</p><div class="sentence">“'+esc(sentence)+'”</div><div class="actions"><button type="button" class="btn" data-ci-habit="1">Turn this into a habit in the Habit Lab →</button><button type="button" class="btn ghost" data-ci-write="1">Write about it</button><button type="button" class="btn ghost" data-ci-again="1">Start again</button></div>'}
+if(ci.step>1&&ci.step<5)h+='<div class="actions"><button type="button" class="btn ghost" data-ci-back="1">Back</button></div>';checkinEl.innerHTML=h;checkinEl.querySelectorAll("[data-ci]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-ci"),v=b.getAttribute("data-value");if(k==="side"){ci.side=v;ci.step=2}else if(k==="core"){ci.core=v;ci.step=3}else if(k==="family"){ci.family=v;ci.step=4}else{ci.feeling=v;ci.step=5;select(ci.core,ci.family,ci.feeling)}renderCheckin()}));const back=checkinEl.querySelector("[data-ci-back]");if(back)back.addEventListener("click",()=>{ci.step--;renderCheckin()});const ag=checkinEl.querySelector("[data-ci-again]");if(ag)ag.addEventListener("click",startCheckin);const hb=checkinEl.querySelector("[data-ci-habit]");if(hb)hb.addEventListener("click",()=>document.getElementById("habit-lab").scrollIntoView({behavior:"smooth"}));const wb=checkinEl.querySelector("[data-ci-write]");if(wb)wb.addEventListener("click",()=>{const core=byId[ci.core];openNotes("feelings",{coreId:ci.core,coreName:core.name,family:ci.family,feeling:ci.feeling,path:core.name+" › "+ci.family+" › "+ci.feeling,sentence:sentenceFor(core,ci.feeling),side:core.side})})}
+/* ===== Habit Lab ===== */
+let hl={core:"angry",family:"Frustrated",feeling:"Aggravated",habitIdx:0,done:{},planText:""};
+function hlFeelingsOptions(){const selEl=document.getElementById("hl-feeling");let h="";CORES.forEach(c=>{h+='<optgroup label="'+esc(c.name)+" — "+(c.side==="met"?"needs met":"needs not met")+'">';c.families.forEach(f=>f.feelings.forEach(fe=>{h+='<option value="'+c.id+"|"+esc(f.name)+"|"+esc(fe)+'"'+(c.id===hl.core&&fe===hl.feeling?" selected":"")+">"+esc(fe)+" ("+esc(c.name)+")</option>"}));h+="</optgroup>"});selEl.innerHTML=h}
+function syncHabitFocus(){if(sel.core&&sel.feeling){hl.core=sel.core;hl.family=sel.family;hl.feeling=sel.feeling;hl.habitIdx=0;renderHabitLab()}else if(sel.core){const c=byId[sel.core];hl.core=sel.core;hl.family=c.families[0].name;hl.feeling=c.families[0].feelings[0];hl.habitIdx=0;renderHabitLab()}}
+function currentHabit(){return GUIDE[hl.core].habits[hl.habitIdx]||GUIDE[hl.core].habits[0]}
+function hlCue(){const own=document.getElementById("hl-stack").value.trim();return own||document.getElementById("hl-cue").value}
+function renderHabitLab(){hlFeelingsOptions();const core=byId[hl.core];const g=GUIDE[hl.core];document.getElementById("hl-direction").innerHTML='<div class="direction-box" style="background:'+(core.side==="met"?"var(--metBg)":"var(--oxBg)")+'"><b>'+(core.side==="met"?"Build on the good:":"Get out of the hard, faster:")+'</b> You picked <b>'+esc(hl.feeling)+'</b> ('+esc(core.name)+" › "+esc(hl.family)+'). Goal: <b>'+esc(g.target)+'</b>. Linked needs: '+core.needs.map(esc).join(", ")+'.</div>';document.getElementById("hl-habits").innerHTML=g.habits.map((hb,i)=>'<button type="button" class="habit-pick" data-hl-habit="'+i+'" aria-pressed="'+(i===hl.habitIdx)+'"><b>'+esc(hb.t)+'</b><span>I will '+esc(hb.a)+'.</span><br><span><em>Why it works:</em> '+esc(hb.w)+"</span></button>").join("");document.querySelectorAll("[data-hl-habit]").forEach(b=>b.addEventListener("click",()=>{hl.habitIdx=parseInt(b.getAttribute("data-hl-habit"),10);renderHabitLab()}));updateIfThen();renderWeek()}
+function updateIfThen(){const hb=currentHabit();const len=document.getElementById("hl-len").value;let t="When "+hlCue().replace(/^After /,"I have finished — after ")+", I will "+hb.a+" for "+len+", so I can move toward: "+GUIDE[hl.core].target.toLowerCase()+".";if(t.indexOf("When I first feel")===0){t="When I first feel "+hl.feeling.toLowerCase()+", I will "+hb.a+" for "+len+", so I can move toward: "+GUIDE[hl.core].target.toLowerCase()+"."}document.getElementById("hl-ifthen").textContent=t}
+function buildPlan(){const hb=currentHabit();const cue=hlCue();const len=document.getElementById("hl-len").value;const core=byId[hl.core];const days=[["Day 1 — Start tiny","Do it once, at the cue, for just "+len+". Success = done, not perfect."],["Day 2 — Same cue, same place","Repeat exactly. Same cue, same place — your brain is learning the link."],["Day 3 — Add the sentence","Before the habit, say: ‘"+sentenceFor(core,hl.feeling)+"’ Then do the habit."],["Day 4 — Make it easier","Remove one friction: lay things out the night before, move it earlier, shrink it if needed."],["Day 5 — Do it with / for someone","Tell one person your plan, or do it together. Accountability doubles follow-through."],["Day 6 — Handle a miss in advance","Write your rescue plan: ‘If I miss the cue, I will do it right after dinner instead.’"],["Day 7 — Review & keep one thing","Ask: did I feel "+GUIDE[hl.core].target.toLowerCase()+" more this week? Keep the version that worked; drop the rest."]];document.getElementById("hl-plan").innerHTML='<ol class="plan-list">'+days.map(d=>'<li><span class="daytag">'+esc(d[0].split(" — ")[0])+'</span><div><b>'+esc(d[0].split(" — ")[1]||"")+'</b><br>'+esc(d[1])+"</div></li>").join("")+"</ol>";document.getElementById("hl-plan-hint").textContent="Your plan for "+hl.feeling+" → "+hb.t+". Cue: "+cue+".";hl.planText="MY 7-DAY HABIT PLAN\nFeeling: "+hl.feeling+" ("+core.name+" › "+hl.family+")\nGoal: "+GUIDE[hl.core].target+"\nHabit: "+hb.t+" — I will "+hb.a+"\nCue: "+cue+"\nLength: "+len+"\nIf-then: "+document.getElementById("hl-ifthen").textContent+"\n\n"+days.map(d=>d[0]+": "+d[1]).join("\n")}
+function renderWeek(){const days=["M","T","W","T","F","S","S"];const labels=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];document.getElementById("hl-week").innerHTML=labels.map((d,i)=>'<button type="button" class="daybtn'+(hl.done[i]?" done":"")+'" data-day="'+i+'" aria-label="'+d+'" aria-pressed="'+!!hl.done[i]+'">'+days[i]+"</button>").join("");document.querySelectorAll("[data-day]").forEach(b=>b.addEventListener("click",()=>{const i=b.getAttribute("data-day");hl.done[i]=!hl.done[i];renderWeek()}));const n=Object.values(hl.done).filter(Boolean).length;document.getElementById("hl-week-msg").textContent=n===0?"No days tapped yet — today counts, whenever you do it.":(n+" of 7 days done this week. "+(n>=5?"That's a real streak — notice how the feeling is shifting.":"Keep it tiny; consistency beats intensity."))}
+document.getElementById("hl-feeling").addEventListener("change",e=>{const parts=e.target.value.split("|");hl.core=parts[0];hl.family=parts[1];hl.feeling=parts[2];hl.habitIdx=0;select(hl.core,hl.family,hl.feeling);renderHabitLab()});
+document.getElementById("hl-cue").addEventListener("change",updateIfThen);document.getElementById("hl-stack").addEventListener("input",updateIfThen);document.getElementById("hl-len").addEventListener("change",updateIfThen);
+document.getElementById("hl-build").addEventListener("click",()=>{buildPlan();document.getElementById("hl-plan").scrollIntoView({behavior:"smooth",block:"nearest"})});
+document.getElementById("hl-copy").addEventListener("click",function(){if(!hl.planText)buildPlan();copyText(hl.planText,this)});
+document.getElementById("hl-download").addEventListener("click",()=>{if(!hl.planText)buildPlan();downloadFile("my-7-day-habit-plan.txt",hl.planText)});
+document.getElementById("hl-write-goal").addEventListener("click",()=>{const hb=currentHabit();const core=byId[hl.core];openNotes("goals",null);document.getElementById("g-goal").value=hb.t+" — for when I feel "+hl.feeling.toLowerCase();document.getElementById("g-need").value=core.needs[0];document.getElementById("g-step").value="I will "+hb.a;document.getElementById("g-cue").value=hlCue();const hint=document.getElementById("goal-prefill-hint");hint.hidden=false;hint.textContent="Prefilled from the Habit Lab ("+hl.feeling+" · "+core.name+") — edit anything before you save it.";document.getElementById("g-goal").focus()});
+/* ===== My Notes ===== */
+const PROMPTS=["Right now I feel…","What I need is…","One small thing I will do today is…","What made today lighter / heavier?"];
+let noteCtx=null,promptIdx=0,goals=[],goalSeq=0,clearArmed=false,clearTimer=null;
+const pad=document.getElementById("pad");
+function switchNoteTab(tab){document.querySelectorAll("[data-ntab]").forEach(b=>b.setAttribute("aria-selected",b.getAttribute("data-ntab")===tab?"true":"false"));document.getElementById("notes-feelings").hidden=tab!=="feelings";document.getElementById("notes-goals").hidden=tab!=="goals"}
+document.querySelectorAll("[data-ntab]").forEach(b=>b.addEventListener("click",()=>switchNoteTab(b.getAttribute("data-ntab"))));
+function setNoteContext(payload){noteCtx=payload;const chip=document.getElementById("note-ctx");if(!payload){chip.hidden=true;chip.innerHTML="";return}chip.hidden=false;chip.className="ctx-chip"+(payload.side==="notmet"?" notmet":"");chip.innerHTML="<span>Writing about: <b>"+esc(payload.feeling)+"</b> — "+esc(payload.path)+'</span><button type="button" id="ctx-clear">Clear</button>';document.getElementById("ctx-clear").addEventListener("click",()=>setNoteContext(null))}
+function insertIntoPad(text){if(pad.value.trim()){if(!/\n\s*$/.test(pad.value))pad.value+="\n\n";pad.value+=text+"\n"}else{pad.value=text+"\n\n"}autoGrowPad();updatePadMeta();pad.focus()}
+function openNotes(tab,payload){switchNoteTab(tab||"feelings");if(payload){setNoteContext(payload);insertIntoPad(payload.sentence)}document.getElementById("notes").scrollIntoView({behavior:"smooth"});if(!payload&&tab==="feelings")setTimeout(()=>pad.focus(),450)}
+function autoGrowPad(){pad.style.height="auto";pad.style.height=Math.max(190,pad.scrollHeight+4)+"px"}
+function updatePadMeta(){const words=pad.value.trim()?pad.value.trim().split(/\s+/).length:0;document.getElementById("pad-count").textContent=words+(words===1?" word":" words")}
+pad.addEventListener("input",()=>{autoGrowPad();updatePadMeta()});
+document.getElementById("pad-date").textContent=todayStamp();
+document.getElementById("prompt-next").addEventListener("click",()=>{promptIdx=(promptIdx+1)%PROMPTS.length;document.getElementById("note-prompt").textContent=PROMPTS[promptIdx]});
+document.getElementById("prompt-use").addEventListener("click",()=>{insertIntoPad(PROMPTS[promptIdx])});
+document.getElementById("note-copy").addEventListener("click",function(){const head="# Feelings note — "+todayStamp()+(noteCtx?"\nFeeling: "+noteCtx.feeling+" ("+noteCtx.path+")":"")+"\n\n";copyText(head+pad.value,this)});
+document.getElementById("note-download").addEventListener("click",()=>{const head="# Feelings note — "+todayStamp()+(noteCtx?"\nFeeling: "+noteCtx.feeling+" ("+noteCtx.path+")\nSentence: "+noteCtx.sentence:"")+"\n\n";downloadFile("feelings-note-"+todayISO()+".md",head+pad.value+"\n")});
+document.getElementById("note-clear").addEventListener("click",function(){if(!clearArmed){clearArmed=true;this.textContent="Tap again to clear";this.classList.add("armed");clearTimer=setTimeout(()=>{clearArmed=false;this.textContent="Clear pad";this.classList.remove("armed")},3200);return}clearTimeout(clearTimer);clearArmed=false;this.textContent="Clear pad";this.classList.remove("armed");pad.value="";setNoteContext(null);autoGrowPad();updatePadMeta()});
+/* Dictation — Web Speech API */
+const micBtn=document.getElementById("mic-btn"),micLabel=document.getElementById("mic-label"),micNote=document.getElementById("mic-note"),liveStrip=document.getElementById("live-strip"),liveText=document.getElementById("live-text");
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let recog=null,listening=false;
+if(!SR){micBtn.disabled=true;micLabel.textContent="Dictate";micNote.textContent="Voice typing works in Chrome or Edge — typing works everywhere."}
+else{micNote.textContent="Tap Dictate and talk — your words land in the pad. Tap again to stop.";recog=new SR();recog.continuous=true;recog.interimResults=true;recog.lang="en-US";
+recog.onresult=function(ev){let interim="";for(let i=ev.resultIndex;i<ev.results.length;i++){const r=ev.results[i];if(r.isFinal){appendSpeech(r[0].transcript)}else{interim+=r[0].transcript}}liveText.textContent=interim?("Listening… “"+interim+"”"):"Listening… speak now."};
+recog.onend=function(){if(listening){try{recog.start()}catch(e){setListening(false)}}};
+recog.onerror=function(ev){if(ev.error==="not-allowed"||ev.error==="service-not-allowed"){setListening(false);micNote.textContent="Microphone permission was blocked — allow the mic in your browser, or just type. The pad works either way."}else if(ev.error==="no-speech"){liveText.textContent="Listening… I didn't catch that — keep talking."}else if(ev.error!=="aborted"){setListening(false);micNote.textContent="Dictation stopped ("+ev.error+"). Tap Dictate to try again, or keep typing."}};
+micBtn.addEventListener("click",()=>{if(listening){setListening(false);try{recog.stop()}catch(e){}}else{try{recog.start();setListening(true)}catch(e){micNote.textContent="Dictation couldn't start — typing works everywhere."}}})}
+function setListening(on){listening=on;micBtn.classList.toggle("listening",on);micBtn.setAttribute("aria-pressed",on?"true":"false");micLabel.textContent=on?"Stop":"Dictate";liveStrip.hidden=!on;if(on)liveText.textContent="Listening… speak now."}
+function appendSpeech(text){const t=String(text||"").trim();if(!t)return;let v=pad.value;if(v&&!/\s$/.test(v))v+=" ";pad.value=v+t;autoGrowPad();updatePadMeta()}
+/* Goals */
+(function buildNeedsList(){const seen={};const list=document.getElementById("needs-list");CORES.forEach(c=>c.needs.forEach(n=>{if(!seen[n]){seen[n]=1;const o=document.createElement("option");o.value=n;list.appendChild(o)}}))})();
+function renderGoals(){const wrap=document.getElementById("goal-list");if(!goals.length){wrap.innerHTML='<div class="goal-empty">No goals yet. Set one above — one goal, one need, one first small step.</div>';return}wrap.innerHTML=goals.map(g=>'<div class="goal-card'+(g.done?" done":"")+'"><button type="button" class="goal-check'+(g.done?" done":"")+'" data-goal-toggle="'+g.id+'" aria-pressed="'+g.done+'" aria-label="Mark goal done">✓</button><div class="g-body"><h4>'+esc(g.goal)+"</h4>"+(g.need?'<p>Because I need <b>'+esc(g.need)+"</b></p>":"")+(g.step?'<p>First small step: <b>'+esc(g.step)+"</b></p>":"")+(g.cue?'<p>I\'ll do it when: <b>'+esc(g.cue)+"</b></p>":"")+(g.free?'<p>'+esc(g.free)+"</p>":"")+'</div><button type="button" class="goal-remove" data-goal-remove="'+g.id+'">Remove</button></div>').join("");wrap.querySelectorAll("[data-goal-toggle]").forEach(b=>b.addEventListener("click",()=>{const g=goals.find(x=>x.id===parseInt(b.getAttribute("data-goal-toggle"),10));if(g){g.done=!g.done;renderGoals()}}));wrap.querySelectorAll("[data-goal-remove]").forEach(b=>b.addEventListener("click",()=>{goals=goals.filter(x=>x.id!==parseInt(b.getAttribute("data-goal-remove"),10));renderGoals()}))}
+document.getElementById("goal-save").addEventListener("click",function(){const goal=document.getElementById("g-goal").value.trim();if(!goal){document.getElementById("g-goal").focus();document.getElementById("g-goal").style.borderColor="#a8381b";setTimeout(()=>document.getElementById("g-goal").style.borderColor="",2200);return}goals.push({id:++goalSeq,goal:goal,need:document.getElementById("g-need").value.trim(),step:document.getElementById("g-step").value.trim(),cue:document.getElementById("g-cue").value.trim(),free:document.getElementById("g-free").value.trim(),done:false});["g-goal","g-need","g-step","g-cue","g-free"].forEach(id=>document.getElementById(id).value="");document.getElementById("goal-prefill-hint").hidden=true;renderGoals();const o=this.textContent;this.textContent="Saved ✓";setTimeout(()=>this.textContent=o,1600)});
+document.getElementById("goals-download").addEventListener("click",()=>{if(!goals.length){renderGoals();return}const body=goals.map((g,i)=>"## "+(i+1)+". "+g.goal+(g.done?" — done ✓":"")+"\n"+(g.need?"- Because I need: "+g.need+"\n":"")+(g.step?"- First small step: "+g.step+"\n":"")+(g.cue?"- I'll do it when: "+g.cue+"\n":"")+(g.free?"\n"+g.free+"\n":"")).join("\n");downloadFile("my-goals-"+todayISO()+".md","# My goals — "+todayStamp()+"\n\n"+body)});
+renderGoals();
+/* Theme toggle — dark by default, light cream one tap away */
+(function(){var btn=document.getElementById("theme-toggle");if(!btn)return;function sync(){var light=isLight();btn.setAttribute("aria-pressed",light?"true":"false");btn.setAttribute("aria-label",light?"Switch to dark theme":"Switch to light theme");btn.setAttribute("title",light?"Switch to dark theme":"Switch to light theme");var meta=document.querySelector('meta[name="color-scheme"]');if(meta)meta.setAttribute("content",light?"light":"dark")}btn.addEventListener("click",function(){var next=isLight()?"dark":"light";document.documentElement.setAttribute("data-theme",next);document.documentElement.style.colorScheme=next;sync();buildWheel();renderSelection()});sync()})();
+/* Init */
+buildWheel();buildList();renderSelection();renderHabitLab();autoGrowPad();updatePadMeta();
+</script>
+</body></html>
