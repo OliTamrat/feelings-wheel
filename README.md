@@ -4,7 +4,7 @@ Created by Olink Technologies.
 
 ## What it is
 
-A free, interactive feelings wheel. Tap a feeling, see the need underneath it, and build one small habit around it. 12 core feelings, 48 families, 97 specific feelings — the full Nonviolent Communication inventory, turned into a page anyone can open and use. No account, no sign-up, nothing uploaded anywhere.
+A free, interactive feelings wheel. Tap a feeling, see the need underneath it, and build one small habit around it. 12 core feelings, 48 families, 97 specific feelings — the full Nonviolent Communication inventory, turned into a page anyone can open and use. No account needed — open it and use it. If you want your notes on more than one device, you can create a free account and they sync; without one, everything stays on the device you're on, and nothing is uploaded anywhere.
 
 ## Why I built it
 
@@ -14,7 +14,9 @@ So I built this: free, for anyone. If it helps one person name what they're feel
 
 ## How it's built
 
-One self-contained page — `index.html`. No server, no database, no account, no tracking. Everything runs in your browser, and nothing you type or say leaves it.
+One self-contained page — `index.html`. No tracking. Everything runs in your browser. As a guest, everything you type or say stays on your device — nothing leaves it. An optional free account (email or Google, through Firebase) syncs your notes, goals and habits across your devices, into your own private space that nobody else can read.
+
+- **Accounts (optional)** — sign up free with email or Google to sync notes, goals and habits across devices; or skip it and keep everything on this device only. Signing in on a device with no synced data uploads what that device already has; signing out returns the device to guest mode.
 
 - **The wheel** — 12 core feelings, 48 families, 97 specific feelings. Tap any feeling to see the need behind it and what helps.
 - **Deep dives** — every feeling has a page of its own: what it usually means, what need it points to, and what to try.
@@ -38,7 +40,7 @@ Open https://olitamrat.github.io/feelings-wheel/ — or download `index.html` an
 
 ## Honest limits
 
-- Notes, goals and habits save in your browser, on your device — they are never sent anywhere, and you can erase them any time from My Notes. Copy or Download still works as a backup. Saving is per device and per browser: what you save on your phone won't appear on your laptop.
+- Saving has two modes. As a guest, notes, goals and habits save in your browser, on your device — they are never sent anywhere, and you can erase them any time from My Notes. Copy or Download still works as a backup. Saving is per device and per browser: what you save on your phone won't appear on your laptop. With a free account, they sync to your private Firebase space and follow you across devices instead.
 - Voice dictation has two modes. The built-in one uses your browser's speech recognition and needs a supported browser (Chrome works best). Whisper dictation runs OpenAI's open-source Whisper model entirely on your device — no API key, no server — after a one-time ~40 MB model download; it works in browsers the built-in mode doesn't. Nothing you say is recorded or sent by this page in either mode.
 
 ## Credits
