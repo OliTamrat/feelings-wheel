@@ -20,15 +20,15 @@ try{var _t=localStorage.getItem("feelings-wheel:theme");if(_t==="dark"||_t==="li
      charcoal, not near-black), cream text, peach accent. Cream is the
      default theme (html[data-theme="light"] below); these tokens apply
      when the visitor toggles to dark. */
-  --bg:#1d1a16; --paper:#26221c; --surface:#26221c; --surface2:#2f2a22;
-  --ink:#f3ede1; --ink-deep:#fffaf0; --soft:#b3a58c; --line:#3a352c;
+  --bg:#292420; --paper:#332c21; --surface:#332c21; --surface2:#3e3628;
+  --ink:#f5efe2; --ink-deep:#fffaf0; --soft:#c6b99e; --line:#4c4330;
   --accent:#F2A97E;
   --ox:#a8381b; --ox-dark:#8a2b12; --ox-line:rgba(242,169,126,.35); --ox-soft:rgba(242,169,126,.12); --oxBg:#3a1c0f; --ox-ink:#f2a183;
   --peach:#F2A97E; --gold:#e8c26a;
   --cloth-line:#453b2c; --taupe:#554631;
   --teal-deep:#2f5d63; --metBg:#2e2a12; --met-ink:#f2d492;
-  --book-shadow:0 36px 85px rgba(0,0,0,.45),0 0 0 1px #33291b;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
+  --book-shadow:0 24px 60px rgba(0,0,0,.35),0 0 0 1px #4a3f2a;
+  --shadow:0 10px 30px rgba(0,0,0,.22);
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --sans:"Schibsted Grotesk",system-ui,-apple-system,sans-serif;
   --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -63,18 +63,8 @@ html[data-theme="light"] .daybtn.done{background:var(--pill);border-color:var(--
 html[data-theme="light"] .mic-btn{background:var(--pill);border-color:var(--pill);color:var(--pill-ink)}
 html[data-theme="light"] .mic-btn.listening{background:#7d2f12;border-color:#7d2f12;color:#fff}
 html[data-theme="light"] .habit-pick[aria-pressed="true"]{border-color:#b98a1e}
-/* Book pages — panel, check-in and notes read as cream pages on the dark ground */
-html[data-theme="dark"] .page{
-  --paper:#f7f1e3; --surface:#fffdf6; --surface2:#eee3cb;
-  --ink:#241E18; --ink-deep:#171310; --soft:#6f6152; --line:#ddd0b8;
-  --cloth-line:#d9cdb4; --taupe:#c9b995; --accent:#a8381b;
-  --metBg:#f3e2ac; --met-ink:#6b5518; --oxBg:#f8dfcf; --ox-ink:#8a2b12; --ox-soft:rgba(168,56,27,.08);
-  background:var(--paper); color:var(--ink);
-  border:1px solid #e0d3b5; box-shadow:0 30px 70px rgba(0,0,0,.38);
-}
-html[data-theme="dark"] .page .micro{background:#fbf0cd;border-color:#e3c878;color:#5c4a12}
-html[data-theme="dark"] .page .btn.ghost{border-color:#b8a888;color:var(--ink)}
-html[data-theme="dark"] .page .btn.danger{color:var(--ox)}
+/* Dark panels sit in the same warm-charcoal family as the page itself —
+   no cream slabs — so the dark theme reads soft and light, not heavy. */
 body,.panel,.note-shell,.checkin,.core-row{transition:background-color .45s ease,color .45s ease,border-color .45s ease}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -134,7 +124,7 @@ section.block{margin-top:120px}
 .search-box input{width:100%;min-height:54px;padding:12px 22px;border:1px solid var(--cloth-line);border-radius:999px;background:transparent;color:var(--ink);text-align:center}
 .search-box input::placeholder{color:var(--soft)}
 .search-results{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:50;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--book-shadow);display:none;overflow:hidden;text-align:left}
-html[data-theme="dark"] .search-results{background:#2a251e}
+html[data-theme="dark"] .search-results{background:#3a332a}
 .search-results.open{display:block}
 .search-results button{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 16px;color:var(--ink);border-bottom:1px solid var(--line);min-height:48px}
 .search-results .sr-name{font-weight:700}
@@ -237,13 +227,13 @@ html[data-theme="light"] .stepblock .art{color:#b98a1e}
 .stepblock p.hint{color:var(--soft);font-size:.98rem;margin:0 0 14px;max-width:600px}
 .stepblock label{font-weight:700;display:block;margin-bottom:6px}
 .stepblock select,.stepblock input[type="text"]{width:100%;max-width:560px;padding:13px 16px;border:1.5px solid var(--cloth-line);border-radius:14px;background:var(--surface);color:var(--ink);margin-bottom:12px;min-height:52px}
-html[data-theme="dark"] .stepblock select,html[data-theme="dark"] .stepblock input[type="text"]{background:#26221c}
+html[data-theme="dark"] .stepblock select,html[data-theme="dark"] .stepblock input[type="text"]{background:var(--surface2)}
 .direction-box{border-radius:18px;padding:18px 20px;margin:6px 0 4px;max-width:640px}
 .habit-pick{display:block;width:100%;max-width:640px;text-align:left;border:1.5px solid var(--cloth-line);background:transparent;border-radius:18px;padding:18px 20px;margin-bottom:12px;color:var(--ink);min-height:48px;transition:background-color .25s ease,border-color .25s ease}
 .habit-pick[aria-pressed="true"]{border-color:var(--peach);background:var(--ox-soft)}
 .habit-pick b{display:block;font-family:var(--serif);font-size:1.15rem;font-weight:400}
 .habit-pick span{font-size:.92rem;color:var(--soft)}
-.ifthen{background:#f7f1e3;color:#241E18;border-radius:20px;padding:24px 26px;font-size:1.3rem;line-height:1.5;font-family:var(--serif);max-width:640px;box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.ifthen{background:var(--surface2);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:24px 26px;font-size:1.3rem;line-height:1.5;font-family:var(--serif);max-width:640px;box-shadow:var(--shadow)}
 html[data-theme="light"] .ifthen{background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line)}
 .plan-list{list-style:none;padding:0;margin:12px 0;max-width:680px}
 .plan-list li{display:flex;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
@@ -393,7 +383,7 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
 @media(max-width:860px){
   .mainnav{display:none}
   .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:110;background:var(--paper);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));gap:4px}
-  html[data-theme="dark"] .tabbar{background:#26221c}
+  html[data-theme="dark"] .tabbar{background:#332c21}
   .tabbar a{flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;padding:8px 2px;border-radius:12px;color:var(--soft);text-decoration:none;font-weight:600;font-size:.82rem;text-align:center;transition:background-color .3s ease,color .3s ease}
   .tabbar a[aria-current="page"]{background:var(--ox-soft);color:var(--ink)}
   html[data-theme="light"] .tabbar a[aria-current="page"]{background:var(--pill);color:var(--pill-ink)}
@@ -410,6 +400,63 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
   .hero-cta a{min-width:100%;min-height:60px;padding:16px 32px}
   section.block{margin-top:88px}
 }
+/* ---------- Dashboard — the state is the visual: streak, real dates,
+   today's feeling, the active goal, the next step ---------- */
+.dash-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;margin-top:30px;align-items:start}
+.dash-side{display:flex;flex-direction:column;gap:18px}
+.dash-card{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:var(--shadow)}
+.dash-card p{color:var(--soft);font-size:.98rem;margin:0 0 10px}
+.dash-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;font-weight:500}
+.dash-big{font-family:var(--serif);font-size:4.4rem;line-height:1;color:var(--ink-deep)}
+.dash-big small{font-size:1.3rem;color:var(--soft);font-family:var(--sans)}
+.dash-feel{font-family:var(--serif);font-weight:400;font-size:1.7rem;margin:0 0 6px;color:var(--ink-deep);line-height:1.15}
+.dash-path{font-family:var(--mono);font-size:.82rem;color:var(--soft)}
+.weekstrip{display:flex;gap:8px;margin:10px 0 4px}
+.wcell{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:10px 2px 8px;border:1.5px solid var(--line);border-radius:16px;color:var(--soft)}
+.wcell .wl{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+.wcell .wn{font-family:var(--serif);font-size:1.3rem;line-height:1.1;color:var(--ink)}
+.wcell .wmarks{min-height:17px;font-size:.82rem;color:var(--accent);display:flex;align-items:center;gap:4px}
+.wcell .cdot{width:7px;height:7px;border-radius:50%;background:#e06a41;display:inline-block}
+.wcell.done{background:var(--metBg);border-color:transparent}
+.wcell.done .wn{color:var(--met-ink)}
+.wcell.today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.wcell.future{opacity:.45}
+.chart-wrap{margin:8px 0 30px}
+.chart{display:flex;align-items:flex-end;gap:6px;height:92px;border-bottom:1px solid var(--line)}
+.bar{flex:1;background:var(--surface2);border-radius:6px 6px 0 0;height:22%;position:relative;min-width:0}
+.bar.on{background:linear-gradient(180deg,#f0cd72,#c99b3f);height:100%}
+.bar span{position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;color:var(--soft)}
+@media(max-width:860px){.dash-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.dash-card{padding:24px 20px}.dash-big{font-size:3.4rem}.weekstrip{gap:5px}.wcell{border-radius:13px;padding:8px 1px 6px}}
+/* ---------- Calendar — real dates, tap to mark practice ---------- */
+.cal{max-width:640px;margin-top:6px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-title{font-family:var(--serif);font-size:1.5rem;color:var(--ink-deep)}
+.cal-nav{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--cloth-line);background:transparent;color:var(--ink);font-size:1.35rem;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.cal-nav:hover{border-color:var(--peach)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-dow{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:center;padding:4px 0}
+.cal-cell{min-height:58px;border:1.5px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:.95rem;padding:6px 2px;width:100%}
+.cal-cell.other{opacity:.3;border-style:dashed}
+.cal-cell.future{opacity:.38}
+.cal-cell.done{background:var(--peach);border-color:var(--peach);color:#221407}
+html[data-theme="light"] .cal-cell.done{background:var(--pill);border-color:var(--pill);color:var(--pill-ink)}
+.cal-cell.today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.cal-num{font-weight:600;line-height:1.1}
+.cal-marks{min-height:15px;font-size:.78rem;line-height:1;display:flex;align-items:center;gap:4px}
+.cal-dot{width:7px;height:7px;border-radius:50%;background:#e06a41;display:inline-block}
+@media(max-width:560px){.cal-cell{min-height:50px;border-radius:12px;font-size:.9rem}.cal-grid{gap:4px}}
+/* ---------- If–then chain — the plan, drawn as its three parts ---------- */
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:16px 0 4px;max-width:680px}
+.cstep{border:1.5px solid var(--cloth-line);border-radius:999px;padding:8px 16px 10px;font-weight:600;background:var(--surface);max-width:100%}
+.cstep i{display:block;font-family:var(--mono);font-style:normal;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1px}
+.carrow{color:var(--accent);font-family:var(--mono)}
+.daydate{font-size:.68rem;letter-spacing:0;text-transform:none;color:var(--soft)}
+.doneflag{color:var(--accent);font-weight:700;font-size:.85rem;white-space:nowrap}
+/* ---------- Check-in progress — four segments, one per step ---------- */
+.ci-progress{display:flex;gap:6px;margin-bottom:18px}
+.ci-progress span{flex:1;height:6px;border-radius:99px;background:var(--line)}
+.ci-progress span.on{background:var(--accent)}
 </style>
 </head>
 <body data-mood="neutral">
@@ -426,6 +473,30 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
 </div>
 <p class="hero-caption">97 feelings · 12 core feelings · Free, forever</p>
 </header>
+
+<section class="block" aria-label="Your dashboard" style="margin-top:76px">
+<p class="secnum">Your dashboard</p>
+<h2 class="sec-title">Your week, at a glance.</h2>
+<p class="sec-lede">The whole idea on one screen: name today's feeling, keep the streak alive, and work one goal with one small step. A day fills in when you check in — or when you tap it as practised in the Habit Lab calendar.</p>
+<div class="dash-grid">
+<div class="dash-card dash-main">
+<p class="dash-label">Current streak</p>
+<div class="dash-big"><span id="dash-streak">0</span> <small>days in a row</small></div>
+<p id="dash-sub" style="margin-top:6px"></p>
+<p class="dash-label" style="margin-top:28px">This week — real dates, Monday to Sunday</p>
+<div class="weekstrip" id="dash-week"></div>
+<p style="font-size:.88rem;margin-top:8px">Gold = you showed up that day. <span style="color:#e06a41" aria-hidden="true">●</span> = checked in · ✓ = practised. The outlined day is today.</p>
+<p class="dash-label" style="margin-top:28px">Last 14 days</p>
+<div class="chart-wrap"><div class="chart" id="dash-chart" role="img" aria-label="Bar chart of the last 14 days — a full gold bar means you checked in or practised that day"></div></div>
+<p id="dash-chart-note" style="font-size:.88rem"></p>
+</div>
+<div class="dash-side">
+<div class="dash-card" id="dash-today"></div>
+<div class="dash-card" id="dash-goal"></div>
+<div class="dash-card" id="dash-next"></div>
+</div>
+</div>
+</section>
 
 <section class="block" aria-label="The wheel" style="margin-top:64px">
 <p class="secnum">01 · The wheel</p>
@@ -447,7 +518,7 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
 <p class="sec-lede">Each area has its own page — go straight to the one you need, and use the navigation to move between them.</p>
 <div class="area-list">
 <a class="area-row" href="#/chapters"><span class="ch-num" aria-hidden="true">02</span><span class="area-titles"><span class="area-name">The 12 chapters</span><span class="area-desc">A deep dive for every core feeling — its four families, the exact words under each, and a starter habit for every line.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
-<a class="area-row" href="#/habits"><span class="ch-num" aria-hidden="true">03</span><span class="area-titles"><span class="area-name">Habit Lab</span><span class="area-desc">Turn one feeling into one tiny habit: pick the habit, anchor it to something you already do, and follow the 7-day practice plan.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
+<a class="area-row" href="#/habits"><span class="ch-num" aria-hidden="true">03</span><span class="area-titles"><span class="area-name">Habit Lab</span><span class="area-desc">Turn one feeling into one tiny habit: pick the habit, anchor it to something you already do, and follow the 7-day practice plan on a real calendar that tracks your days and your streak.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
 <a class="area-row" href="#/checkin"><span class="ch-num" aria-hidden="true">✓</span><span class="area-titles"><span class="area-name">Daily check-in</span><span class="area-desc">Four quick steps — needs met or not, core feeling, family, exact word — ending in a first step you can take right away.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
 <a class="area-row" href="#/notes"><span class="ch-num" aria-hidden="true">04</span><span class="area-titles"><span class="area-name">My Notes</span><span class="area-desc">Write about a feeling you just named, or set a goal and its first small step. Type, or tap the mic and talk — it saves as you go.</span></span><span class="area-arrow" aria-hidden="true">→</span></a>
 </div>
@@ -479,11 +550,10 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
 <section class="block" id="habit-lab" aria-label="Habit Lab">
 <p class="secnum">03 · Habit Lab</p>
 <h2 class="sec-title">One feeling.<br>One tiny habit.</h2>
-<p class="sec-lede">Pick one feeling you want to work with. If it's a hard one, the Lab builds a habit that helps you get out of it faster. If it's a good one, it builds a habit that makes it happen more often. Small, specific, anchored to something you already do.</p>
+<p class="sec-lede">Pick one feeling you want to work with. If it's a hard one, the Lab builds a habit that helps you get out of it faster. If it's a good one, it builds a habit that makes it happen more often. Small, specific, anchored to something you already do — and tracked on a real calendar in step 4, so you can see your streak, not just your plan.</p>
 
 <div class="stepblock">
 <p class="s-num">01</p>
-<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><path d="M4 38 C 40 20, 70 44, 105 40 C 140 36, 155 46, 180 26 C 205 6, 225 8, 245 26 C 262 41, 280 40, 296 32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
 <h3>Choose your focus feeling</h3>
 <p class="hint" id="hl-focus-hint">Start from the wheel, a line above, or pick here.</p>
 <label for="hl-feeling">I want to work with…</label>
@@ -493,7 +563,6 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
 
 <div class="stepblock">
 <p class="s-num">02</p>
-<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 8 H 240" opacity=".35"/><path d="M10 18 H 290" opacity=".35"/><path d="M10 28 H 180" /><path d="M10 38 H 260" opacity=".35"/><path d="M10 48 H 130" /></g></svg>
 <h3>Pick one tiny habit</h3>
 <p class="hint">Three options matched to this feeling. Pick one — not all three.</p>
 <div id="hl-habits"></div>
@@ -501,9 +570,9 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
 
 <div class="stepblock">
 <p class="s-num">03</p>
-<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="60" cy="26" r="15"/><circle cx="112" cy="26" r="15"/><path d="M75 26 H 97" opacity=".6"/><path d="M140 26 H 290" opacity=".35"/></g></svg>
 <h3>Anchor it &amp; make it tiny</h3>
-<p class="hint">Habits stick when they are attached to something you already do, and so small you can't say no.</p>
+<p class="hint">Habits stick when they are attached to something you already do, and so small you can't say no. Your plan, as a chain — it updates as you choose:</p>
+<div class="chain" id="hl-chain" aria-label="Your plan as a chain: when, I will, for how long"></div>
 <label for="hl-cue">When will you do it?</label>
 <select id="hl-cue"><option>After I pour my morning coffee / tea</option><option>When I first feel this feeling</option><option>After lunch</option><option>When I get in the car</option><option>After I sit at my desk</option><option>Before bed</option><option>After dinner</option></select>
 <label for="hl-stack">Or write your own cue</label>
@@ -517,12 +586,14 @@ html[data-theme="light"] .mainnav a[aria-current="page"]{background:var(--pill);
 
 <div class="stepblock">
 <p class="s-num">04</p>
-<svg class="art" width="300" height="52" viewBox="0 0 300 52" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 40 V 26"/><path d="M54 40 V 20"/><path d="M96 40 V 30"/><path d="M138 40 V 14"/><path d="M180 40 V 24"/><path d="M222 40 V 18"/><path d="M264 40 V 10"/></g></svg>
-<h3>Your 7-day practice plan</h3>
-<p class="hint" id="hl-plan-hint">Press “Build my 7-day plan” and your week appears here — a little more each day, never a jump.</p>
+<h3>Your 7-day plan — and the calendar that tracks it</h3>
+<p class="hint" id="hl-plan-hint">Press “Build my 7-day plan” and your week appears here — a little more each day, never a jump. Each day carries its real date, starting today.</p>
 <div id="hl-plan"></div>
-<h3 style="margin-top:24px">This week — tap a day when you did it</h3>
-<div class="week" id="hl-week"></div><p class="hint" id="hl-week-msg" style="margin-top:8px"></p><p class="hint">Your taps save on this device, like your notes and goals.</p>
+<h3 style="margin-top:28px">Your calendar — tap a day you practised</h3>
+<p class="hint">This is how tracking works: build the plan above, do the tiny habit, then tap that date here. Gold means practised; the orange dot means you checked in that day; the outlined cell is today. Future days unlock when they arrive. Your streak — here and on the dashboard — counts every day you practised or checked in.</p>
+<div class="cal" id="hl-cal"></div>
+<p class="hint" id="hl-cal-msg" style="margin-top:10px"></p>
+<p class="hint">Your taps save on this device, like your notes and goals — and sync to your account when you're signed in.</p>
 <div class="actions no-print"><button type="button" class="btn" id="hl-copy">Copy my plan</button><button type="button" class="btn ghost" id="hl-download">Download plan (.txt)</button><button type="button" class="btn ghost" id="hl-write-goal">Write a goal for this habit →</button></div>
 </div>
 </section>
@@ -639,7 +710,7 @@ function polar(r,d){const rad=d*Math.PI/180;return[CX+r*Math.sin(rad),CY-r*Math.
 function sector(a,b,c,d){const p1=polar(b,c),p2=polar(b,d),p3=polar(a,d),p4=polar(a,c);return "M"+p1[0].toFixed(2)+" "+p1[1].toFixed(2)+" A"+b+" "+b+" 0 0 1 "+p2[0].toFixed(2)+" "+p2[1].toFixed(2)+" L"+p3[0].toFixed(2)+" "+p3[1].toFixed(2)+" A"+a+" "+a+" 0 0 0 "+p4[0].toFixed(2)+" "+p4[1].toFixed(2)+" Z"}
 function textEl(r,am,fs,fw,t){const p=polar(r,am);const na=((am%360)+360)%360;const rot=na>180?na+90:na-90;return '<text x="'+p[0].toFixed(1)+'" y="'+p[1].toFixed(1)+'" font-size="'+fs+'" font-weight="'+fw+'" text-anchor="middle" dominant-baseline="central" transform="rotate('+rot.toFixed(1)+" "+p[0].toFixed(1)+" "+p[1].toFixed(1)+')">'+esc(t)+"</text>"}
 function isLight(){return document.documentElement.getAttribute("data-theme")==="light"}
-function buildWheel(){const light=isLight();const wheelBg=light?"#fffaf0":"#26221c",rimTopBand=light?"#e8c26a":"#57471f",rimBotBand=light?"#d98a5e":"#63331f",rimText=light?"#241E18":"#e8dcc2",centerStroke=light?"#c9b995":"#554631",centerMain=light?"#241E18":"#f3ede1",centerSub=light?"#6f6152":"#b3a58c";let s='<circle cx="360" cy="360" r="359" fill="'+wheelBg+'"/>';const tA=polar(R_RIM,276),tB=polar(R_RIM,84),bA=polar(R_RIM,264),bB=polar(R_RIM,96),bdA=polar(R_RIM,270),bdB=polar(R_RIM,90);s+='<defs><path id="rim-top" d="M'+tA[0].toFixed(1)+" "+tA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+tB[0].toFixed(1)+" "+tB[1].toFixed(1)+'"/><path id="rim-bottom" d="M'+bA[0].toFixed(1)+" "+bA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 0 "+bB[0].toFixed(1)+" "+bB[1].toFixed(1)+'"/></defs>';s+='<path d="M'+bdA[0].toFixed(1)+" "+bdA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+bdB[0].toFixed(1)+" "+bdB[1].toFixed(1)+'" fill="none" stroke="'+rimTopBand+'" stroke-width="30"/><path d="M'+bdB[0].toFixed(1)+" "+bdB[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+bdA[0].toFixed(1)+" "+bdA[1].toFixed(1)+'" fill="none" stroke="'+rimBotBand+'" stroke-width="30"/>';s+='<text font-size="16.5" font-weight="800" letter-spacing="2.5" fill="'+rimText+'"><textPath href="#rim-top" startOffset="50%" text-anchor="middle">FEELINGS WHEN YOUR NEEDS ARE MET</textPath></text><text font-size="16.5" font-weight="800" letter-spacing="2.5" fill="'+rimText+'"><textPath href="#rim-bottom" startOffset="50%" text-anchor="middle">FEELINGS WHEN YOUR NEEDS ARE NOT MET</textPath></text>';
+function buildWheel(){const light=isLight();const wheelBg=light?"#fffaf0":"#332c21",rimTopBand=light?"#e8c26a":"#57471f",rimBotBand=light?"#d98a5e":"#63331f",rimText=light?"#241E18":"#e8dcc2",centerStroke=light?"#c9b995":"#554631",centerMain=light?"#241E18":"#f3ede1",centerSub=light?"#6f6152":"#b3a58c";let s='<circle cx="360" cy="360" r="359" fill="'+wheelBg+'"/>';const tA=polar(R_RIM,276),tB=polar(R_RIM,84),bA=polar(R_RIM,264),bB=polar(R_RIM,96),bdA=polar(R_RIM,270),bdB=polar(R_RIM,90);s+='<defs><path id="rim-top" d="M'+tA[0].toFixed(1)+" "+tA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+tB[0].toFixed(1)+" "+tB[1].toFixed(1)+'"/><path id="rim-bottom" d="M'+bA[0].toFixed(1)+" "+bA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 0 "+bB[0].toFixed(1)+" "+bB[1].toFixed(1)+'"/></defs>';s+='<path d="M'+bdA[0].toFixed(1)+" "+bdA[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+bdB[0].toFixed(1)+" "+bdB[1].toFixed(1)+'" fill="none" stroke="'+rimTopBand+'" stroke-width="30"/><path d="M'+bdB[0].toFixed(1)+" "+bdB[1].toFixed(1)+" A"+R_RIM+" "+R_RIM+" 0 0 1 "+bdA[0].toFixed(1)+" "+bdA[1].toFixed(1)+'" fill="none" stroke="'+rimBotBand+'" stroke-width="30"/>';s+='<text font-size="16.5" font-weight="800" letter-spacing="2.5" fill="'+rimText+'"><textPath href="#rim-top" startOffset="50%" text-anchor="middle">FEELINGS WHEN YOUR NEEDS ARE MET</textPath></text><text font-size="16.5" font-weight="800" letter-spacing="2.5" fill="'+rimText+'"><textPath href="#rim-bottom" startOffset="50%" text-anchor="middle">FEELINGS WHEN YOUR NEEDS ARE NOT MET</textPath></text>';
 ORDER.forEach((id,i)=>{const core=byId[id];const a0=i*30+300,a1=a0+30;s+='<g class="segwrap" data-level="core" data-core="'+id+'"><path class="seg" data-level="core" data-core="'+id+'" tabindex="0" role="button" aria-label="Core feeling: '+esc(core.name)+'" d="'+sector(R_CORE[0],R_CORE[1],a0+.4,a1-.4)+'" fill="'+core.color+'"/>'+textEl((R_CORE[0]+R_CORE[1])/2,(a0+a1)/2,16,800,core.name)+"</g>";core.families.forEach((fam,fi)=>{const fa0=a0+fi*7.5,fa1=fa0+7.5;s+='<g class="segwrap" data-level="family" data-core="'+id+'" data-family="'+esc(fam.name)+'"><path class="seg" data-level="family" data-core="'+id+'" data-family="'+esc(fam.name)+'" tabindex="0" role="button" aria-label="Family: '+esc(fam.name)+'" d="'+sector(R_FAM[0],R_FAM[1],fa0+.3,fa1-.3)+'" fill="'+mixWhite(core.color,.38)+'"/>'+textEl((R_FAM[0]+R_FAM[1])/2,(fa0+fa1)/2,11.5,700,fam.name)+"</g>";const step=7.5/fam.feelings.length;fam.feelings.forEach((feel,si)=>{const sa0=fa0+si*step,sa1=sa0+step;s+='<g class="segwrap" data-level="feeling" data-core="'+id+'" data-family="'+esc(fam.name)+'" data-feeling="'+esc(feel)+'"><path class="seg" data-level="feeling" data-core="'+id+'" data-family="'+esc(fam.name)+'" data-feeling="'+esc(feel)+'" tabindex="0" role="button" aria-label="Feeling: '+esc(feel)+'" d="'+sector(R_FEEL[0],R_FEEL[1],sa0+.25,sa1-.25)+'" fill="'+mixWhite(core.color,.66)+'"/>'+textEl((R_FEEL[0]+R_FEEL[1])/2,(sa0+sa1)/2,11.5,600,feel)+"</g>"})})});
 s+='<circle cx="360" cy="360" r="46" fill="'+wheelBg+'" stroke="'+centerStroke+'" stroke-width="2"/><text id="cl1" x="360" y="350" text-anchor="middle" font-size="14" font-weight="800" fill="'+centerMain+'">97 feelings</text><text id="cl2" x="360" y="370" text-anchor="middle" font-size="11.5" fill="'+centerSub+'">12 core feelings</text>';document.getElementById("wheel").innerHTML=s;
 document.querySelectorAll("#wheel .seg").forEach(el=>{function act(){const l=el.getAttribute("data-level"),cid=el.getAttribute("data-core");if(l==="core")select(cid,null,null);else if(l==="family")select(cid,el.getAttribute("data-family"),null);else select(cid,el.getAttribute("data-family"),el.getAttribute("data-feeling"))}el.addEventListener("click",act);el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act()}})});
@@ -682,8 +753,8 @@ var _oc=document.getElementById("open-checkin");if(_oc)_oc.addEventListener("cli
 var _nc=document.getElementById("nav-checkin");if(_nc)_nc.addEventListener("click",e=>{e.preventDefault();startCheckin()});
 document.getElementById("hero-checkin").addEventListener("click",e=>{e.preventDefault();startCheckin()});
 function ciOpts(items,attr){return '<div class="ci-options">'+items.map(it=>'<button type="button" data-ci="'+attr+'" data-value="'+esc(it.value)+'"'+(it.big?' class="big"':"")+">"+esc(it.label)+"</button>").join("")+"</div>"}
-function renderCheckin(){if(!ci)return;let h="<h2>How are you feeling right now?</h2>";if(ci.step===1){h+='<p style="color:var(--soft)">Step 1 of 4 — are your needs met, or not?</p>'+ciOpts([{value:"met",label:"My needs are met",big:1},{value:"notmet",label:"My needs are not met",big:1}],"side")}else if(ci.step===2){h+='<p style="color:var(--soft)">Step 2 of 4 — pick the core feeling closest to yours</p>'+ciOpts(CORES.filter(c=>c.side===ci.side).map(c=>({value:c.id,label:c.name})),"core")}else if(ci.step===3){const core=byId[ci.core];h+='<p style="color:var(--soft)">Step 3 of 4 — which family under '+esc(core.name)+'</p>'+ciOpts(core.families.map(f=>({value:f.name,label:f.name})),"family")}else if(ci.step===4){const core=byId[ci.core],fam=findFamily(core,ci.family);h+='<p style="color:var(--soft)">Step 4 of 4 — name it precisely</p>'+ciOpts(fam.feelings.map(f=>({value:f,label:f})),"feeling")}else{const core=byId[ci.core];const sentence=sentenceFor(core,ci.feeling);const g=GUIDE[core.id];h+='<p style="color:var(--soft)">Your check-in</p><h2 style="font-size:1.6rem">'+esc(ci.feeling)+'</h2><p>'+esc(core.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+"</p>"+badge(core)+"<p>"+esc(g.assoc)+"</p><p><strong>First step:</strong> "+esc(g.steps[0][0])+" — "+esc(g.steps[0][1])+'</p><div class="sentence">“'+esc(sentence)+'”</div><div class="actions"><button type="button" class="btn" data-ci-habit="1">Turn this into a habit in the Habit Lab →</button><button type="button" class="btn ghost" data-ci-write="1">Write about it</button><button type="button" class="btn ghost" data-ci-again="1">Start again</button></div>'}
-if(ci.step>1&&ci.step<5)h+='<div class="actions"><button type="button" class="btn ghost" data-ci-back="1">Back</button></div>';checkinEl.innerHTML=h;checkinEl.querySelectorAll("[data-ci]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-ci"),v=b.getAttribute("data-value");if(k==="side"){ci.side=v;ci.step=2}else if(k==="core"){ci.core=v;ci.step=3}else if(k==="family"){ci.family=v;ci.step=4}else{ci.feeling=v;ci.step=5;select(ci.core,ci.family,ci.feeling)}renderCheckin()}));const back=checkinEl.querySelector("[data-ci-back]");if(back)back.addEventListener("click",()=>{ci.step--;renderCheckin()});const ag=checkinEl.querySelector("[data-ci-again]");if(ag)ag.addEventListener("click",startCheckin);const hb=checkinEl.querySelector("[data-ci-habit]");if(hb)hb.addEventListener("click",()=>go("#/habits"));const wb=checkinEl.querySelector("[data-ci-write]");if(wb)wb.addEventListener("click",()=>{const core=byId[ci.core];openNotes("feelings",{coreId:ci.core,coreName:core.name,family:ci.family,feeling:ci.feeling,path:core.name+" › "+ci.family+" › "+ci.feeling,sentence:sentenceFor(core,ci.feeling),side:core.side})})}
+function renderCheckin(){if(!ci)return;let h='<div class="ci-progress" aria-hidden="true">'+[1,2,3,4].map(function(i){return '<span class="'+(ci.step>=i||ci.step===5?"on":"")+'"></span>'}).join("")+'</div><h2>How are you feeling right now?</h2>';if(ci.step===1){h+='<p style="color:var(--soft)">Step 1 of 4 — are your needs met, or not?</p>'+ciOpts([{value:"met",label:"My needs are met",big:1},{value:"notmet",label:"My needs are not met",big:1}],"side")}else if(ci.step===2){h+='<p style="color:var(--soft)">Step 2 of 4 — pick the core feeling closest to yours</p>'+ciOpts(CORES.filter(c=>c.side===ci.side).map(c=>({value:c.id,label:c.name})),"core")}else if(ci.step===3){const core=byId[ci.core];h+='<p style="color:var(--soft)">Step 3 of 4 — which family under '+esc(core.name)+'</p>'+ciOpts(core.families.map(f=>({value:f.name,label:f.name})),"family")}else if(ci.step===4){const core=byId[ci.core],fam=findFamily(core,ci.family);h+='<p style="color:var(--soft)">Step 4 of 4 — name it precisely</p>'+ciOpts(fam.feelings.map(f=>({value:f,label:f})),"feeling")}else{const core=byId[ci.core];const sentence=sentenceFor(core,ci.feeling);const g=GUIDE[core.id];h+='<p style="color:var(--soft)">Your check-in</p><h2 style="font-size:1.6rem">'+esc(ci.feeling)+'</h2><p>'+esc(core.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+"</p>"+badge(core)+"<p>"+esc(g.assoc)+"</p><p><strong>First step:</strong> "+esc(g.steps[0][0])+" — "+esc(g.steps[0][1])+'</p><div class="sentence">“'+esc(sentence)+'”</div><div class="actions"><button type="button" class="btn" data-ci-habit="1">Turn this into a habit in the Habit Lab →</button><button type="button" class="btn ghost" data-ci-write="1">Write about it</button><button type="button" class="btn ghost" data-ci-again="1">Start again</button></div>'}
+if(ci.step>1&&ci.step<5)h+='<div class="actions"><button type="button" class="btn ghost" data-ci-back="1">Back</button></div>';checkinEl.innerHTML=h;checkinEl.querySelectorAll("[data-ci]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-ci"),v=b.getAttribute("data-value");if(k==="side"){ci.side=v;ci.step=2}else if(k==="core"){ci.core=v;ci.step=3}else if(k==="family"){ci.family=v;ci.step=4}else{ci.feeling=v;ci.step=5;select(ci.core,ci.family,ci.feeling);checkLog[todayISO()]={core:ci.core,family:ci.family,feeling:ci.feeling,side:byId[ci.core].side,at:Date.now()};saveNow();renderDash();renderCalendar()}renderCheckin()}));const back=checkinEl.querySelector("[data-ci-back]");if(back)back.addEventListener("click",()=>{ci.step--;renderCheckin()});const ag=checkinEl.querySelector("[data-ci-again]");if(ag)ag.addEventListener("click",startCheckin);const hb=checkinEl.querySelector("[data-ci-habit]");if(hb)hb.addEventListener("click",()=>go("#/habits"));const wb=checkinEl.querySelector("[data-ci-write]");if(wb)wb.addEventListener("click",()=>{const core=byId[ci.core];openNotes("feelings",{coreId:ci.core,coreName:core.name,family:ci.family,feeling:ci.feeling,path:core.name+" › "+ci.family+" › "+ci.feeling,sentence:sentenceFor(core,ci.feeling),side:core.side})})}
 /* ===== Habit Lab ===== */
 let hl={core:"angry",family:"Frustrated",feeling:"Aggravated",habitIdx:0,done:{},planText:"",planBuilt:false};
 function hlFeelingsOptions(){const selEl=document.getElementById("hl-feeling");let h="";CORES.forEach(c=>{h+='<optgroup label="'+esc(c.name)+" — "+(c.side==="met"?"needs met":"needs not met")+'">';c.families.forEach(f=>f.feelings.forEach(fe=>{h+='<option value="'+c.id+"|"+esc(f.name)+"|"+esc(fe)+'"'+(c.id===hl.core&&fe===hl.feeling?" selected":"")+">"+esc(fe)+" ("+esc(c.name)+")</option>"}));h+="</optgroup>"});selEl.innerHTML=h}
@@ -691,9 +762,9 @@ function syncHabitFocus(){if(sel.core&&sel.feeling){hl.core=sel.core;hl.family=s
 function currentHabit(){return GUIDE[hl.core].habits[hl.habitIdx]||GUIDE[hl.core].habits[0]}
 function hlCue(){const own=document.getElementById("hl-stack").value.trim();return own||document.getElementById("hl-cue").value}
 function renderHabitLab(){hlFeelingsOptions();const core=byId[hl.core];const g=GUIDE[hl.core];document.getElementById("hl-direction").innerHTML='<div class="direction-box" style="background:'+(core.side==="met"?"var(--metBg)":"var(--oxBg)")+'"><b>'+(core.side==="met"?"Build on the good:":"Get out of the hard, faster:")+'</b> You picked <b>'+esc(hl.feeling)+'</b> ('+esc(core.name)+" › "+esc(hl.family)+'). Goal: <b>'+esc(g.target)+'</b>. Linked needs: '+core.needs.map(esc).join(", ")+'.</div>';document.getElementById("hl-habits").innerHTML=g.habits.map((hb,i)=>'<button type="button" class="habit-pick" data-hl-habit="'+i+'" aria-pressed="'+(i===hl.habitIdx)+'"><b>'+esc(hb.t)+'</b><span>I will '+esc(hb.a)+'.</span><br><span><em>Why it works:</em> '+esc(hb.w)+"</span></button>").join("");document.querySelectorAll("[data-hl-habit]").forEach(b=>b.addEventListener("click",()=>{hl.habitIdx=parseInt(b.getAttribute("data-hl-habit"),10);renderHabitLab();saveNow()}));updateIfThen();renderWeek()}
-function updateIfThen(){const hb=currentHabit();const len=document.getElementById("hl-len").value;let t="When "+hlCue().replace(/^After /,"I have finished — after ")+", I will "+hb.a+" for "+len+", so I can move toward: "+GUIDE[hl.core].target.toLowerCase()+".";if(t.indexOf("When I first feel")===0){t="When I first feel "+hl.feeling.toLowerCase()+", I will "+hb.a+" for "+len+", so I can move toward: "+GUIDE[hl.core].target.toLowerCase()+"."}document.getElementById("hl-ifthen").textContent=t}
-function buildPlan(){const hb=currentHabit();const cue=hlCue();const len=document.getElementById("hl-len").value;const core=byId[hl.core];const days=[["Day 1 — Start tiny","Do it once, at the cue, for just "+len+". Success = done, not perfect."],["Day 2 — Same cue, same place","Repeat exactly. Same cue, same place — your brain is learning the link."],["Day 3 — Add the sentence","Before the habit, say: ‘"+sentenceFor(core,hl.feeling)+"’ Then do the habit."],["Day 4 — Make it easier","Remove one friction: lay things out the night before, move it earlier, shrink it if needed."],["Day 5 — Do it with / for someone","Tell one person your plan, or do it together. Accountability doubles follow-through."],["Day 6 — Handle a miss in advance","Write your rescue plan: ‘If I miss the cue, I will do it right after dinner instead.’"],["Day 7 — Review & keep one thing","Ask: did I feel "+GUIDE[hl.core].target.toLowerCase()+" more this week? Keep the version that worked; drop the rest."]];document.getElementById("hl-plan").innerHTML='<ol class="plan-list">'+days.map(d=>'<li><span class="daytag">'+esc(d[0].split(" — ")[0])+'</span><div><b>'+esc(d[0].split(" — ")[1]||"")+'</b><br>'+esc(d[1])+"</div></li>").join("")+"</ol>";document.getElementById("hl-plan-hint").textContent="Your plan for "+hl.feeling+" → "+hb.t+". Cue: "+cue+".";hl.planText="MY 7-DAY HABIT PLAN\nFeeling: "+hl.feeling+" ("+core.name+" › "+hl.family+")\nGoal: "+GUIDE[hl.core].target+"\nHabit: "+hb.t+" — I will "+hb.a+"\nCue: "+cue+"\nLength: "+len+"\nIf-then: "+document.getElementById("hl-ifthen").textContent+"\n\n"+days.map(d=>d[0]+": "+d[1]).join("\n")}
-function renderWeek(){const days=["M","T","W","T","F","S","S"];const labels=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];document.getElementById("hl-week").innerHTML=labels.map((d,i)=>'<button type="button" class="daybtn'+(hl.done[i]?" done":"")+'" data-day="'+i+'" aria-label="'+d+'" aria-pressed="'+!!hl.done[i]+'">'+days[i]+"</button>").join("");document.querySelectorAll("[data-day]").forEach(b=>b.addEventListener("click",()=>{const i=b.getAttribute("data-day");hl.done[i]=!hl.done[i];renderWeek();saveNow()}));const n=Object.values(hl.done).filter(Boolean).length;document.getElementById("hl-week-msg").textContent=n===0?"No days tapped yet — today counts, whenever you do it.":(n+" of 7 days done this week. "+(n>=5?"That's a real streak — notice how the feeling is shifting.":"Keep it tiny; consistency beats intensity."))}
+function updateIfThen(){const hb=currentHabit();const len=document.getElementById("hl-len").value;let t="When "+hlCue().replace(/^After /,"I have finished — after ")+", I will "+hb.a+" for "+len+", so I can move toward: "+GUIDE[hl.core].target.toLowerCase()+".";if(t.indexOf("When I first feel")===0){t="When I first feel "+hl.feeling.toLowerCase()+", I will "+hb.a+" for "+len+", so I can move toward: "+GUIDE[hl.core].target.toLowerCase()+"."}document.getElementById("hl-ifthen").textContent=t;const chEl=document.getElementById("hl-chain");if(chEl){chEl.innerHTML='<span class="cstep"><i>When</i>'+esc(hlCue())+'</span><span class="carrow" aria-hidden="true">\u2192</span><span class="cstep"><i>I will</i>'+esc(hb.a)+'</span><span class="carrow" aria-hidden="true">\u2192</span><span class="cstep"><i>For</i>'+esc(len)+'</span>'}}
+function buildPlan(){const hb=currentHabit();const cue=hlCue();const len=document.getElementById("hl-len").value;const core=byId[hl.core];const start=new Date();const planDays=[["Day 1 — Start tiny","Do it once, at the cue, for just "+len+". Success = done, not perfect."],["Day 2 — Same cue, same place","Repeat exactly. Same cue, same place — your brain is learning the link."],["Day 3 — Add the sentence","Before the habit, say: ‘"+sentenceFor(core,hl.feeling)+"’ Then do the habit."],["Day 4 — Make it easier","Remove one friction: lay things out the night before, move it earlier, shrink it if needed."],["Day 5 — Do it with / for someone","Tell one person your plan, or do it together. Accountability doubles follow-through."],["Day 6 — Handle a miss in advance","Write your rescue plan: ‘If I miss the cue, I will do it right after dinner instead.’"],["Day 7 — Review & keep one thing","Ask: did I feel "+GUIDE[hl.core].target.toLowerCase()+" more this week? Keep the version that worked; drop the rest."]];document.getElementById("hl-plan").innerHTML='<ol class="plan-list">'+planDays.map((d,i)=>{const dt=new Date(start);dt.setDate(start.getDate()+i);const iso=isoOf(dt);return '<li><span class="daytag">'+esc(d[0].split(" — ")[0])+'<br><span class="daydate">'+esc(dt.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"}))+'</span></span><div><b>'+esc(d[0].split(" — ")[1]||"")+'</b>'+(practDays[iso]?' <span class="doneflag">\u2713 practised</span>':"")+'<br>'+esc(d[1])+"</div></li>"}).join("")+"</ol>";document.getElementById("hl-plan-hint").textContent="Your plan for "+hl.feeling+" → "+hb.t+". Cue: "+cue+".";hl.planText="MY 7-DAY HABIT PLAN\nFeeling: "+hl.feeling+" ("+core.name+" › "+hl.family+")\nGoal: "+GUIDE[hl.core].target+"\nHabit: "+hb.t+" — I will "+hb.a+"\nCue: "+cue+"\nLength: "+len+"\nIf-then: "+document.getElementById("hl-ifthen").textContent+"\n\n"+planDays.map(d=>d[0]+": "+d[1]).join("\n")}
+function renderWeek(){renderCalendar();renderDash()}
 document.getElementById("hl-feeling").addEventListener("change",e=>{const parts=e.target.value.split("|");hl.core=parts[0];hl.family=parts[1];hl.feeling=parts[2];hl.habitIdx=0;select(hl.core,hl.family,hl.feeling);renderHabitLab();saveNow()});
 document.getElementById("hl-cue").addEventListener("change",()=>{updateIfThen();saveNow()});document.getElementById("hl-stack").addEventListener("input",()=>{updateIfThen();saveSoon()});document.getElementById("hl-len").addEventListener("change",()=>{updateIfThen();saveNow()});
 document.getElementById("hl-build").addEventListener("click",()=>{buildPlan();hl.planBuilt=true;saveNow();document.getElementById("hl-plan").scrollIntoView({behavior:"smooth",block:"nearest"})});
@@ -732,8 +803,8 @@ function setListening(on){listening=on;micBtn.classList.toggle("listening",on);m
 function appendSpeech(text){const t=String(text||"").trim();if(!t)return;let v=pad.value;if(v&&!/\s$/.test(v))v+=" ";pad.value=v+t;autoGrowPad();updatePadMeta()}
 /* Goals */
 (function buildNeedsList(){const seen={};const list=document.getElementById("needs-list");CORES.forEach(c=>c.needs.forEach(n=>{if(!seen[n]){seen[n]=1;const o=document.createElement("option");o.value=n;list.appendChild(o)}}))})();
-function renderGoals(){const wrap=document.getElementById("goal-list");if(!goals.length){wrap.innerHTML='<div class="goal-empty">No goals yet. Set one above — one goal, one need, one first small step.</div>';return}wrap.innerHTML=goals.map(g=>'<div class="goal-card'+(g.done?" done":"")+'"><button type="button" class="goal-check'+(g.done?" done":"")+'" data-goal-toggle="'+g.id+'" aria-pressed="'+g.done+'" aria-label="Mark goal done">✓</button><div class="g-body"><h4>'+esc(g.goal)+"</h4>"+(g.need?'<p>Because I need <b>'+esc(g.need)+"</b></p>":"")+(g.step?'<p>First small step: <b>'+esc(g.step)+"</b></p>":"")+(g.cue?'<p>I\'ll do it when: <b>'+esc(g.cue)+"</b></p>":"")+(g.free?'<p>'+esc(g.free)+"</p>":"")+'</div><button type="button" class="goal-remove" data-goal-remove="'+g.id+'">Remove</button></div>').join("");wrap.querySelectorAll("[data-goal-toggle]").forEach(b=>b.addEventListener("click",()=>{const g=goals.find(x=>x.id===parseInt(b.getAttribute("data-goal-toggle"),10));if(g){g.done=!g.done;renderGoals();saveNow()}}));wrap.querySelectorAll("[data-goal-remove]").forEach(b=>b.addEventListener("click",()=>{goals=goals.filter(x=>x.id!==parseInt(b.getAttribute("data-goal-remove"),10));renderGoals();saveNow()}))}
-document.getElementById("goal-save").addEventListener("click",function(){const goal=document.getElementById("g-goal").value.trim();if(!goal){document.getElementById("g-goal").focus();document.getElementById("g-goal").style.borderColor="#a8381b";setTimeout(()=>document.getElementById("g-goal").style.borderColor="",2200);return}goals.push({id:++goalSeq,goal:goal,need:document.getElementById("g-need").value.trim(),step:document.getElementById("g-step").value.trim(),cue:document.getElementById("g-cue").value.trim(),free:document.getElementById("g-free").value.trim(),done:false});["g-goal","g-need","g-step","g-cue","g-free"].forEach(id=>document.getElementById(id).value="");document.getElementById("goal-prefill-hint").hidden=true;renderGoals();saveNow();const o=this.textContent;this.textContent="Saved ✓";setTimeout(()=>this.textContent=o,1600)});
+function renderGoals(){const wrap=document.getElementById("goal-list");if(!goals.length){wrap.innerHTML='<div class="goal-empty">No goals yet. Set one above — one goal, one need, one first small step.</div>';return}wrap.innerHTML=goals.map(g=>'<div class="goal-card'+(g.done?" done":"")+'"><button type="button" class="goal-check'+(g.done?" done":"")+'" data-goal-toggle="'+g.id+'" aria-pressed="'+g.done+'" aria-label="Mark goal done">✓</button><div class="g-body"><h4>'+esc(g.goal)+"</h4>"+(g.need?'<p>Because I need <b>'+esc(g.need)+"</b></p>":"")+(g.step?'<p>First small step: <b>'+esc(g.step)+"</b></p>":"")+(g.cue?'<p>I\'ll do it when: <b>'+esc(g.cue)+"</b></p>":"")+(g.free?'<p>'+esc(g.free)+"</p>":"")+'</div><button type="button" class="goal-remove" data-goal-remove="'+g.id+'">Remove</button></div>').join("");wrap.querySelectorAll("[data-goal-toggle]").forEach(b=>b.addEventListener("click",()=>{const g=goals.find(x=>x.id===parseInt(b.getAttribute("data-goal-toggle"),10));if(g){g.done=!g.done;renderGoals();renderDash();saveNow()}}));wrap.querySelectorAll("[data-goal-remove]").forEach(b=>b.addEventListener("click",()=>{goals=goals.filter(x=>x.id!==parseInt(b.getAttribute("data-goal-remove"),10));renderGoals();renderDash();saveNow()}))}
+document.getElementById("goal-save").addEventListener("click",function(){const goal=document.getElementById("g-goal").value.trim();if(!goal){document.getElementById("g-goal").focus();document.getElementById("g-goal").style.borderColor="#a8381b";setTimeout(()=>document.getElementById("g-goal").style.borderColor="",2200);return}goals.push({id:++goalSeq,goal:goal,need:document.getElementById("g-need").value.trim(),step:document.getElementById("g-step").value.trim(),cue:document.getElementById("g-cue").value.trim(),free:document.getElementById("g-free").value.trim(),done:false});["g-goal","g-need","g-step","g-cue","g-free"].forEach(id=>document.getElementById(id).value="");document.getElementById("goal-prefill-hint").hidden=true;renderGoals();renderDash();saveNow();const o=this.textContent;this.textContent="Saved ✓";setTimeout(()=>this.textContent=o,1600)});
 document.getElementById("goals-download").addEventListener("click",()=>{if(!goals.length){renderGoals();return}const body=goals.map((g,i)=>"## "+(i+1)+". "+g.goal+(g.done?" — done ✓":"")+"\n"+(g.need?"- Because I need: "+g.need+"\n":"")+(g.step?"- First small step: "+g.step+"\n":"")+(g.cue?"- I'll do it when: "+g.cue+"\n":"")+(g.free?"\n"+g.free+"\n":"")).join("\n");downloadFile("my-goals-"+todayISO()+".md","# My goals — "+todayStamp()+"\n\n"+body)});
 renderGoals();
 /* ===== Saving — on this device only (this browser's local storage) ===== */
@@ -741,7 +812,7 @@ const STORE_KEY="feelings-wheel:v1";
 let saveTimer=null,restoring=false,storageOK=true;
 function setSaveState(t){const el=document.getElementById("save-state");if(el)el.textContent=t}
 function timeNow(){return new Date().toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})}
-function collectState(){return {v:1,savedAt:Date.now(),pad:pad.value,noteCtx:noteCtx,promptIdx:promptIdx,goals:goals,goalSeq:goalSeq,hl:{core:hl.core,family:hl.family,feeling:hl.feeling,habitIdx:hl.habitIdx,done:hl.done,planBuilt:!!hl.planBuilt,cue:document.getElementById("hl-cue").value,stack:document.getElementById("hl-stack").value,len:document.getElementById("hl-len").value}}}
+function collectState(){return {v:1,savedAt:Date.now(),pad:pad.value,noteCtx:noteCtx,promptIdx:promptIdx,goals:goals,goalSeq:goalSeq,log:checkLog,days:practDays,hl:{core:hl.core,family:hl.family,feeling:hl.feeling,habitIdx:hl.habitIdx,done:weekDoneObj(),planBuilt:!!hl.planBuilt,cue:document.getElementById("hl-cue").value,stack:document.getElementById("hl-stack").value,len:document.getElementById("hl-len").value}}}
 function saveNow(){if(restoring||!storageOK)return;const data=collectState();try{localStorage.setItem(STORE_KEY,JSON.stringify(data));setSaveState(typeof fbUser!=="undefined"&&fbUser?("Saved · synced to your account · "+timeNow()):("Saved on this device · "+timeNow()))}catch(e){storageOK=false;setSaveState("Saving isn't available in this browser session — Download keeps a copy that's yours.")}if(typeof scheduleCloudSave==="function")scheduleCloudSave(data)}
 function saveSoon(){if(restoring)return;if(saveTimer)clearTimeout(saveTimer);saveTimer=setTimeout(saveNow,500)}
 function applyStateData(d){if(!d)return;restoring=true;
@@ -750,7 +821,8 @@ setNoteContext(d.noteCtx||null);
 if(typeof d.promptIdx==="number"&&PROMPTS[d.promptIdx]){promptIdx=d.promptIdx;document.getElementById("note-prompt").textContent=PROMPTS[promptIdx]}
 if(Array.isArray(d.goals)){goals=d.goals;goalSeq=d.goalSeq||goals.length;renderGoals()}
 if(d.hl){hl.core=d.hl.core||hl.core;hl.family=d.hl.family||hl.family;hl.feeling=d.hl.feeling||hl.feeling;hl.habitIdx=d.hl.habitIdx||0;hl.done=d.hl.done||{};hl.planBuilt=!!d.hl.planBuilt;if(d.hl.cue)document.getElementById("hl-cue").value=d.hl.cue;if(typeof d.hl.stack==="string")document.getElementById("hl-stack").value=d.hl.stack;if(d.hl.len)document.getElementById("hl-len").value=d.hl.len}
-restoring=false;renderHabitLab();if(hl.planBuilt)buildPlan();autoGrowPad();updatePadMeta()}
+if(d.log)checkLog=d.log;if(d.days)practDays=d.days;else if(d.hl&&d.hl.done){const mon0=mondayOf(new Date());Object.keys(d.hl.done).forEach(function(k){if(d.hl.done[k]){const dt=new Date(mon0);dt.setDate(mon0.getDate()+parseInt(k,10));practDays[isoOf(dt)]=true}})}
+restoring=false;renderHabitLab();if(hl.planBuilt)buildPlan();renderCalendar();renderDash();autoGrowPad();updatePadMeta()}
 function restoreSaved(){let raw=null;try{raw=localStorage.getItem(STORE_KEY)}catch(e){storageOK=false}
 if(!raw){setSaveState(storageOK?"Your words save on this device as you write. Use Sign in at the top of the page and they sync to your account instead.":"Saving isn't available in this browser session — Download keeps a copy that's yours.");return}
 let d=null;try{d=JSON.parse(raw)}catch(e){}
@@ -758,7 +830,7 @@ if(!d){setSaveState("Your words save on this device as you write. Use Sign in at
 applyStateData(d);
 setSaveState("Picked up where you left off — restored from this device"+(d.savedAt?(" · last saved "+new Date(d.savedAt).toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})):"")+".")}
 let eraseArmed=false,eraseTimer=null;
-document.getElementById("erase-saved").addEventListener("click",function(){if(!eraseArmed){eraseArmed=true;this.textContent="Tap again to erase everything";this.classList.add("armed");eraseTimer=setTimeout(()=>{eraseArmed=false;this.textContent="Erase saved data";this.classList.remove("armed")},3200);return}clearTimeout(eraseTimer);eraseArmed=false;this.textContent="Erase saved data";this.classList.remove("armed");try{localStorage.removeItem(STORE_KEY)}catch(e){}pad.value="";setNoteContext(null);goals=[];goalSeq=0;renderGoals();hl.done={};hl.planBuilt=false;hl.planText="";document.getElementById("hl-plan").innerHTML="";document.getElementById("hl-plan-hint").textContent="Press “Build my 7-day plan” and your week appears here — a little more each day, never a jump.";renderWeek();autoGrowPad();updatePadMeta();setSaveState("Everything saved on this device has been erased. New writing will save here again as you type.")});
+document.getElementById("erase-saved").addEventListener("click",function(){if(!eraseArmed){eraseArmed=true;this.textContent="Tap again to erase everything";this.classList.add("armed");eraseTimer=setTimeout(()=>{eraseArmed=false;this.textContent="Erase saved data";this.classList.remove("armed")},3200);return}clearTimeout(eraseTimer);eraseArmed=false;this.textContent="Erase saved data";this.classList.remove("armed");try{localStorage.removeItem(STORE_KEY)}catch(e){}pad.value="";setNoteContext(null);goals=[];goalSeq=0;renderGoals();hl.done={};checkLog={};practDays={};hl.planBuilt=false;hl.planText="";document.getElementById("hl-plan").innerHTML="";document.getElementById("hl-plan-hint").textContent="Press “Build my 7-day plan” and your week appears here — a little more each day, never a jump.";renderWeek();autoGrowPad();updatePadMeta();setSaveState("Everything saved on this device has been erased. New writing will save here again as you type.")});
 /* ===== Dictation — Whisper, running on this device (Transformers.js) ===== */
 const wBtn=document.getElementById("whisper-btn"),wLabel=document.getElementById("whisper-label"),dlStrip=document.getElementById("dl-strip"),dlFill=document.getElementById("dl-fill"),dlText=document.getElementById("dl-text");
 let tfPipe=null,tfLoading=null,wRec=null,wChunks=[],wRecording=false,wStream=null,wBusy=false;
@@ -822,6 +894,67 @@ loadFirebase();
    is saved as a display preference and restored before first paint by the
    inline script in <head>, so it persists across visits with no flash. */
 (function(){var btn=document.getElementById("theme-toggle");if(!btn)return;function sync(){var light=isLight();btn.setAttribute("aria-pressed",light?"true":"false");btn.setAttribute("aria-label",light?"Switch to dark theme":"Switch to light theme");btn.setAttribute("title",light?"Switch to dark theme":"Switch to light theme");var meta=document.querySelector('meta[name="color-scheme"]');if(meta)meta.setAttribute("content",light?"light dark":"dark light")}btn.addEventListener("click",function(){var next=isLight()?"dark":"light";document.documentElement.setAttribute("data-theme",next);document.documentElement.style.colorScheme=next;try{localStorage.setItem("feelings-wheel:theme",next)}catch(e){}sync();buildWheel();renderSelection()});sync()})();
+/* ===== Dashboard + calendar — driven by real activity, never decoration.
+   checkLog: one entry per date (ISO) from a completed check-in.
+   practDays: the set of dates tapped as practised in the Habit Lab
+   calendar. A day is "active" when either exists; the streak, the week
+   strip, the 14-day chart and the calendar all read the same two stores,
+   which save and sync with everything else in collectState(). ===== */
+let checkLog={},practDays={},calCursor=null;
+function isoOf(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function mondayOf(d){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
+function dayActive(iso){return !!(practDays[iso]||checkLog[iso])}
+function currentStreak(){let n=0;const d=new Date();if(!dayActive(isoOf(d)))d.setDate(d.getDate()-1);while(dayActive(isoOf(d))){n++;d.setDate(d.getDate()-1)}return n}
+function weekDoneObj(){const o={};const mon=mondayOf(new Date());for(let i=0;i<7;i++){const dt=new Date(mon);dt.setDate(mon.getDate()+i);if(practDays[isoOf(dt)])o[i]=true}return o}
+function renderDash(){const streakEl=document.getElementById("dash-streak");if(!streakEl)return;
+streakEl.textContent=currentStreak();
+const mon=mondayOf(new Date());let wk=0;for(let i=0;i<7;i++){const dt=new Date(mon);dt.setDate(mon.getDate()+i);if(dayActive(isoOf(dt)))wk++}
+document.getElementById("dash-sub").textContent=wk+" of 7 days this week · "+Object.keys(checkLog).length+" check-in"+(Object.keys(checkLog).length===1?"":"s")+" logged so far";
+const names=["M","T","W","T","F","S","S"];let wh="";
+for(let i=0;i<7;i++){const dt=new Date(mon);dt.setDate(mon.getDate()+i);const iso=isoOf(dt);
+wh+='<div class="wcell'+(dayActive(iso)?" done":"")+(iso===todayISO()?" today":"")+(iso>todayISO()?" future":"")+'"><span class="wl">'+names[i]+'</span><span class="wn">'+dt.getDate()+'</span><span class="wmarks">'+(checkLog[iso]?'<span class="cdot"></span>':"")+(practDays[iso]?"✓":"")+"</span></div>"}
+document.getElementById("dash-week").innerHTML=wh;
+let ch="",active14=0;
+for(let i=13;i>=0;i--){const dt=new Date();dt.setDate(dt.getDate()-i);const iso=isoOf(dt);const on=dayActive(iso);if(on)active14++;
+ch+='<div class="bar'+(on?" on":"")+'" title="'+esc(dt.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"}))+(on?" — checked in or practised":" — nothing logged")+'"><span>'+dt.getDate()+"</span></div>"}
+document.getElementById("dash-chart").innerHTML=ch;
+document.getElementById("dash-chart-note").textContent=active14+" of the last 14 days had a check-in or a practice. Each bar is one day — a full gold bar means you showed up.";
+const todayLabel=new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
+const entry=checkLog[todayISO()];const tEl=document.getElementById("dash-today");
+if(entry){const core=byId[entry.core];
+tEl.innerHTML='<p class="dash-label">Today — '+esc(todayLabel)+'</p><h3 class="dash-feel">'+esc(entry.feeling)+'</h3><p class="dash-path">'+esc(core.name)+" › "+esc(entry.family)+'</p><p>“'+esc(sentenceFor(core,entry.feeling))+'”</p><a class="btn small ghost" href="#/checkin">Check in again</a>'}
+else{tEl.innerHTML='<p class="dash-label">Today — '+esc(todayLabel)+'</p><h3 class="dash-feel">Not named yet</h3><p>Four quick steps — needs met or not, core feeling, family, exact word — and today fills in here, with the need underneath it.</p><a class="btn small" href="#/checkin">Start today\'s check-in</a>'}
+const gEl=document.getElementById("dash-goal");const active=goals.filter(g=>!g.done);const doneCount=goals.length-active.length;
+if(active.length){const g=active[0];
+gEl.innerHTML='<p class="dash-label">Your goal · '+doneCount+" of "+goals.length+' done</p><h3 class="dash-feel">'+esc(g.goal)+'</h3>'+(g.step?'<p>First small step: <b style="color:var(--ink)">'+esc(g.step)+"</b></p>":"")+(g.cue?'<p>I\'ll do it when: '+esc(g.cue)+"</p>":"")+'<button type="button" class="btn small ghost" data-goal-link="1">Open my goals</button>'}
+else if(goals.length){gEl.innerHTML='<p class="dash-label">Your goal</p><h3 class="dash-feel">All goals done ✓</h3><p>Every goal you set is complete. Set the next one — one sentence, one need, one first small step.</p><button type="button" class="btn small" data-goal-link="1">Set a new goal</button>'}
+else{gEl.innerHTML='<p class="dash-label">Your goal</p><h3 class="dash-feel">No goal yet</h3><p>A goal here is one sentence, one need, and one first small step. Set it once — it stays on this dashboard until it\'s done.</p><button type="button" class="btn small" data-goal-link="1">Set a goal</button>'}
+const nEl=document.getElementById("dash-next");
+if(entry){const g=GUIDE[entry.core];
+nEl.innerHTML='<p class="dash-label">Your next small step</p><h3 class="dash-feel">'+esc(g.steps[0][0])+'</h3><p>'+esc(g.steps[0][1])+'</p><a class="btn small ghost" href="#/chapters/'+entry.core+'">Open the '+esc(byId[entry.core].name)+' chapter</a>'}
+else if(hl.planBuilt){nEl.innerHTML='<p class="dash-label">Your next small step</p><h3 class="dash-feel">'+esc(currentHabit().t)+'</h3><p>'+esc(document.getElementById("hl-ifthen").textContent)+'</p><a class="btn small ghost" href="#/habits">Open the Habit Lab</a>'}
+else{nEl.innerHTML='<p class="dash-label">Your next small step</p><h3 class="dash-feel">Name it first</h3><p>Once you check in, your next step appears here — matched to the feeling you named, not generic advice.</p><a class="btn small ghost" href="#/checkin">Start a check-in</a>'}}
+document.addEventListener("click",function(e){const b=e.target.closest("[data-goal-link]");if(b){switchNoteTab("goals");go("#/notes")}});
+function renderCalendar(){const cal=document.getElementById("hl-cal");if(!cal)return;
+if(!calCursor)calCursor=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+const y=calCursor.getFullYear(),m=calCursor.getMonth();const first=new Date(y,m,1);
+const startOff=(first.getDay()+6)%7;const dim=new Date(y,m+1,0).getDate();const prevDim=new Date(y,m,0).getDate();const tIso=todayISO();
+let h='<div class="cal-head"><button type="button" class="cal-nav" data-cal="-1" aria-label="Previous month">‹</button><span class="cal-title">'+esc(first.toLocaleDateString(undefined,{month:"long",year:"numeric"}))+'</span><button type="button" class="cal-nav" data-cal="1" aria-label="Next month">›</button></div>';
+h+='<div class="cal-grid" aria-hidden="true">'+["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(d=>'<span class="cal-dow">'+d+"</span>").join("")+"</div>";
+h+='<div class="cal-grid">';
+for(let i=0;i<42;i++){const dayNum=i-startOff+1;let dt,other=false;
+if(dayNum<1){dt=new Date(y,m-1,prevDim+dayNum);other=true}else if(dayNum>dim){dt=new Date(y,m+1,dayNum-dim);other=true}else{dt=new Date(y,m,dayNum)}
+const iso=isoOf(dt);const fut=iso>tIso;
+let cls="cal-cell";if(other)cls+=" other";if(fut)cls+=" future";if(practDays[iso])cls+=" done";if(iso===tIso)cls+=" today";
+const inner='<span class="cal-num">'+dt.getDate()+'</span><span class="cal-marks">'+(checkLog[iso]?'<span class="cal-dot"></span>':"")+(practDays[iso]?"✓":"")+"</span>";
+if(other||fut){h+='<div class="'+cls+'" aria-hidden="true">'+inner+"</div>"}
+else{h+='<button type="button" class="'+cls+'" data-cal-day="'+iso+'" aria-pressed="'+(practDays[iso]?"true":"false")+'" aria-label="'+esc(dt.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}))+(practDays[iso]?" — practised; tap to undo":" — tap to mark practised")+'">'+inner+"</button>"}}
+h+="</div>";cal.innerHTML=h;
+cal.querySelectorAll("[data-cal]").forEach(b=>b.addEventListener("click",()=>{calCursor=new Date(y,m+parseInt(b.getAttribute("data-cal"),10),1);renderCalendar()}));
+cal.querySelectorAll("[data-cal-day]").forEach(b=>b.addEventListener("click",()=>{const iso=b.getAttribute("data-cal-day");if(practDays[iso])delete practDays[iso];else practDays[iso]=true;saveNow();renderCalendar();renderDash();if(hl.planBuilt)buildPlan()}));
+const msg=document.getElementById("hl-cal-msg");
+if(msg){const mk=isoOf(first).slice(0,7);let pc=0,cc=0;Object.keys(practDays).forEach(k=>{if(k.slice(0,7)===mk)pc++});Object.keys(checkLog).forEach(k=>{if(k.slice(0,7)===mk)cc++});const st=currentStreak();
+msg.textContent=pc+" day"+(pc===1?"":"s")+" practised and "+cc+" check-in"+(cc===1?"":"s")+" in "+first.toLocaleDateString(undefined,{month:"long"})+" · current streak: "+st+" day"+(st===1?"":"s")+". Tap a gold day again to undo it."}}
 /* ===== Pages — each area is its own page, addressed by hash =====
    #/ is the Wheel home, #/chapters the 12 deep dives (a chapter opens
    directly at #/chapters/<core-id>), #/habits the Habit Lab, #/checkin the
