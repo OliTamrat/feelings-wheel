@@ -592,6 +592,19 @@ html[data-theme="light"] .wheel-wrap::after{background:radial-gradient(closest-s
 @media(prefers-reduced-motion:reduce){
   .dash-main::after{animation:none;display:none}
 }
+/* ---------- NVC check-in — the 4-step process inside the Check-in view ---------- */
+.ci-modebar{display:flex;flex-wrap:wrap;gap:6px;background:var(--surface2);border-radius:999px;padding:5px;width:fit-content;max-width:100%;margin-bottom:22px}
+.ci-modebar button{border:0;background:transparent;color:var(--soft);font-weight:600;border-radius:999px;padding:9px 18px;min-height:44px;font-size:.95rem}
+.ci-modebar button[aria-pressed="true"]{background:var(--metal);border:1px solid #a87e26;color:#2a1f05;box-shadow:0 6px 16px rgba(168,126,38,.30),inset 0 1px 0 rgba(255,255,255,.6)}
+html[data-theme="light"] .ci-modebar button[aria-pressed="true"]{background:var(--pill-metal);border-color:#0f0d08;color:#f0cd72;box-shadow:0 8px 20px rgba(36,30,24,.22),inset 0 1px 0 rgba(249,231,161,.35)}
+.ci-steplabel{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:500}
+.ci-hint{color:var(--soft);font-size:.98rem;margin:0 0 16px;max-width:620px}
+.ci-label{font-weight:700;display:block;margin:0 0 6px}
+.ci-textarea,.ci-input{width:100%;padding:14px 16px;border:1.5px solid var(--cloth-line);border-radius:16px;background:var(--surface);color:var(--ink);min-height:52px}
+.ci-textarea{font-family:var(--serif);font-size:1.12rem;line-height:1.6;resize:vertical}
+.ci-options button.active{background:var(--metal);border-color:#a87e26;color:#2a1f05;box-shadow:0 6px 16px rgba(168,126,38,.30),inset 0 1px 0 rgba(255,255,255,.6)}
+.ci-credit{color:var(--soft);font-size:.88rem;margin-top:18px}
+.ci-credit a{color:var(--accent)}
 </style>
 </head>
 <body data-mood="neutral">
@@ -783,9 +796,9 @@ html[data-theme="light"] .wheel-wrap::after{background:radial-gradient(closest-s
 
 <div class="view" data-view="checkin" hidden>
 <section class="block" aria-label="Guided check-in">
-<p class="secnum">Check-in</p>
-<h2 class="sec-title">Four steps to the<br>exact word.</h2>
-<p class="sec-lede">Start broad — are your needs met, or not? — then narrow: the core feeling, its family, and finally the precise word, with a first step you can take right away.</p>
+<p class="secnum">Check-in · Nonviolent Communication</p>
+<h2 class="sec-title">Observation. Feeling.<br>Need. Request.</h2>
+<p class="sec-lede">The four-step check-in from Marshall Rosenberg's Nonviolent Communication: say what happened without judgment, name the feeling on the wheel, find the need underneath it, and end with one small, doable request — all in one sentence you can actually say. In a hurry? The quick path still just logs the feeling.</p>
 <section class="checkin page" id="checkin" aria-label="Guided check-in"></section>
 </section>
 </div><!-- /checkin -->
@@ -880,16 +893,102 @@ const IDX=[];CORES.forEach(c=>c.families.forEach(f=>{IDX.push({type:"family",nam
 const si=document.getElementById("search"),sr=document.getElementById("search-results");
 si.addEventListener("input",()=>{const q=si.value.trim().toLowerCase();if(!q){sr.classList.remove("open");sr.innerHTML="";return}const hits=IDX.filter(e=>e.name.toLowerCase().indexOf(q)!==-1).slice(0,8);sr.innerHTML=hits.length?hits.map((e,i)=>'<button type="button" data-hit="'+i+'"><span class="sr-name">'+esc(e.name)+'</span><span class="sr-path">'+esc(e.core.name+" › "+e.family+(e.feeling?" › "+e.name:" (family)"))+"</span></button>").join(""):'<div style="padding:14px 16px;color:var(--soft)">No match — try a shorter word.</div>';sr.querySelectorAll("[data-hit]").forEach((b,i)=>b.addEventListener("click",()=>{const e=hits[i];select(e.core.id,e.family,e.feeling,{scroll:true});si.value="";sr.classList.remove("open")}));sr.classList.add("open")});
 document.addEventListener("click",e=>{if(!e.target.closest(".search-box"))sr.classList.remove("open")});
-/* Check-in */
+/* Check-in — two paths sharing the same feeling picker and the same log.
+   The main path is the 4-step NVC check-in, the core process of
+   Nonviolent Communication as taught by CNVC:
+   1 Observation — what happened, free of evaluation/judgment.
+   2 Feeling — what I feel (a feeling, not a thought).
+   3 Need — the universal need underneath, met or unmet.
+   4 Request — what I would like, stated as a true request, not a demand.
+   It ends in the full NVC sentence: "When [observation], I feel
+   [feeling] because I need [need]. Would you [request]?"
+   The quick path — "Just log the feeling" — is the original four taps
+   (needs met or not → core → family → exact word) and logs at once.
+   Either way the entry lands in checkLog for today; the NVC path stores
+   its four parts with it, and everything saves/syncs as before. */
 const checkinEl=document.getElementById("checkin");let ci=null;
-function beginCheckin(){ci={step:1,side:null,core:null,family:null,feeling:null};checkinEl.classList.add("open");renderCheckin()}
+function blankCheckin(){return{mode:"nvc",step:1,side:null,core:null,family:null,feeling:null,observation:"",need:null,needCustom:"",request:"",reqTo:"other"}}
+function beginCheckin(){ci=blankCheckin();checkinEl.classList.add("open");renderCheckin()}
 function startCheckin(){beginCheckin();go("#/checkin")}
 var _oc=document.getElementById("open-checkin");if(_oc)_oc.addEventListener("click",startCheckin);
 var _nc=document.getElementById("nav-checkin");if(_nc)_nc.addEventListener("click",e=>{e.preventDefault();startCheckin()});
 document.getElementById("hero-checkin").addEventListener("click",e=>{e.preventDefault();startCheckin()});
-function ciOpts(items,attr){return '<div class="ci-options">'+items.map(it=>'<button type="button" data-ci="'+attr+'" data-value="'+esc(it.value)+'"'+(it.big?' class="big"':"")+">"+esc(it.label)+"</button>").join("")+"</div>"}
-function renderCheckin(){if(!ci)return;let h='<div class="ci-progress" aria-hidden="true">'+[1,2,3,4].map(function(i){return '<span class="'+(ci.step>=i||ci.step===5?"on":"")+'"></span>'}).join("")+'</div><h2>How are you feeling right now?</h2>';if(ci.step===1){h+='<p style="color:var(--soft)">Step 1 of 4 — are your needs met, or not?</p>'+ciOpts([{value:"met",label:"My needs are met",big:1},{value:"notmet",label:"My needs are not met",big:1}],"side")}else if(ci.step===2){h+='<p style="color:var(--soft)">Step 2 of 4 — pick the core feeling closest to yours</p>'+ciOpts(CORES.filter(c=>c.side===ci.side).map(c=>({value:c.id,label:c.name})),"core")}else if(ci.step===3){const core=byId[ci.core];h+='<p style="color:var(--soft)">Step 3 of 4 — which family under '+esc(core.name)+'</p>'+ciOpts(core.families.map(f=>({value:f.name,label:f.name})),"family")}else if(ci.step===4){const core=byId[ci.core],fam=findFamily(core,ci.family);h+='<p style="color:var(--soft)">Step 4 of 4 — name it precisely</p>'+ciOpts(fam.feelings.map(f=>({value:f,label:f})),"feeling")}else{const core=byId[ci.core];const sentence=sentenceFor(core,ci.feeling);const g=GUIDE[core.id];h+='<p style="color:var(--soft)">Your check-in</p><h2 style="font-size:1.6rem">'+esc(ci.feeling)+'</h2><p>'+esc(core.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+"</p>"+badge(core)+"<p>"+esc(g.assoc)+"</p><p><strong>First step:</strong> "+esc(g.steps[0][0])+" — "+esc(g.steps[0][1])+'</p><div class="sentence">“'+esc(sentence)+'”</div><div class="actions"><button type="button" class="btn" data-ci-habit="1">Turn this into a habit in the Habit Lab →</button><button type="button" class="btn ghost" data-ci-write="1">Write about it</button><button type="button" class="btn ghost" data-ci-again="1">Start again</button></div>'}
-if(ci.step>1&&ci.step<5)h+='<div class="actions"><button type="button" class="btn ghost" data-ci-back="1">Back</button></div>';checkinEl.innerHTML=h;checkinEl.querySelectorAll("[data-ci]").forEach(b=>b.addEventListener("click",()=>{const k=b.getAttribute("data-ci"),v=b.getAttribute("data-value");if(k==="side"){ci.side=v;ci.step=2}else if(k==="core"){ci.core=v;ci.step=3}else if(k==="family"){ci.family=v;ci.step=4}else{ci.feeling=v;ci.step=5;select(ci.core,ci.family,ci.feeling);checkLog[todayISO()]={core:ci.core,family:ci.family,feeling:ci.feeling,side:byId[ci.core].side,at:Date.now()};saveNow();renderDash();renderCalendar()}renderCheckin()}));const back=checkinEl.querySelector("[data-ci-back]");if(back)back.addEventListener("click",()=>{ci.step--;renderCheckin()});const ag=checkinEl.querySelector("[data-ci-again]");if(ag)ag.addEventListener("click",startCheckin);const hb=checkinEl.querySelector("[data-ci-habit]");if(hb)hb.addEventListener("click",()=>go("#/habits"));const wb=checkinEl.querySelector("[data-ci-write]");if(wb)wb.addEventListener("click",()=>{const core=byId[ci.core];openNotes("feelings",{coreId:ci.core,coreName:core.name,family:ci.family,feeling:ci.feeling,path:core.name+" › "+ci.family+" › "+ci.feeling,sentence:sentenceFor(core,ci.feeling),side:core.side})})}
+function ciOpts(items,attr,active){return '<div class="ci-options">'+items.map(function(it){var cls=[];if(it.big)cls.push("big");if(active&&it.value===active)cls.push("active");return '<button type="button" data-ci="'+attr+'" data-value="'+esc(it.value)+'"'+(cls.length?' class="'+cls.join(" ")+'"':"")+(active&&it.value===active?' aria-pressed="true"':"")+">"+esc(it.label)+"</button>"}).join("")+"</div>"}
+function cleanPart(s){return String(s||"").trim().replace(/\.+$/,"")}
+function lcFirst(s){if(!s)return s;if(s.length>1&&s.charAt(1)>="A"&&s.charAt(1)<="Z")return s;if(s==="I"||s.indexOf("I ")===0)return s;return s.charAt(0).toLowerCase()+s.slice(1)}
+function nvcSentence(o){var core=o.core;var need=o.need||core.needs[0];var parts=[];var obs=cleanPart(o.observation);if(obs)parts.push("When "+lcFirst(obs));parts.push("I feel "+String(o.feeling).toLowerCase()+(core.side==="met"?(" because my need for "+need+" is being met"):(" because I need "+need)));var s=parts.join(", ")+".";var req=cleanPart(o.request);if(req)s+=" "+(o.reqTo==="self"?"Could I ":"Would you ")+lcFirst(req)+"?";return s}
+function entrySentence(entry,core){if(entry&&(entry.observation||entry.request||entry.need))return nvcSentence({observation:entry.observation||"",feeling:entry.feeling,core:core,need:entry.need||null,request:entry.request||"",reqTo:entry.reqTo||"other"});return sentenceFor(core,entry.feeling)}
+const ALL_NEEDS=[];(function(){var seen={};CORES.forEach(function(c){c.needs.forEach(function(n){if(!seen[n]){seen[n]=1;ALL_NEEDS.push(n)}})})})();
+function pickerStage(){if(!ci.side)return 1;if(!ci.core)return 2;if(!ci.family)return 3;if(!ci.feeling)return 4;return 5}
+function pickerHTML(sublabel){var st=pickerStage();var pre='<p style="color:var(--soft)">'+sublabel+"</p>";
+if(st===1)return pre+ciOpts([{value:"met",label:"My needs are met",big:1},{value:"notmet",label:"My needs are not met",big:1}],"side");
+if(st===2)return pre+ciOpts(CORES.filter(function(c){return c.side===ci.side}).map(function(c){return{value:c.id,label:c.name}}),"core");
+if(st===3){var core=byId[ci.core];return pre+ciOpts(core.families.map(function(f){return{value:f.name,label:f.name}}),"family")}
+var core2=byId[ci.core],fam=findFamily(core2,ci.family);return pre+ciOpts(fam.feelings.map(function(f){return{value:f,label:f}}),"feeling")}
+function logCheckin(nvc){var entry={core:ci.core,family:ci.family,feeling:ci.feeling,side:byId[ci.core].side,at:Date.now()};if(nvc){entry.mode="nvc";entry.observation=cleanPart(ci.observation);entry.need=ci.need||byId[ci.core].needs[0];entry.request=cleanPart(ci.request);entry.reqTo=ci.reqTo}checkLog[todayISO()]=entry;select(ci.core,ci.family,ci.feeling);saveNow();renderDash();renderCalendar()}
+function modeBarHTML(){return '<div class="ci-modebar" role="group" aria-label="Check-in path"><button type="button" data-ci-mode="nvc" aria-pressed="'+(ci.mode==="nvc"?"true":"false")+'">4-step NVC check-in</button><button type="button" data-ci-mode="quick" aria-pressed="'+(ci.mode==="quick"?"true":"false")+'">Just log the feeling</button></div>'}
+function renderCheckin(){if(!ci)return;var isNVC=ci.mode==="nvc";var h="";
+var prog=isNVC?ci.step:pickerStage();
+h+='<div class="ci-progress" aria-hidden="true">'+[1,2,3,4].map(function(i){return '<span class="'+(prog>=i||prog===5?"on":"")+'"></span>'}).join("")+"</div>"+modeBarHTML();
+if(isNVC){
+if(ci.step===1){
+h+='<p class="ci-steplabel">Step 1 of 4 · Observation</p><h2>What happened?</h2><p class="ci-hint">The first step of the NVC process is observation: what happened, free of evaluation or judgment. Just what happened, like a camera would see it.</p><label class="ci-label" for="ci-obs">What happened</label><textarea id="ci-obs" class="ci-textarea" rows="3" placeholder="What happened, in plain words…">'+esc(ci.observation)+'</textarea><div class="actions"><button type="button" class="btn" data-ci-continue="1">Continue to the feeling →</button><button type="button" class="btn ghost" data-ci-skipobs="1">Skip for now</button></div>';
+}else if(ci.step===2){
+h+='<p class="ci-steplabel">Step 2 of 4 · Feeling</p><h2>What do you feel?</h2><p class="ci-hint">Name what you feel — a feeling, not a thought. In NVC teaching, a word like “misunderstood” is a thought about what someone did, not a feeling. The words on the wheel are feelings.</p>';
+if(ci.feeling){var fc=byId[ci.core];h+='<div class="sentence">I feel '+esc(ci.feeling.toLowerCase())+'</div><p class="pathline">'+esc(fc.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+'</p><div class="actions"><button type="button" class="btn" data-ci-continue="1">Continue to the need →</button></div>'}
+else{var subs=["First — are your needs met, or not?","Pick the core feeling closest to yours","Which family under "+(ci.core?byId[ci.core].name:"")+"?","Name it precisely"];h+=pickerHTML(subs[pickerStage()-1])}
+}else if(ci.step===3){
+var core3=byId[ci.core];if(!ci.need)ci.need=core3.needs[0];
+h+='<p class="ci-steplabel">Step 3 of 4 · Need</p><h2>What need is underneath?</h2><p class="ci-hint">In NVC, feelings point to universal human needs — met or unmet. Because you feel '+esc(ci.feeling.toLowerCase())+" ("+esc(core3.name)+"), the needs linked to this feeling are below. Tap the one that fits.</p>"+ciOpts(core3.needs.map(function(n){return{value:n,label:n}}),"need",ci.needCustom?"":ci.need)+'<label class="ci-label" for="ci-need-custom" style="margin-top:16px">Or another need</label><input type="text" id="ci-need-custom" class="ci-input" list="ci-needs-list" placeholder="Pick or type a need" value="'+esc(ci.needCustom)+'"><datalist id="ci-needs-list">'+ALL_NEEDS.map(function(n){return '<option value="'+esc(n)+'">'}).join("")+'</datalist><div class="actions"><button type="button" class="btn" data-ci-continue="1">Continue to the request →</button></div>';
+}else if(ci.step===4){
+h+='<p class="ci-steplabel">Step 4 of 4 · Request</p><h2>What would you like?</h2><p class="ci-hint">The last step is a request: what you would like, stated as a true request, not a demand — one small, doable ask, to yourself or to another person.</p><div class="ci-options" style="margin-bottom:14px"><button type="button" data-reqto="other" class="'+(ci.reqTo==="other"?"active":"")+'" aria-pressed="'+(ci.reqTo==="other"?"true":"false")+'">Ask someone else</button><button type="button" data-reqto="self" class="'+(ci.reqTo==="self"?"active":"")+'" aria-pressed="'+(ci.reqTo==="self"?"true":"false")+'">Ask myself</button></div><label class="ci-label" for="ci-req">What would you like to ask for, in one small step?</label><input type="text" id="ci-req" class="ci-input" placeholder="One small, doable ask…" value="'+esc(ci.request)+'"><div class="actions"><button type="button" class="btn" data-ci-finish="1">Complete the check-in</button><button type="button" class="btn ghost" data-ci-skipreq="1">Skip the request</button></div>';
+}else{
+var core5=byId[ci.core];var sentence=nvcSentence({observation:ci.observation,feeling:ci.feeling,core:core5,need:ci.need,request:ci.request,reqTo:ci.reqTo});var g=GUIDE[core5.id];
+h+='<p class="ci-steplabel">Your NVC check-in</p><h2 style="font-size:1.6rem">'+esc(ci.feeling)+"</h2><p>"+esc(core5.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+"</p>"+badge(core5)+'<ol class="steps"><li><span class="stepnum">1</span><div><b>Observation</b><p>'+(cleanPart(ci.observation)?esc(cleanPart(ci.observation)):"Skipped")+'</p></div></li><li><span class="stepnum">2</span><div><b>Feeling</b><p>'+esc(ci.feeling)+'</p></div></li><li><span class="stepnum">3</span><div><b>Need</b><p>'+esc(ci.need||core5.needs[0])+(core5.side==="met"?" — being met":" — unmet")+'</p></div></li><li><span class="stepnum">4</span><div><b>Request</b><p>'+(cleanPart(ci.request)?esc(cleanPart(ci.request)):"Skipped")+'</p></div></li></ol><h3>Say it in one sentence</h3><div class="sentence">“'+esc(sentence)+'”</div><p style="margin-top:14px"><strong>First step:</strong> '+esc(g.steps[0][0])+" — "+esc(g.steps[0][1])+'</p><div class="actions"><button type="button" class="btn" data-ci-copy="'+esc(sentence)+'">Copy the sentence</button><button type="button" class="btn ghost" data-ci-habit="1">Turn this into a habit in the Habit Lab →</button><button type="button" class="btn ghost" data-ci-write="1">Write about it</button><button type="button" class="btn ghost" data-ci-again="1">Start again</button></div><p class="ci-credit">The four steps — observation, feeling, need, request — are the core process of Nonviolent Communication, developed by Marshall Rosenberg. Learn more in <a href="https://www.cnvc.org/learn/nvc-101" target="_blank" rel="noopener">CNVC’s NVC 101</a>.</p>';
+}
+}else{
+var st=pickerStage();
+if(st<5){var labels=["Step 1 of 4 — are your needs met, or not?","Step 2 of 4 — pick the core feeling closest to yours","Step 3 of 4 — which family under "+(ci.core?byId[ci.core].name:""),"Step 4 of 4 — name it precisely"];h+="<h2>How are you feeling right now?</h2>"+pickerHTML(labels[st-1])}
+else{var coreQ=byId[ci.core];var sentenceQ=sentenceFor(coreQ,ci.feeling);var gQ=GUIDE[coreQ.id];h+='<p style="color:var(--soft)">Your check-in</p><h2 style="font-size:1.6rem">'+esc(ci.feeling)+"</h2><p>"+esc(coreQ.name)+" › "+esc(ci.family)+" › "+esc(ci.feeling)+"</p>"+badge(coreQ)+"<p>"+esc(gQ.assoc)+"</p><p><strong>First step:</strong> "+esc(gQ.steps[0][0])+" — "+esc(gQ.steps[0][1])+'</p><div class="sentence">“'+esc(sentenceQ)+'”</div><div class="actions"><button type="button" class="btn" data-ci-tonvc="1">Add the NVC steps — observation, need, request →</button><button type="button" class="btn ghost" data-ci-habit="1">Turn this into a habit in the Habit Lab →</button><button type="button" class="btn ghost" data-ci-write="1">Write about it</button><button type="button" class="btn ghost" data-ci-again="1">Start again</button></div>'}
+}
+var showBack=false;
+if(isNVC&&ci.step>1&&ci.step<5)showBack=true;
+if(!isNVC&&pickerStage()>1&&pickerStage()<5)showBack=true;
+if(showBack)h+='<div class="actions"><button type="button" class="btn ghost" data-ci-back="1">Back</button></div>';
+checkinEl.innerHTML=h;
+checkinEl.querySelectorAll("[data-ci-mode]").forEach(function(b){b.addEventListener("click",function(){var m=b.getAttribute("data-ci-mode");if(m===ci.mode)return;ci.mode=m;if(m==="nvc")ci.step=1;renderCheckin()})});
+checkinEl.querySelectorAll("[data-ci]").forEach(function(b){b.addEventListener("click",function(){var k=b.getAttribute("data-ci"),v=b.getAttribute("data-value");
+if(k==="side"){ci.side=v;ci.core=null;ci.family=null;ci.feeling=null}
+else if(k==="core"){ci.core=v;ci.family=null;ci.feeling=null;ci.need=null;ci.needCustom=""}
+else if(k==="family"){ci.family=v;ci.feeling=null}
+else if(k==="need"){ci.need=v;ci.needCustom="";renderCheckin();return}
+else if(k==="feeling"){ci.feeling=v;if(ci.mode==="quick"){logCheckin(false)}}
+renderCheckin()})});
+checkinEl.querySelectorAll("[data-reqto]").forEach(function(b){b.addEventListener("click",function(){var inp=document.getElementById("ci-req");if(inp)ci.request=inp.value;ci.reqTo=b.getAttribute("data-reqto");renderCheckin()})});
+var cont=checkinEl.querySelector("[data-ci-continue]");if(cont)cont.addEventListener("click",function(){
+if(ci.step===1){var ta=document.getElementById("ci-obs");if(ta)ci.observation=ta.value;ci.step=2}
+else if(ci.step===2){ci.step=3}
+else if(ci.step===3){var ci3=document.getElementById("ci-need-custom");if(ci3&&ci3.value.trim()){ci.needCustom=ci3.value.trim();ci.need=ci.needCustom}ci.step=4}
+renderCheckin()});
+var sk=checkinEl.querySelector("[data-ci-skipobs]");if(sk)sk.addEventListener("click",function(){ci.observation="";ci.step=2;renderCheckin()});
+var fin=checkinEl.querySelector("[data-ci-finish]");if(fin)fin.addEventListener("click",function(){var inp=document.getElementById("ci-req");if(inp)ci.request=inp.value;logCheckin(true);ci.step=5;renderCheckin()});
+var skr=checkinEl.querySelector("[data-ci-skipreq]");if(skr)skr.addEventListener("click",function(){ci.request="";logCheckin(true);ci.step=5;renderCheckin()});
+var back=checkinEl.querySelector("[data-ci-back]");if(back)back.addEventListener("click",function(){
+if(ci.mode==="nvc"){
+if(ci.step===4){var inp=document.getElementById("ci-req");if(inp)ci.request=inp.value;ci.step=3}
+else if(ci.step===3){var ci3=document.getElementById("ci-need-custom");if(ci3)ci.needCustom=ci3.value;ci.step=2}
+else if(ci.step===2){if(ci.feeling)ci.feeling=null;else if(ci.family)ci.family=null;else if(ci.core){ci.core=null;ci.need=null;ci.needCustom=""}else if(ci.side)ci.side=null;else ci.step=1}
+}else{
+if(ci.feeling)ci.feeling=null;else if(ci.family)ci.family=null;else if(ci.core)ci.core=null;else if(ci.side)ci.side=null}
+renderCheckin()});
+var cp=checkinEl.querySelector("[data-ci-copy]");if(cp)cp.addEventListener("click",function(){copyText(cp.getAttribute("data-ci-copy"),cp)});
+var tv=checkinEl.querySelector("[data-ci-tonvc]");if(tv)tv.addEventListener("click",function(){ci.mode="nvc";ci.step=1;if(ci.core)ci.need=null;renderCheckin();checkinEl.scrollIntoView({behavior:"smooth",block:"nearest"})});
+var ag=checkinEl.querySelector("[data-ci-again]");if(ag)ag.addEventListener("click",startCheckin);
+var hb=checkinEl.querySelector("[data-ci-habit]");if(hb)hb.addEventListener("click",function(){go("#/habits")});
+var wb=checkinEl.querySelector("[data-ci-write]");if(wb)wb.addEventListener("click",function(){var core=byId[ci.core];var sent=ci.mode==="nvc"&&ci.step===5?nvcSentence({observation:ci.observation,feeling:ci.feeling,core:core,need:ci.need,request:ci.request,reqTo:ci.reqTo}):sentenceFor(core,ci.feeling);openNotes("feelings",{coreId:ci.core,coreName:core.name,family:ci.family,feeling:ci.feeling,path:core.name+" › "+ci.family+" › "+ci.feeling,sentence:sent,side:core.side})});
+if(isNVC&&ci.step===1){var ta2=document.getElementById("ci-obs");if(ta2&&currentView==="checkin")ta2.focus()}
+if(isNVC&&ci.step===4){var rq=document.getElementById("ci-req");if(rq&&currentView==="checkin")rq.focus()}
+}
 /* ===== Habit Lab ===== */
 let hl={core:"angry",family:"Frustrated",feeling:"Aggravated",habitIdx:0,done:{},planText:"",planBuilt:false};
 function hlFeelingsOptions(){const selEl=document.getElementById("hl-feeling");let h="";CORES.forEach(c=>{h+='<optgroup label="'+esc(c.name)+" — "+(c.side==="met"?"needs met":"needs not met")+'">';c.families.forEach(f=>f.feelings.forEach(fe=>{h+='<option value="'+c.id+"|"+esc(f.name)+"|"+esc(fe)+'"'+(c.id===hl.core&&fe===hl.feeling?" selected":"")+">"+esc(fe)+" ("+esc(c.name)+")</option>"}));h+="</optgroup>"});selEl.innerHTML=h}
@@ -1057,7 +1156,7 @@ document.getElementById("dash-chart-note").textContent=active14+" of the last 14
 const todayLabel=new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
 const entry=checkLog[todayISO()];const tEl=document.getElementById("dash-today");
 if(entry){const core=byId[entry.core];
-tEl.innerHTML='<p class="dash-label">Today — '+esc(todayLabel)+'</p><h3 class="dash-feel">'+esc(entry.feeling)+'</h3><p class="dash-path">'+esc(core.name)+" › "+esc(entry.family)+'</p><p>“'+esc(sentenceFor(core,entry.feeling))+'”</p><a class="btn small ghost" href="#/checkin">Check in again</a>'}
+tEl.innerHTML='<p class="dash-label">Today — '+esc(todayLabel)+'</p><h3 class="dash-feel">'+esc(entry.feeling)+'</h3><p class="dash-path">'+esc(core.name)+" › "+esc(entry.family)+'</p><p>“'+esc(entrySentence(entry,core))+'”</p><a class="btn small ghost" href="#/checkin">Check in again</a>'}
 else{tEl.innerHTML='<p class="dash-label">Today — '+esc(todayLabel)+'</p><h3 class="dash-feel">Not named yet</h3><p>Four quick steps — needs met or not, core feeling, family, exact word — and today fills in here, with the need underneath it.</p><a class="btn small" href="#/checkin">Start today\'s check-in</a>'}
 const gEl=document.getElementById("dash-goal");const active=goals.filter(g=>!g.done);const doneCount=goals.length-active.length;
 if(active.length){const g=active[0];
